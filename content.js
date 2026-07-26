@@ -299,7 +299,7 @@
 
     const load = async () => {
         try {
-            const response = await fetch('/api/content', { headers: { Accept: 'application/json' } });
+            const response = await fetch('/api/content/', { headers: { Accept: 'application/json' } });
             if (!response.ok) throw new Error(`content API ${response.status}`);
             const documentData = await response.json();
             render(documentData);
