@@ -265,7 +265,10 @@ function displayDailyQuote() {
 
         // 获取新名言
         const newQuote = quoteManager.getNextQuote();
-        quoteElement.textContent = newQuote;
+        const quoteText = document.createElement('span');
+        quoteText.className = 'quote-text';
+        quoteText.textContent = newQuote;
+        quoteElement.replaceChildren(quoteText);
 
         // 添加动画类
         quoteElement.classList.add('animate-in');
