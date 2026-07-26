@@ -55,6 +55,14 @@
     color: var(--color-text, rgba(255,255,255,0.85));
 }
 
+.quote-text {
+    display: inline;
+    background-image: linear-gradient(135deg, var(--color-primary-light), var(--color-accent-1));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 .poem-footer,
 .quote-footer {
     display: flex;
