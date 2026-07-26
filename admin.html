@@ -36,7 +36,13 @@
                 </div>
             </header>
 
-            <div class="admin-layout">
+            <div class="admin-tabs" role="tablist" aria-label="后台功能">
+                <button class="admin-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="content-tab" data-tab="content-tab">内容管理</button>
+                <button class="admin-tab" type="button" role="tab" aria-selected="false" aria-controls="account-tab" data-tab="account-tab">账号信息</button>
+            </div>
+
+            <div id="content-tab" class="admin-tab-panel" role="tabpanel">
+              <div class="admin-layout">
                 <aside class="admin-sidebar">
                     <div class="sidebar-heading"><span>事件分区</span><span id="event-count" class="count-badge"></span></div>
                     <div id="section-list" class="section-list"></div>
@@ -69,6 +75,43 @@
                     </div>
                     <div id="empty-editor" class="empty-editor">从左侧选择分区，再选择一个事件开始编辑。</div>
                 </section>
+              </div>
+            </div>
+
+            <div id="account-tab" class="admin-tab-panel account-tab" role="tabpanel" hidden>
+                <div class="account-grid">
+                    <section class="account-card">
+                        <div class="admin-kicker">CURRENT ACCOUNT</div>
+                        <h2>账号信息</h2>
+                        <dl class="account-details">
+                            <div><dt>管理员账号</dt><dd id="account-username">—</dd></div>
+                            <div><dt>创建时间</dt><dd id="account-created-at">—</dd></div>
+                            <div><dt>最近登录</dt><dd id="account-last-login">—</dd></div>
+                        </dl>
+                        <form id="password-form" class="admin-form">
+                            <div class="field-heading"><span>更新密码</span></div>
+                            <label>当前密码<input id="current-password" type="password" autocomplete="current-password" minlength="10" required></label>
+                            <label>新密码<input id="new-password" type="password" autocomplete="new-password" minlength="10" required></label>
+                            <label>确认新密码<input id="confirm-password" type="password" autocomplete="new-password" minlength="10" required></label>
+                            <button class="admin-primary" type="submit">更新密码</button>
+                            <p id="password-message" class="admin-message" role="status"></p>
+                        </form>
+                    </section>
+
+                    <section class="account-card">
+                        <div class="admin-kicker">ADMINISTRATORS</div>
+                        <h2>添加管理员账号</h2>
+                        <p class="admin-muted">新账号创建后即可登录后台。密码仅以哈希形式保存。</p>
+                        <form id="admin-create-form" class="admin-form">
+                            <label>新管理员账号<input id="new-admin-username" autocomplete="off" pattern="[a-zA-Z0-9_.-]{3,80}" required></label>
+                            <label>初始密码<input id="new-admin-password" type="password" autocomplete="new-password" minlength="10" required></label>
+                            <button class="admin-primary" type="submit">创建管理员</button>
+                            <p id="admin-create-message" class="admin-message" role="status"></p>
+                        </form>
+                        <div class="admin-list-heading"><span>现有管理员</span><span id="admin-list-count" class="count-badge"></span></div>
+                        <ul id="admin-list" class="admin-list"></ul>
+                    </section>
+                </div>
             </div>
         </section>
     </main>

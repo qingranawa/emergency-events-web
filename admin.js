@@ -9,6 +9,8 @@
         element.classList.toggle('is-error', isError);
     };
 
+    const formatDate = value => value ? new Date(value).toLocaleString('zh-CN', { dateStyle: 'medium', timeStyle: 'short' }) : '—';
+
     const request = async (path, options = {}) => {
         const headers = { Accept: 'application/json', ...(options.body ? { 'content-type': 'application/json' } : {}), ...(options.headers || {}) };
         if (state.csrfToken && options.method && options.method !== 'GET') headers['X-CSRF-Token'] = state.csrfToken;
@@ -130,6 +132,53 @@
         renderEditor();
     };
 
+    const renderAdminList = users => {
+        const list = $('#admin-list');
+        list.replaceChildren();
+        $('#admin-list-count').textContent = `${users.length} 个账号`;
+        users.forEach(user => {
+            const item = document.createElement('li');
+            const name = document.createElement('strong');
+            name.textContent = user.username;
+            const meta = document.createElement('span');
+            meta.textContent = `创建于 ${formatDate(user.created_at)}`;
+            item.append(name, meta);
+            list.append(item);
+        });
+    };
+
+    const loadAccount = async () => {
+        const [accountResult, usersResult] = await Promise.all([
+            request('/api/admin/account/'),
+            request('/api/admin/users/'),
+        ]);
+        if (!accountResult.ok || !usersResult.ok) {
+            if (accountResult.response.status === 401 || usersResult.response.status === 401) {
+                showLogin('登录已过期，请重新登录');
+                return;
+            }
+            setMessage($('#admin-create-message'), accountResult.data?.error || usersResult.data?.error || '账号信息加载失败', true);
+            return;
+        }
+        const user = accountResult.data.user;
+        $('#account-username').textContent = user.username;
+        $('#account-created-at').textContent = formatDate(user.created_at);
+        $('#account-last-login').textContent = formatDate(user.last_login_at);
+        renderAdminList(usersResult.data.users || []);
+    };
+
+    const activateTab = tabId => {
+        document.querySelectorAll('.admin-tab').forEach(tab => {
+            const active = tab.dataset.tab === tabId;
+            tab.classList.toggle('is-active', active);
+            tab.setAttribute('aria-selected', String(active));
+        });
+        document.querySelectorAll('.admin-tab-panel').forEach(panel => {
+            panel.hidden = panel.id !== tabId;
+        });
+        if (tabId === 'account-tab') loadAccount();
+    };
+
     const selectSection = sectionId => {
         if (state.dirty && !window.confirm('当前有未保存的修改，确定切换吗？')) return;
         state.selectedSectionId = sectionId;
@@ -210,6 +259,50 @@
         setMessage($('#login-message'), message, Boolean(message));
     };
 
+    const updatePassword = async event => {
+        event.preventDefault();
+        const currentPassword = $('#current-password').value;
+        const newPassword = $('#new-password').value;
+        const confirmPassword = $('#confirm-password').value;
+        if (newPassword !== confirmPassword) {
+            setMessage($('#password-message'), '两次输入的新密码不一致', true);
+            return;
+        }
+        const button = event.target.querySelector('button[type="submit"]');
+        button.disabled = true;
+        setMessage($('#password-message'), '正在更新…');
+        const result = await request('/api/admin/account/', {
+            method: 'PUT',
+            body: JSON.stringify({ currentPassword, newPassword }),
+        });
+        button.disabled = false;
+        if (!result.ok) {
+            if (result.response.status === 401) return setMessage($('#password-message'), result.data?.error || '当前密码错误', true);
+            return setMessage($('#password-message'), result.data?.error || '密码更新失败', true);
+        }
+        $('#password-form').reset();
+        setMessage($('#password-message'), result.data?.message || '密码已更新');
+    };
+
+    const createAdmin = async event => {
+        event.preventDefault();
+        const button = event.target.querySelector('button[type="submit"]');
+        button.disabled = true;
+        setMessage($('#admin-create-message'), '正在创建…');
+        const result = await request('/api/admin/users/', {
+            method: 'POST',
+            body: JSON.stringify({ username: $('#new-admin-username').value.trim(), password: $('#new-admin-password').value }),
+        });
+        button.disabled = false;
+        if (!result.ok) {
+            if (result.response.status === 401) return showLogin('登录已过期，请重新登录');
+            return setMessage($('#admin-create-message'), result.data?.error || '管理员账号创建失败', true);
+        }
+        $('#admin-create-form').reset();
+        setMessage($('#admin-create-message'), '管理员账号已创建');
+        await loadAccount();
+    };
+
     const loadContent = async () => {
         const result = await request('/api/admin/content/');
         if (!result.ok) return showLogin(result.data?.error || '无法加载后台内容');
@@ -220,6 +313,7 @@
         $('#admin-user').textContent = `已登录：${result.data.user.username}`;
         setDirty(false);
         showDashboard(true);
+        activateTab('content-tab');
         renderAll();
     };
 
@@ -238,6 +332,9 @@
 
     document.addEventListener('DOMContentLoaded', async () => {
         $('#login-form').addEventListener('submit', login);
+        document.querySelectorAll('.admin-tab').forEach(tab => tab.addEventListener('click', () => activateTab(tab.dataset.tab)));
+        $('#password-form').addEventListener('submit', updatePassword);
+        $('#admin-create-form').addEventListener('submit', createAdmin);
         $('#section-select').addEventListener('change', event => selectSection(event.target.value));
         $('#event-select').addEventListener('change', event => selectEvent(event.target.value));
         $('#event-editor').addEventListener('input', () => setDirty(true));
