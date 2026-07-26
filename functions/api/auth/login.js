@@ -23,7 +23,13 @@ export async function onRequestPost(context) {
         return json({ error: '登录失败次数过多，请稍后再试' }, 429, { 'retry-after': String(Math.ceil((user.locked_until - now) / 1000)) });
     }
 
-    const valid = user ? await verifyPassword(password, user.password_salt, user.password_hash) : false;
+    let valid = false;
+    try {
+        valid = user ? await verifyPassword(password, user.password_salt, user.password_hash) : false;
+    } catch (error) {
+        console.error('[auth-login] password verification failed', error);
+        return json({ error: '密码校验失败，请稍后重试', debug: String(error?.message || error) }, 500);
+    }
     if (!valid) {
         if (user) {
             const failedAttempts = (user.failed_attempts || 0) + 1;
