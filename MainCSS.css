@@ -59,6 +59,13 @@
     --radius-2xl: 36px;
     --radius-full: 9999px;
 
+    /* 嵌套事件卡片的统一间距与圆角公式 */
+    --event-layout-gap: var(--space-6);
+    --nested-radius-gap: var(--space-2);
+    --event-content-radius: var(--radius-lg);
+    --event-card-radius: calc(var(--event-content-radius) + var(--nested-radius-gap));
+    --event-section-radius: calc(var(--event-card-radius) + var(--nested-radius-gap));
+
     /* 阴影 — 极度柔和扩散，无硬阴影 */
     --shadow-card: 0 8px 40px rgba(0, 0, 0, 0.4);
     --shadow-card-hover: 0 16px 60px rgba(0, 0, 0, 0.5);
@@ -148,8 +155,9 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ===== 流体岛导航 (Fluid Island Nav) ===== */
 .toc-compact {
-    position: sticky;
+    position: fixed;
     top: var(--space-6);
+    left: var(--space-6);
     z-index: 100;
     max-width: 220px;
     margin-bottom: var(--space-8);
@@ -234,6 +242,52 @@ h1, h2, h3, h4, h5, h6 {
     background: rgba(106, 130, 251, 0.1);
 }
 
+/* ===== 首屏 Hero ===== */
+.hero {
+    position: relative;
+    isolation: isolate;
+    min-height: calc(100dvh - (var(--space-8) * 2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    text-align: center;
+}
+
+.hero-copy {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 960px);
+    transform: none;
+}
+
+.hero-emblem {
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    right: -7%;
+    width: min(68vw, 780px);
+    color: rgba(255, 255, 255, 0.18);
+    pointer-events: none;
+    transform: translateY(calc(-50% + 5cm)) rotate(-7deg);
+    opacity: 0.42;
+}
+
+.hero-emblem img {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: invert(1) grayscale(1) brightness(0.72) drop-shadow(0 0 28px rgba(255, 255, 255, 0.04));
+}
+
+.light-theme .hero-emblem {
+    color: rgba(20, 24, 50, 0.2);
+}
+
+.light-theme .hero-emblem img {
+    filter: grayscale(1) brightness(0.72) drop-shadow(0 0 28px rgba(20, 24, 50, 0.06));
+}
+
 /* ===== 主标题 (Eyebrow Tag 模式 + 宏大字距) ===== */
 .main-title {
     font-family: var(--font-display);
@@ -243,10 +297,22 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.15;
     text-align: center;
     color: var(--color-text);
-    margin: var(--space-16) auto var(--space-12);
+    margin: 0 auto;
     position: relative;
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 100%;
+    box-sizing: border-box;
+}
+
+.hero-subtitle {
+    margin: var(--space-6) 0 0;
+    color: var(--color-text-secondary);
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    letter-spacing: 0.08em;
 }
 
 /* Eyebrow badge */
@@ -373,9 +439,9 @@ div.section[id] > * {
 .event {
     background: rgba(255, 255, 255, 0.02);
     border: 0.5px solid rgba(255, 255, 255, 0.04);
-    border-radius: var(--radius-xl);
+    border-radius: var(--event-card-radius);
     padding: var(--space-6);
-    margin-bottom: var(--space-6);
+    margin: 0;
     transition: var(--transition-smooth);
     position: relative;
     overflow: visible;
@@ -384,15 +450,27 @@ div.section[id] > * {
         0 2px 16px rgba(0, 0, 0, 0.15);
 }
 
-/* 阵营事件之间的分割线，仅出现在相邻事件卡片的交界处 */
-.section[id] .event + .event {
-    margin-top: var(--space-10);
+/* 事件区统一使用外层留白与卡片之间的相同间距 */
+.section[id] {
+    display: flex;
+    flex-direction: column;
+    gap: var(--event-layout-gap);
+    padding: var(--event-layout-gap);
+    border-radius: var(--event-section-radius);
 }
 
+.section[id] > h2,
+.section[id] > .event,
+.section[id] > .event + .event {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* 阵营事件之间的分割线，仅出现在相邻事件卡片的交界处 */
 .section[id] .event + .event::before {
     content: '';
     position: absolute;
-    top: calc(var(--space-10) * -0.5);
+    top: calc(var(--event-layout-gap) * -0.5);
     left: 10%;
     width: 80%;
     height: 1px;
@@ -429,11 +507,16 @@ div.section[id] > * {
     display: block;
     margin: var(--space-4) 0;
     padding: var(--space-5);
-    border-radius: var(--radius-lg);
+    border-radius: var(--event-content-radius);
     font-weight: 500;
     line-height: 1.7;
     transition: var(--transition-smooth);
     position: relative;
+}
+
+/* 事件卡片最后一个内容块不额外占用底部外边距，保持四周等距 */
+.event > :last-child {
+    margin-bottom: 0;
 }
 
 /* 广播 — 毛玻璃卡 */
@@ -531,6 +614,49 @@ div.section[id] > * {
     margin: var(--space-8) 0;
 }
 
+/* ===== 响应式事件排列 ===== */
+@media (min-width: 980px) {
+    #goi-events,
+    #foundation-events,
+    #emergency-events,
+    #containment-breaches {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--event-layout-gap);
+        padding: var(--event-layout-gap);
+        align-items: start;
+    }
+
+    #goi-events > h2,
+    #foundation-events > h2,
+    #emergency-events > h2,
+    #containment-breaches > h2 {
+        grid-column: 1 / -1;
+    }
+
+    #goi-events > .event,
+    #foundation-events > .event,
+    #emergency-events > .event,
+    #containment-breaches > .event {
+        margin: 0;
+    }
+
+    /* 事件按顺序排列；奇数张时最后一张独占整行 */
+    #goi-events > .event:last-child:nth-of-type(odd),
+    #foundation-events > .event:last-child:nth-of-type(odd),
+    #emergency-events > .event:last-child:nth-of-type(odd),
+    #containment-breaches > .event:last-child:nth-of-type(odd) {
+        grid-column: 1 / -1;
+    }
+
+    #goi-events > .event + .event::before,
+    #foundation-events > .event + .event::before,
+    #emergency-events > .event + .event::before,
+    #containment-breaches > .event + .event::before {
+        display: none;
+    }
+}
+
 /* ===== 响应式 ===== */
 @media (max-width: 768px) {
     body {
@@ -554,7 +680,22 @@ div.section[id] > * {
     }
 
     .main-title {
-        margin: var(--space-10) auto var(--space-8);
+        margin: 0 auto;
+    }
+
+    .hero {
+        min-height: calc(100dvh - (var(--space-4) * 2));
+    }
+
+    .hero-copy {
+        width: min(100%, 720px);
+        transform: none;
+    }
+
+    .hero-emblem {
+        right: -24%;
+        width: min(92vw, 620px);
+        opacity: 0.2;
     }
 
     .toc-compact {
@@ -577,6 +718,24 @@ div.section[id] > * {
 
     .event > * {
         padding: var(--space-3);
+    }
+
+    .main-title {
+        font-size: var(--text-2xl);
+    }
+
+    .hero {
+        min-height: calc(100dvh - (var(--space-3) * 2));
+    }
+
+    .hero-copy {
+        transform: none;
+    }
+
+    .hero-emblem {
+        right: -42%;
+        width: 115vw;
+        opacity: 0.12;
     }
 }
 
