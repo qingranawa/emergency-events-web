@@ -1,5 +1,5 @@
-/* D1-backed page content renderer. The database stores content as data; the
- * renderer only writes textContent/attributes and never executes stored HTML. */
+/* D1-backed page content renderer. The database stores content as data; rich
+ * footer text is parsed through a small allowlist and never executes markup. */
 (() => {
     'use strict';
 
@@ -12,31 +12,43 @@
         return element;
     };
 
-    const appendRichText = (parent, text, links = []) => {
-        let cursor = 0;
-        const matches = links
-            .map(link => ({ ...link, index: text.indexOf(link.label, cursor) }))
-            .filter(link => link.index >= 0)
-            .sort((left, right) => left.index - right.index);
+    const SAFE_LINK_PROTOCOL = /^(https?:|mailto:)/i;
 
-        matches.forEach(link => {
-            if (link.index < cursor) return;
-            parent.append(document.createTextNode(text.slice(cursor, link.index)));
-            const anchor = createElement('a', 'license-link content-footer-link', link.label);
-            anchor.href = link.href;
+    const appendRichNode = (node, parent) => {
+        if (node.nodeType === Node.TEXT_NODE) {
+            parent.append(document.createTextNode(node.nodeValue));
+            return;
+        }
+        if (node.nodeType !== Node.ELEMENT_NODE) return;
+
+        if (node.tagName === 'A') {
+            const href = node.getAttribute('href') || '';
+            if (!SAFE_LINK_PROTOCOL.test(href)) {
+                node.childNodes.forEach(child => appendRichNode(child, parent));
+                return;
+            }
+            const anchor = createElement('a', 'license-link content-footer-link');
+            anchor.href = href;
             anchor.target = '_blank';
             anchor.rel = 'noopener noreferrer';
-            if (link.strong) {
-                const strong = createElement('strong');
-                strong.append(anchor);
-                parent.append(strong);
-            } else {
-                parent.append(anchor);
-            }
-            cursor = link.index + link.label.length;
-        });
+            node.childNodes.forEach(child => appendRichNode(child, anchor));
+            parent.append(anchor);
+            return;
+        }
 
-        parent.append(document.createTextNode(text.slice(cursor)));
+        const allowedTag = ['STRONG', 'EM', 'BR'].includes(node.tagName);
+        if (!allowedTag) {
+            node.childNodes.forEach(child => appendRichNode(child, parent));
+            return;
+        }
+        const element = createElement(node.tagName.toLowerCase());
+        node.childNodes.forEach(child => appendRichNode(child, element));
+        parent.append(element);
+    };
+
+    const appendRichText = (parent, text) => {
+        const documentFragment = new DOMParser().parseFromString(String(text ?? ''), 'text/html').body;
+        documentFragment.childNodes.forEach(node => appendRichNode(node, parent));
     };
 
     const renderNavigation = (documentData) => {
@@ -64,6 +76,18 @@
             mobileLink.append(document.createTextNode(item.label));
             mobile.append(mobileLink);
         });
+
+        const adminDesktopItem = createElement('li');
+        const adminDesktopLink = createElement('a', 'toc-admin-link', '后台管理');
+        adminDesktopLink.href = '/admin';
+        adminDesktopItem.append(adminDesktopLink);
+        desktop.append(adminDesktopItem);
+
+        const adminMobileLink = createElement('a', 'toc-admin-link');
+        adminMobileLink.href = '/admin';
+        adminMobileLink.append(createElement('span', '', 'AD'));
+        adminMobileLink.append(document.createTextNode('后台管理'));
+        mobile.append(adminMobileLink);
     };
 
     const renderIntro = (documentData, root) => {
@@ -215,12 +239,20 @@
         const thanks = createElement('div', 'thanks-section');
         thanks.append(createElement('h3', 'section-title', '特别鸣谢'));
         const mainThanks = createElement('div', 'main-thanks');
-        data.thanks.forEach(text => mainThanks.append(createElement('p', '', text)));
+        data.thanks.forEach(text => {
+            const paragraph = createElement('p');
+            appendRichText(paragraph, text);
+            mainThanks.append(paragraph);
+        });
         thanks.append(mainThanks);
         const contributors = createElement('div', 'contributors');
         contributors.append(createElement('p', 'contributors-title', '感谢以下人员及制作组的贡献：'));
         const contributorList = createElement('ul', 'contributor-list');
-        data.contributors.forEach(text => contributorList.append(createElement('li', '', text)));
+        data.contributors.forEach(text => {
+            const item = createElement('li');
+            appendRichText(item, text);
+            contributorList.append(item);
+        });
         contributors.append(contributorList);
         thanks.append(contributors);
         thanksSection.append(thanks);
@@ -228,34 +260,20 @@
 
         const copyrightSection = createElement('div', 'section');
         copyrightSection.append(createElement('h3', 'section-title', '版权信息'));
-        const linkData = data.links || {};
-        const wiki = linkData.scp_wiki || 'https://scp-wiki-cn.wikidot.com/';
-        const cc = linkData.cc || 'https://creativecommons.org/licenses/by-sa/3.0/';
-        const emblem = linkData.emblem || 'https://commons.wikimedia.org/wiki/File:SCP_Foundation_(emblem).svg';
-        const linkSets = [
-            [{ label: 'SCP基金会', href: wiki, strong: true }],
-            [{ label: 'CC BY-SA 3.0', href: cc, strong: true }],
-            [{ label: 'Wikimedia Commons', href: emblem, strong: true }, { label: 'CC BY-SA 3.0', href: cc, strong: true }],
-        ];
-        data.copyright_paragraphs.forEach((text, index) => {
+        data.copyright_paragraphs.forEach(text => {
             const paragraph = createElement('p', 'section-text');
-            appendRichText(paragraph, text, linkSets[index] || []);
+            appendRichText(paragraph, text);
             copyrightSection.append(paragraph);
         });
         const license = createElement('div', 'license-section');
         const licenseInfo = createElement('div', 'license-info');
-        const licenseLinks = [
-            [{ label: '知识共享 署名-相同方式共享 3.0 协议', href: cc, strong: true }],
-            [{ label: 'Creative Commons Attribution-ShareAlike 3.0 Unported License', href: cc, strong: true }],
-            [{ label: 'SCP基金会', href: wiki, strong: true }],
-        ];
-        data.license_text.forEach((text, index) => {
+        data.license_text.forEach(text => {
             const paragraph = createElement('p', 'license-text');
-            appendRichText(paragraph, text, licenseLinks[index] || []);
+            appendRichText(paragraph, text);
             licenseInfo.append(paragraph);
         });
         const wikiParagraph = createElement('p', 'wiki-link');
-        appendRichText(wikiParagraph, data.wiki_text, licenseLinks[2]);
+        appendRichText(wikiParagraph, data.wiki_text);
         licenseInfo.append(wikiParagraph);
         const icons = createElement('div', 'license-icons');
         data.license_icons.forEach(iconData => {
