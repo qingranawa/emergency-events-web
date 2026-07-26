@@ -28,7 +28,7 @@ export async function onRequestPost(context) {
         valid = user ? await verifyPassword(password, user.password_salt, user.password_hash) : false;
     } catch (error) {
         console.error('[auth-login] password verification failed', error);
-        return json({ error: '密码校验失败，请稍后重试', debug: String(error?.message || error) }, 500);
+        return json({ error: '密码校验失败，请稍后重试' }, 500);
     }
     if (!valid) {
         if (user) {
