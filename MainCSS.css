@@ -378,10 +378,26 @@ div.section[id] > * {
     margin-bottom: var(--space-6);
     transition: var(--transition-smooth);
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     box-shadow:
         inset 0 1px 1px rgba(255, 255, 255, 0.02),
         0 2px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* 阵营事件之间的分割线，仅出现在相邻事件卡片的交界处 */
+.section[id] .event + .event {
+    margin-top: var(--space-10);
+}
+
+.section[id] .event + .event::before {
+    content: '';
+    position: absolute;
+    top: calc(var(--space-10) * -0.5);
+    left: 10%;
+    width: 80%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(139, 163, 255, 0.28), rgba(252, 92, 125, 0.2), transparent);
+    pointer-events: none;
 }
 
 .event:hover {
