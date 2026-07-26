@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import process from 'node:process';
 
-const iterations = 120000;
+const iterations = 100000;
 const mode = process.argv.includes('--local') ? '--local' : process.argv.includes('--remote') ? '--remote' : null;
 const username = (process.env.ADMIN_USERNAME || '').trim();
 const password = process.env.ADMIN_PASSWORD || '';

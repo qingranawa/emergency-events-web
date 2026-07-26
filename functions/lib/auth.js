@@ -1,7 +1,7 @@
 const encoder = new TextEncoder();
 const SESSION_COOKIE = 'emergency_admin_session';
 const SESSION_TTL_SECONDS = 60 * 60 * 24 * 7;
-const PASSWORD_ITERATIONS = 120000;
+const PASSWORD_ITERATIONS = 100000;
 
 const toBase64Url = bytes => {
     const view = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
