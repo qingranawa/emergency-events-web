@@ -1,0 +1,14 @@
+/* === 主题切换 — 补充样式 === */
+/* 基础样式在 MainCSS.css 中定义，这里仅处理过渡和减少运动 */
+
+body {
+    transition: background-color 0.5s cubic-bezier(0.32, 0.72, 0, 1), color 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #theme-toggle,
+    #theme-toggle *,
+    body {
+        transition: none !important;
+    }
+}

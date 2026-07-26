@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="紧急事件娱乐模式 - SCP: Secret Laboratory 事件列表">
+    <meta name="author" content="Jeff">
+
+    <title>紧急事件</title>
+
+    <!-- 字体预加载 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- 使用details标签的目录导航 -->
+    <details class="toc-compact">
+        <summary class="toc-header">
+            <span class="toc-title">目录导航</span>
+            <svg class="toc-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                <path fill="currentColor" d="M7 10l5 5 5-5z" />
+            </svg>
+        </summary>
+        <nav class="toc-content">
+            <div class="toc-links">
+                <a href="#goi-events">GOI事件</a>
+                <a href="#foundation-events">基金会</a>
+                <a href="#emergency-events">紧急</a>
+                <a href="#containment-breaches">收容</a>
+                <a href="#changelog">日志</a>
+                <a href="#footer-container">声明</a>
+            </div>
+        </nav>
+    </details>
+
+
+    <link rel="stylesheet" href="MainCSS.css">
+    <!-- 主CSS -->
+
+    <!-- 搜索触发按钮样式 -->
+    <link rel="stylesheet" href="search-trigger.css">
+    <script src="search-trigger.js"></script>
+    <!-- 搜索功能 -->
+
+
+
+    <!-- 返回顶部按钮 -->
+    <button id="scroll-to-top" aria-label="返回顶部" title="返回顶部" class="scroll-top-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 15l-6-6-6 6" />
+        </svg>
+        <span class="progress-circle"></span>
+        <span class="progress-text"></span>
+    </button>
+
+    <!-- 返回顶部按钮样式 -->
+    <link rel="stylesheet" href="scroll-to-to.css">
+    <script src="scroll-to-to.js"></script>
+    <!-- 返回顶部功能 -->
+
+
+
+    <!-- 复制按钮样式 -->
+    <link rel="stylesheet" href="copy-btn.css">
+    <script src="copy-btn.js"></script>
+    <!-- 复制按钮样式 -->
+
+
+
+    <!-- 主题切换按钮样式 -->
+    <link rel="stylesheet" href="theme-toggle.css">
+    <script src="theme-toggle.js"></script>
+    <!-- 主题切换功能 -->
+
+    <!-- 顶部导航栏样式 -->
+    <link rel="stylesheet" href="toc-links.css">
+    <script src="toc-links.js"></script>
+    <!-- 顶部导航栏功能 -->
+
+    <!-- 页面模块样式 -->
+    <link rel="stylesheet" href="changelog-container.css">
+    <link rel="stylesheet" href="poem.css">
+    <link rel="stylesheet" href="footer-container.css">
+    <link rel="stylesheet" href="quick-links.css">
+    
+
+    
+</head>
+
+<body>
+    
+
+    <!-- 搜索触发按钮 - 更现代的浮动按钮 -->
+    <button id="search-trigger" class="search-trigger" aria-label="打开搜索">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <span class="shortcut-hint">Ctrl+K</span>
+    </button>
+
+    <!-- 搜索模态框 -->
+    <div id="search-modal" class="search-modal">
+        <div class="search-modal-content">
+            <div class="search-header">
+                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" id="search-box" placeholder="搜索广播内容..." autocomplete="off" aria-label="搜索输入框">
+                <button id="close-search" class="close-search" aria-label="关闭搜索">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div id="search-results" class="search-results">
+                <div class="search-empty-state">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <p>输入关键词搜索广播内容</p>
+                    <div class="search-tips">
+                        <span>仅搜索广播消息内容</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h1 class="main-title">Welcome to Emergencies - WEB</h1>
+
+    <!-- 页面内容 -->
+    <div class="section">
+        <h2>注意事项 Attention</h2>
+        <ul>
+            <li>游戏开始时需公布娱乐模式规则。</li>
+            <li>关闭轻收容净化程序。</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>撤离协议 Evacuation protocols</h2>
+        <p><strong>开启撤离协议时，以下阵营可在逃生点撤离：</strong></p>
+        <ul>
+            <li>基金会阵营</li>
+            <li>混沌分裂者阵营</li>
+            <li>SCP阵营</li>
+            <li>蛇之手阵营</li>
+            <li>格鲁乌P阵营</li>
+        </ul>
+        <p><strong>注意：</strong>GOC无法撤离，开启核弹爆炸时将变为观察者。</p>
+
+
+        <!-- 主题切换按钮 -->
+        <button id="theme-toggle" aria-label="切换主题" title="切换明暗主题">
+            <span class="theme-icon" aria-hidden="true">🌓</span>
+            <span class="theme-text">切换主题</span>
+        </button>
+
+    </div>
+
+    <div id="goi-events" class="section">
+        <h2>GOI组织事件</h2>
+
+        <div class="event">
+            <h3>1. 全球超自然联盟入侵设施</h3>
+            <div class="broadcast">
+                <button class="copy-btn" onclick="copyBroadcast(this)" aria-label="复制">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+                &lt;color=red&gt;外部威胁警报警告。&lt;/color&gt;&lt;SIZE=0.01&gt; External Threat Alarm
+                &lt;/size&gt;&lt;SIZE=0.01&gt; pitch_.2 .g3 .g6 pitch_1 . Facility diagnostic anomaly detected . . .
+                .&lt;/SIZE&gt;警告，设施检测异常。&lt;split&gt;所有人员请注意，&lt;color=#990033&gt;全球超自然联盟&lt;/color&gt;已经侵入设施。
+                &lt;SIZE=0.01&gt; pitch_0.6 .G4 .G4 .G4 .G4 pitch_1 ATTENTION ALL SITE PERSONNEL THE G O C has BEGUN A R
+                AID ON THE FACILITY &lt;/SIZE&gt;
+                &lt;split&gt;请所有人确保&lt;color=#FF0000&gt;核弹&lt;/color&gt;的安全。&lt;SIZE=0.01&gt; Please ensure the safety
+                of the alpha warhead for all Remaining &lt;/SIZE&gt;
+            </div>
+            <p class="task">任务：去核弹室开启核弹头。</p>
+            <p class="summary">概要：将游戏中所有观察者变为教程角色，根据角色数量给予九尾狐中士（默认）及九尾狐列兵装备，传送至49家或96家。</p>
+        </div>
+
+        <div class="event">
+            <h3>2. FBI特异事故处入侵设施（每局一次）</h3>
+            <div class="broadcast">
+                <button class="copy-btn" onclick="copyBroadcast(this)" aria-label="复制">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+                &lt;SIZE=0.01&gt; PITCH_0.9 .G5 PITCH_1.2 .G5 .G5 .G5 PITCH_0.5 .G5 PITCH_1.11
+                &lt;/size&gt;&lt;split&gt;注意，本通告系统。&lt;SIZE=0.01&gt;
+                Attention THIS JAM_040_2 IS PITCH_0.8 JAM_040_3 ANNOUNCE MENT System PITCH_0.2 .G5
+                PITCH_1.12 SYSTEM &lt;/size&gt;
+                &lt;split&gt;[&lt;color=#FF7F50&gt;FBI特异事故处&lt;/color&gt;]本公告系统现在由军事指挥。 &lt;SIZE=0.01&gt; PITCH_0.87 Now
+                under
+                Military Command . . . &lt;/size&gt;
+            </div>
+            <p class="task">任务：黑入设施的3个电板后撤离。</p>
+            <p class="summary">概要：将游戏中一定数量的观察者变为教程角色，根据角色数量给予九尾狐中士（默认）或九尾狐指挥官装备，传送至A大门（GATE A）。</p>
+        </div>
+
+        <div class="event">
+            <h3>3. 混沌分裂者入侵设施(事件刷新)</h3>
+            <div class="broadcast">
+                <button class="copy-btn" onclick="copyBroadcast(this)" aria-label="复制">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+                &lt;color=red&gt;外部威胁警报警告。&lt;/color&gt;
+                &lt;SIZE=0.01&gt; External Threat Alarm &lt;/size&gt;
+                &lt;SIZE=0.01&gt; pitch_.2 .g3 .g6 pitch_1 . Facility diagnostic anomaly detected . . . .&lt;/size&gt;
+                警告，设施检测异常。&lt;split&gt;所有人员请注意，&lt;color=#7FFF00&gt;混沌分裂者</color>已经侵入设施。 &lt;SIZE=0.01&gt; pitch_0.6 .G4
+                .G4
+                .G4 .G4 pitch_1 ATTENTION ALL SITE PERSONNEL THE Chaos Insurgency has BEGUN A R
+                AID ON THE FACILITY &lt;/size&gt;
+                &lt;split&gt;建议所有剩余人员按照标准疏散协议进行，直到MTF小队到达目的地。&lt;SIZE=0.01&gt; . . . . . . AllRemaining .G3
+                .G3 .G1 .G2 &lt;/size&gt;
+            </div>
+            <p class="task">任务：拯救D级人员，消灭基金会势力</p>
+            <p class="summary">概要：刷新一车混沌</p>
+        </div>
+
+        <div class="event">
+            <h3>4. 蛇之手入侵设施(每局最多3次)</h3>
+            <div class="broadcast">
+                <button class="copy-btn" onclick="copyBroadcast(this)" aria-label="复制">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+                &lt;color=red&gt;外部威胁警报警告。&lt;/color&gt;
+                &lt;SIZE=0.01&gt; External Threat Alarm &lt;/size&gt;
+                &lt;SIZE=0.01&gt; pitch_.2 .g3 .g6 pitch_1 . Facility diagnostic anomaly detected . . . .&lt;/size&gt;
+                警告，设施检测异常。&lt;split&gt; 所有人员请注意，&lt;color=#7FFF00&gt;蛇之手&lt;/color&gt;已经侵入设施。 &lt;SIZE=0.01&gt;
+                pitch_0.6 .G4
+                .G4
+                .G4 pitch_1 All personnel are aware that the Serpent Hand has infiltrated the
+                facility.G3 .G3 .G1 .G2 &lt;/size&gt;
+            </div>
+            <p class="task">任务：帮助SCP获得胜利。</p>
+            <p class="summary">概要：将游戏中观察者(最多6个)变为教程角色,中士( 默认)或指挥官装备,血量调整为150。</p>
+        </div>
+
+        <div class="event">
+            <h3>5. 格鲁乌P进入设施(每局最多3次)</h3>
+            <div class="broadcast">
+                <button class="copy-btn" onclick="copyBroadcast(this)" aria-label="复制">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+                &lt;color=red&gt;外部威胁警报警告。&lt;/color&gt;
+                &lt;SIZE=0.01&gt; External Threat Alarm &lt;/size&gt;
+                &lt;split&gt;有混沌分裂者势力进入设施。&lt;SIZE=0.01&gt; pitch_.2 .g4 .G3 pitch_1 . Chaos Insurgency armed personnel
+                entered the facility &lt;split&gt;
+                &lt;SIZE=0.01&gt; .G3 .G3 .G1 &lt;split&gt;
+                &lt;size=0.01&gt; AllRemaining &lt;/size&gt;建议所有幸存人员继续执行标准疏散方案，直至MTF小队抵达您所处的位置。
+            </div>
+
+            <div class="broadcast">
+                <button class="copy-btn" onclick="copyBroadcast(this)" aria-label="复制">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+                &lt;color=yellow&gt;内部威胁警报警告。&lt;/color&gt;
+                &lt;SIZE=0.01&gt; Internal Threat Alarm &lt;/size&gt;
+                &lt;split&gt;有SCP基金会势力进入设施。&lt;SIZE=0.01&gt; pitch_.2 .g4 .G3 pitch_1 . SCP Foundation armed personnel
+                entered the facility &lt;split&gt;
+                &lt;SIZE=0.01&gt; .G3 .G3 .G1 &lt;split&gt;
+                &lt;size=0.01&gt; AllRemaining &lt;/size&gt;建议所有幸存人员继续执行标准疏散方案，直至MTF小队抵达您所处的位置。
+            </div>
+            <p class="task">任务：帮助对应势力取得胜利。</p>
+            <p class="summary">
+                概要：选择两个广播其中一个在游戏中播放，将游戏中6-10个观察者变为你想要的势力(基金会势力或者混沌分裂者势力，基金会势力刷新6-10个收容专家,混沌分裂者势力刷新6-8个征召兵)给予足够的子弹并给予效果肾上腺素,血量调整为150。
+            </p>
+        </div>
+
+    </div>
+
+    <div id="foundation-events" class="section">
+        <h2>基金会阵营事件</h2>
+
+        <div class="event">
+            <h3>1. 机动特遣队NU-7落锤进入设施（每局1次）</h3>
+            <div class="broadcast">
+                <button class="copy-btn" onclick="copyBroadcast(this)" aria-label="复制">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+                注意&lt;size=0.01&gt; pitch_.2 .g4 .g3 pitch_1 Attention
+                &lt;/size&gt;&lt;split&gt;机动特遣部队&lt;color=#70C3FF&gt;”NU-7”落锤&lt;/color&gt;&lt;size=0.01&gt; MtfUnit NU
+                7 &lt;/size&gt;已进入设施&lt;size=0.01&gt; HasEntered &lt;/size&gt;&lt;split&gt;&lt;size=0.01&gt;
+                AllRemaining &lt;/size&gt;建议所有幸存人员继续执行标准疏散方案，直至MTF小队抵达您所处的位置。&lt;split&gt;&lt;size=0.01&gt; NU 7 will
+                report SCP containment and other status &lt;/size&gt;NU-7 将报告SCP收容和其他状态。
+            </div>
+            <p class="summary">概要：刷新5名九尾狐指挥官，给予囚鸟，血量调整为175。</p>
+        </div>
+
+        <div class="event">
+            <h3>2. 机动特遣队Alpha-1红右手进入设施(每局3次)</h3>
+            <div class="broadcast">
+                <button class="copy-btn" onclick="copyBroadcast(this)" aria-label="复制">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+                机动特遣部队&lt;color=#003DCA&gt;”Alpha-1” 红右手&lt;/color&gt;&lt;size=0.01&gt; MtfUnit Alpha 1
+                &lt;/size&gt;已进入设施&lt;size=0.01&gt; HasEntered &lt;/size&gt;
+                &lt;split&gt;所有存活单位立即向MTF团队报告&lt;size=0.01&gt; All Remaining units should report to MtfUnit immediately
+                &lt;/size&gt;
+            </div>
+            <p class="summary">概要：刷新6名九尾狐指挥官,血量调整为160。</p>
+        </div>
+
+        <div class="event">
+            <h3>3. 机动特遣队Beta-7疯帽商进入设施(每局2次)</h3>
+            <div class="broadcast">
+                <button class="copy-btn" onclick="copyBroadcast(this)" aria-label="复制">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+                机动特遣部队&lt;color=#FFFF00&gt;”beta-7”疯帽商&lt;/color&gt;&lt;size=0.01&gt; MtfUnit Beta 7
+                &lt;/size&gt;已进入设施&lt;size=0.01&gt; HasEntered &lt;/size&gt;&lt;split&gt;&lt;size=0.01&gt; The site is
+                currentz expiration a Biological hazards from of heavy SCP anomaly
+                &lt;/size&gt;该设施目前正在经历生物危害形式的严重异常SCP暴露&lt;split&gt;&lt;size=0.01&gt; AllRemaining
+                &lt;/size&gt;建议所有幸存人员继续执行标准疏散方案，直至MTF小队抵达您所处的位置。&lt;split&gt;&lt;size=0.01&gt; UncalculatedSCPsLeft
+                &lt;/size&gt;目前还有未知个SCP项目等待被重新收容
+            </div>
+            <p class="summary">概要：刷新4~6名九尾狐收容专家,血量调整为150。</p>
+        </div>
+
+        <div class="event">
+            <h3>4. 二级安全部队进入设施(每局1次)</h3>
+            <div class="broadcast">
+                <button class="copy-btn" onclick="copyBroadcast(this)" aria-label="复制">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+                二级安全部队，&lt;size=0.01&gt; Security Forces 2 &lt;/size&gt;已进入设施&lt;size=0.01&gt; HasEntered &lt;/size&gt;
+                &lt;split&gt;&lt;size=0.01&gt; SCP 5 0 0 4 will cooperate with the Security Forces 2 to back the
+                security of the facility &lt;/size&gt;SCP-5004将协同二级安全部队恢复设施安全&lt;split&gt;&lt;size=0.01&gt; AllRemaining
+                &lt;/size&gt;建议所有幸存人员继续执行标准疏散方案，直至MTF小队抵达您所处的位置。
+            </div>
+            <p class="summary">概要：刷新一名九尾狐指挥官,拥有一把囚鸟。当设施中存在SCP-5004时,则一直刷新九尾狐,血量调整为200。</p>
+        </div>
+
+        <div class="event">
+            <h3>5. 机动特遣队ETA-10非礼勿视进入设施(不怎么刷)</h3>
+            <div class="broadcast">
+                <button class="copy-btn" onclick="copyBroadcast(this)" aria-label="复制">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+                机动特遣部队&lt;color=#0096FF&gt;”ETA-10”非礼勿视&lt;/color&gt;&lt;size=0.01&gt; MtfUnit ETA 10
+                &lt;/size&gt;已进入设施&lt;size=0.01&gt; HasEntered &lt;/size&gt; &lt;split&gt;&lt;size=0.01&gt; AllRemaining
+                &lt;/size&gt;建议所有幸存人员继续执行标准疏散方案，直至MTF小队抵达您所处的位置。&lt;split&gt;&lt;size=0.01&gt; AllSecured
+                &lt;/size&gt;所有SCP主体均已得到控制,等待被重新收容。
+            </div>
+            <p class="summary">概要：刷新5名九尾狐中士给予SCP-268效果（隐身),血量调整为90。</p>
+        </div>
+
+        <div class="event">
+            <h3>6. 机动特遣队Gamma-4金胡子的船员进入设施(每局1次)</h3>
+            <div class="broadcast">
+                <button class="copy-btn" onclick="copyBroadcast(this)" aria-label="复制">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+                机动特遣部队&lt;color=#EE9A00&gt;”Gamma-4”金胡子的船员</color>
+                &lt;size=0.01&gt; MtfUnit Gamma 4 &lt;/size&gt;已进入设施&lt;size=0.01&gt; HasEntered &lt;/size&gt;
+                &lt;split&gt;
+                &lt;size=0.01&gt; AllRemaining &lt;/size&gt;建议所有幸存人员继续执行标准疏散方案，直至MTF小队抵达您所处的位置。 &lt;split&gt;
+                &lt;size=0.01&gt; UncalculatedSCPsLeft &lt;/size&gt;目前还有未知个SCP项目等待被重新收容。
+            </div>
+            <p class="summary">概要：刷新一名九尾狐指挥官,拥有一把囚鸟。当设施中存在SCP-5004时,则一直刷新九尾狐,血量调整为200。</p>
+        </div>
+
+        <div class="event">
+            <h3>7. 收容失效处理组CBHD进入设施(每局1次)</h3>
+            <div class="broadcast">
+                <button class="copy-btn" onclick="copyBroadcast(this)" aria-label="复制">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+                &lt;size=0.01&gt; The C B H D HasEntered &lt;/size&gt;收容失效处理组 (C.B.H.D)
+                已进入设施&lt;split&gt;该设施发生KETER级收容失效&lt;size=0.01&gt; the
+                facility is ongoing a KETER class containment breach &lt;/size&gt;
+                &lt;split&gt;
+                &lt;size=0.01&gt; All remaining personnel are advised to proceed with standard evacuation
+                protocols &lt;/size&gt;所有幸存人员需继续执行标准疏散方案&lt;split&gt;
+                &lt;size=0.01&gt; UncalculatedSCPsLeft &lt;/size&gt;目前还有未知个SCP项目等待被重新收容。
+            </div>
+            <p class="summary">概要：刷新5名九尾狐列兵，给予给100%（200）移动速度和50%（100）抗性,血量调整为95。</p>
+        </div>
+
+        <div class="event">
+            <h3>8. 机动特遣队Delta-5前线奔跑者进入设施(每局1次)</h3>
+            <div class="broadcast">
+                <button class="copy-btn" onclick="copyBroadcast(this)" aria-label="复制">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+                机动特遣部队&lt;color=#FFA07A&gt;”Delta-5”前线奔跑者&lt;/color&gt;&lt;size=0.01&gt; MtfUnit delta 5
+                &lt;/size&gt;已进入设施&lt;size=0.01&gt; HasEntered &lt;/size&gt; &lt;split&gt;&lt;size=0.01&gt; The facility
+                has ongoing serious containment breach
+                &lt;/size&gt;该设施发生严重的收容失效&lt;split&gt;所有人员不要靠近设施出口。&lt;size=0.01&gt; All Personnel Do not get close the
+                facility exit . . . &lt;/size&gt;
+            </div>
+            <p class="summary">概要：刷新5名九尾狐中士,传送至设施中任意位置,血量调整为150. </p>
+        </div>
+        <div class="event">
+            <h3>9 机动特遣队Gamma-5红鲱鱼进入设施(每局1次)</h3>
+            <div class="broadcast">
+                <button class="copy-btn" onclick="copyBroadcast(this)" aria-label="复制">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+                机动特遣部队&lt;color=#8B4C39&gt;”Gamma-5”红鲱鱼&lt;/color&gt;代号:Alpha-5&lt;size=0.01&gt; MtfUnit gamma 5
+                designated Nato_A 5 &lt;/size&gt;已进入设施&lt;size=0.01&gt; HasEntered &lt;/size&gt;
+                &lt;split&gt;&lt;size=0.01&gt; The A P 5 protocol is activated
+                &lt;/size&gt;AP-5协议已启动&lt;split&gt;所有人员不要靠近设施出口。&lt;size=0.01&gt; All Personnel Do not get close the
+                facility exit . . . &lt;/size&gt;
+            </div>
+            <p class="summary">刷新7名九尾狐指挥官,给予所有人AMNESIA VISION效果,血量调整为150。</p>
+        </div>
+        <div class="event">
+            <h3>10 快速反应部队</h3>
+            <div class="broadcast">
+                <button class="copy-btn" onclick="copyBroadcast(this)" aria-label="复制">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+                &lt;SIZE=0.01&gt; .g1 .g2 quick response team &lt;split&gt;[&lt;color=#40E0D0&gt;快速反应部队警报&lt;/color&gt;]
+                撤退并重新集结 &lt;SIZE=0.01&gt; alerting withdraw and regroup comfirmed a backup squad is being dispatched
+                bagged a s a p &lt;split&gt; 确认正在尽快派遣后备小队&lt;SIZE=0.01&gt; all units exercise extreme caution
+                &lt;split&gt; 所有单位都要极其小心。
+            </div>
+            <p class="summary">概要：随便刷</p>
+        </div>
+
+        <div class="event">
+            <h3>11 机动特遣队Alpha-9最后的希望进入设施</h3>
+            <div class="broadcast">
+                <button class="copy-btn" onclick="copyBroadcast(this)" aria-label="复制">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+                机动特遣部队&lt;color=#082E54&gt;”Alpha-9”最后的希望&lt;/color&gt;&lt;size=0.01&gt; MtfUnit Alpha 9
+                &lt;/size&gt;已进入设施&lt;size=0.01&gt; HasEntered &lt;/size&gt;&lt;split&gt;&lt;size=0.01&gt; This site is
+                undergoing multiple S C P by anomalous objects &lt;/size&gt;&lt;split&gt;此站点正经历多次异常对象的破坏
+                &lt;split&gt;带着最后希望的机动特遣队已经着陆 &lt;size=0.01&gt;MtfUnit with the last wish has landed&lt;/size&gt;
+                &lt;split&gt;一旦局势得到控制 &lt;size=0.01&gt; Once the situation is under control &lt;/size&gt;
+                &lt;split&gt;Alpha-9会提供状态报告&lt;size=0.01&gt; Alpha 9 will available status reports &lt;/size&gt;
+            </div>
+            <p class="summary">概要：刷新一飞机九尾狐并给与肾上腺素效果(无限体力),血量调整为150。</p>
+        </div>
+
+        <div class="event">
+            <h3>13 机动特遣队Tau-5轮回进入设施</h3>
+            <div class="broadcast">
+                <button class="copy-btn" onclick="copyBroadcast(this)" aria-label="复制">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+                机动特遣部队&lt;color=#8B1A1A&gt;”Tau”轮回&lt;/color&gt;代号:Alpha-7&lt;size=0.01&gt; MtfUnit delta 5 designated
+                Nato_A 7 &lt;/size&gt;已紧急进入设施&lt;size=0.01&gt; EMERGENCY HasEntered &lt;/size&gt;
+            </div>
+            <p class="summary">概要：作为核弹爆炸前，最后一波飞机刷新。</p>
+        </div>
+
+        <div class="event">
+            <h3>13 机动特遣队CN-GAMMA-6进入设施</h3>
+            <div class="broadcast">
+                <button class="copy-btn" onclick="copyBroadcast(this)" aria-label="复制">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+                机动特遣C.B.R.N单位&lt;color=#b1d85c&gt;”CN-Gamma-6”免疫系统&lt;/color&gt;&lt;size=0.01&gt; Mobile Task Force C B
+                R N unit C N gamma 6 &lt;/size&gt;已进入设施&lt;size=0.01&gt; HasEntered
+                &lt;/size&gt;&lt;split&gt;&lt;size=0.01&gt; The site is currentz expiration a Biological and Nuclear
+                hazards from of heavy anomaly
+                &lt;/size&gt;该设施目前正在经历生物危害及核危害形式的严重暴露&lt;split&gt;设施紧急疏散撤离协议生效,&lt;size=0.01&gt; THE FACILITY EMERGENCY
+                EVACUATE Protocol initiated &lt;/size&gt;所有人员立即撤离&lt;size=0.01&gt; all personnel evacuated immediately
+                &lt;/size&gt;
+            </div>
+            <p class="summary">概要：刷新一飞机收容专家。</p>
+        </div>
+
+    </div>
+
+    <div id="emergency-events" class="section">
+        <h2>紧急事件</h2>
+
+        <div class="event">
+            <h3>1. ARI接管设施远程门控制系统</h3>
+            <div class="broadcast">
+                <button class="copy-btn" onclick="copyBroadcast(this)" aria-label="复制">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+                &lt;color=#00FF00&gt;[ARI]&lt;/color&gt;ARI安全系统生效, 设施电力系统已被AR-500接管&lt;size=0.01&gt; A R I Security
+                system initiated The power system of the facility has been taken over by A R 500 Protocol &lt;/size&gt;
+            </div>
+            <p class="summary">概要：将设施所有门锁定并打开（SCP-079家除外），通常持续300秒。</p>
+        </div>
+
+        <div class="event">
+            <h3>2 ARI接管设施电力系统</h3>
+            <div class="broadcast">
+                <button class="copy-btn" onclick="copyBroadcast(this)" aria-label="复制">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+                &lt;color=#00FF00&gt;[ARI]&lt;/color&gt;ARI安全系统生效, 设施电力系统已被AR-500接管&lt;size=0.01&gt; A R I Security
+                system initiated The power system of the facility has been taken over by A R 500 Protocol &lt;/size&gt;
+            </div>
+            <p class="summary">概要：开灯。</p>
+        </div>
+
+        <div class="event">
+            <h3>3 AR-200控制ALPHA核弹头</h3>
+            <div class="broadcast">
+                <button class="copy-btn" onclick="copyBroadcast(this)" aria-label="复制">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+                AR-100安全协议终止。由ARI安全系统命令编辑的爆炸序列失效，所有人员恢复标准工作概要。
+                &lt;size=0.01&gt; Termination of AR 100 protocol . detonation sequence redacted by A R I Security system
+                command ALL personnel resume standard work &lt;/size&gt;
+            </div>
+            <p class="summary">概要：关闭场上正在执行的ALPHA核弹头引爆序列。</p>
+        </div>
+        <div class="event">
+            <h3>4 Espilon-11禁止靠近广播(保护地表安全)</h3>
+            <div class="broadcast">
+                <button class="copy-btn" onclick="copyBroadcast(this)" aria-label="复制">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+                所有生还人员注意&lt;size=0.01&gt; pitch_.2 .g4 .g5 pitch_1 Attention All Remaining Personnel
+                &lt;/size&gt;&lt;split&gt;该设施发生KETER级收容失效&lt;size=0.01&gt; the facility is ongoing a KETER class
+                containment breach &lt;/size&gt;&lt;split&gt;&lt;/size&gt;所有人员不要靠近设施出口。&lt;size=0.01&gt; All Personnel
+                Do not get close the facility exit . . . &lt;/size&gt;&lt;split&gt;重复&lt;size=0.01&gt; REPEAT
+                &lt;/size&gt;&lt;split&gt;不要靠近设施A B大门。&lt;size=0.01&gt; Do not get close the facility A B GATE
+                &lt;/size&gt;
+            </div>
+            <p class="summary">概要：A大门封锁。</p>
+        </div>
+
+        <div class="event">
+            <h3>6 设施紧急疏散协议启动</h3> &lt; ! -- 就是没有5 -- &gt;
+            <div class="broadcast">
+                <button class="copy-btn" onclick="copyBroadcast(this)" aria-label="复制">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+                所有人员注意&lt;size=0.01&gt; pitch_.2 .g4 .g4 pitch_1 . Attention all personnel
+                &lt;/size&gt;&lt;split&gt;设施紧急疏散撤离协议生效,&lt;size=0.01&gt; THE FACILITY EMERGENCY EVACUATE Protocol
+                initiated &lt;/size&gt;所有人员立即撤离&lt;size=0.01&gt; all personnel evacuated immediately &lt;/size&gt;
+            </div>
+            <p class="summary">概要：关闭场上正在执行的ALPHA核弹头引爆序列。</p>
+        </div>
+
+        <div class="event">
+            <h3>7 设施电力系统被攻击</h3>
+            <div class="broadcast">
+                <button class="copy-btn" onclick="copyBroadcast(this)" aria-label="复制">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+                &lt;color=YELLOW&gt;[FORM SITE02]&lt;/color&gt;所有人员注意, 设施电力系统被未知单位攻击&lt;size=0.01&gt; Attention all
+                personnel The facility power system was attacked by unknown units.
+                &lt;/size&gt;&lt;split&gt;电力系统即将停止支持&lt;size=0.01&gt; The power system stops supporting &lt;/size&gt;
+            </div>
+            <p class="summary">概要：关闭设施灯光</p>
+        </div>
+
+        <div class="event">
+            <h3>8 设施净化P-B-0系统</h3>
+            <div class="broadcast">
+                <button class="copy-btn" onclick="copyBroadcast(this)" aria-label="复制">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+                &lt;color=YELLOW&gt;[FORM_05_COMMAND]&lt;/color&gt;所有人员注意&lt;size=0.01&gt; Attention all personnel .
+                &lt;/size&gt;&lt;split&gt;&lt;color=red&gt;[05_ORDER]&lt;/color&gt;设施P-B-0全体净化程序启动&lt;size=0.01&gt;
+                facility P B 0 DECONTAMINATION SEQUENCE activated
+                &lt;/size&gt;&lt;split&gt;&lt;color=YELLOW&gt;[5分钟倒计时]&lt;/color&gt;所有人员立即撤离至地表区域&lt;size=0.01&gt; all
+                personnel evacuated to the surface zone immediately &lt;/size&gt;
+            </div>
+            <p class="summary">概要：计时5分钟，计时器归零时为未在地表的单位添加DECONTAMINATION效果。</p>
+        </div>
+    </div>
+
+    <div id="containment-breaches" class="section">
+        <h2>收容失效</h2>
+
+        <div class="event">
+            <h3>1 收容失效 096</h3>
+            <div class="broadcast">
+                <button class="copy-btn" onclick="copyBroadcast(this)" aria-label="复制">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+                &lt;color=RED&gt;[FROM SITE02]&lt;/color&gt;危险！&lt;size=0.01&gt; Danger
+                &lt;/size&gt;所有人员注意&lt;color=red&gt;SCP-096&lt;/color&gt;收容失效! &lt;size=0.01&gt; Attention all personnel
+                The SCP 0 9 6 Containment breach
+                &lt;/size&gt;&lt;split&gt;所有剩余人员按照标准疏散协议进行，直到MTF小队到达目的地。&lt;size=0.01&gt; AllRemaining &lt;/size&gt;
+            </div>
+            <p class="summary">概要：刷新一名SCP-096。</p>
+        </div>
+
+        <div class="event">
+            <h3>2 收容失效 173</h3>
+            <div class="broadcast">
+                <button class="copy-btn" onclick="copyBroadcast(this)" aria-label="复制">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+                &lt;color=RED&gt;[FROM SITE02]&lt;/color&gt;危险！&lt;size=0.01&gt; Danger
+                &lt;/size&gt;所有人员注意&lt;color=red&gt;SCP-173&lt;/color&gt;收容失效! &lt;size=0.01&gt; Attention all personnel
+                The SCP 1 7 3 Containment breach
+                &lt;/size&gt;&lt;split&gt;所有剩余人员按照标准疏散协议进行，直到MTF小队到达目的地。&lt;size=0.01&gt; AllRemaining &lt;/size&gt;
+            </div>
+            <p class="summary">概要：刷新一名SCP-173。</p>
+        </div>
+        <div class="event">
+            <h3>3 收容失效 3035</h3>
+            <div class="broadcast">
+                <button class="copy-btn" onclick="copyBroadcast(this)" aria-label="复制">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+                &lt;color=RED&gt;[FROM SITE02]&lt;/color&gt;危险！&lt;size=0.01&gt; Danger
+                &lt;/size&gt;所有人员注意&lt;color=red&gt;SCP-3035&lt;/color&gt;收容失效! &lt;size=0.01&gt; Attention all
+                personnel The SCP 3 0 3 5 Containment breach
+                &lt;/size&gt;&lt;split&gt;所有剩余人员按照标准疏散协议进行，直到MTF小队到达目的地。&lt;size=0.01&gt; AllRemaining &lt;/size&gt;
+            </div>
+            <p class="summary">概要：刷新一名教程角色,拥有手提灯。逃出设施时变为除SCP-079以外的随机一名SCP角色。</p>
+        </div>
+        <div class="event">
+            <h3>4 收容失效 079</h3>
+            <div class="broadcast">
+                <button class="copy-btn" onclick="copyBroadcast(this)" aria-label="复制">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+                &lt;color=RED&gt;[FROM SITE02]&lt;/color&gt;危险！&lt;size=0.01&gt; Danger
+                &lt;/size&gt;所有人员注意&lt;color=red&gt;SCP-079&lt;/color&gt;收容失效! 攻击设施控制系统&lt;size=0.01&gt; Attention all
+                personnel The SCP 0 7 9 Containment breach . attack facility control system
+                &lt;/size&gt;&lt;split&gt;所有剩余人员按照标准疏散协议进行，直到MTF小队到达目的地。&lt;size=0.01&gt; AllRemaining &lt;/size&gt;
+            </div>
+            <p class="summary">概要：刷新一名SCP-079。</p>
+        </div>
+
+    </div>
+
+    <div id="changelog" class="changelog-container">
+        <h2 class="changelog-title">更新日志</h2>
+        <div class="changelog">
+            <details class="changelog-details" close>
+                <summary class="changelog-summary">
+                    <span>查看更新日志</span>
+                    <svg class="dropdown-icon" viewBox="0 0 24 24" width="16" height="16">
+                        <path fill="currentColor" d="M7 10l5 5 5-5z" />
+                    </svg>
+                </summary>
+                <ul class="changelog-list">
+                    <li class="changelog-item native">
+                        <span class="version-badge">紧急事件公告</span>
+                        <span class="update-text">重制版v4.2已更新</span>
+                    </li>
+                    <li class="highlight-container">
+                        <span class="version-badge">WED-V3.1.2</span>
+                        <span class="update-text">新增动态背景(rain-toggle.js)现在可以通过rain-toggle进行控制。</span>
+                    </li>
+                    <li class="highlight-container">
+                        <span class="version-badge">WED-V3.1.1</span>
+                        <span class="update-text">新增Main-title。</span>
+                    </li>
+                    <li class="highlight-container">
+                        <span class="version-badge">WED-V3.1</span>
+                        <span class="update-text">将本项目CSS及JavaScript代码移至外部文件。</span>
+                    </li>
+                    <li class="highlight-container">
+                        <span class="version-badge">WED-V3</span>
+                        <span class="update-text">优化section模块，美化页面版式。</span>
+                    </li>
+                    <li class="highlight-container">
+                        <span class="version-badge">WED-V2.3.2</span>
+                        <span class="update-text">找到了awa</span>
+                    </li>
+                    <li class="highlight-container">
+                        <span class="version-badge">WED-V2.3.1</span>
+                        <span class="update-text">我把一言的CSS模块搞丢了，重新做了一个。</span>
+                    </li>
+                    <li class="highlight-container">
+                        <span class="version-badge">WED-V2.3</span>
+                        <span class="update-text">再次优化搜索框和乱七八糟的功能</span>
+                    </li>
+                    <li class="highlight-container">
+                        <span class="version-badge">WED-V2.2</span>
+                        <span class="update-text">我们再次优化页面，复制按钮、搜索框、回到顶部看起来更简约更美观！</span>
+                    </li>
+                    <li class="highlight-container">
+                        <span class="version-badge">WED-V2.1</span>
+                        <span class="update-text">修复已知BUG。</span>
+                    </li>
+                    <li class="highlight-container">
+                        <span class="version-badge">WED-V2</span>
+                        <span class="update-text">是的，我将所有的事件都加了进来并且优化修改了页面CSS代码和更新日志样式！</span>
+                    </li>
+                    <li class="highlight-container">
+                        <span class="version-badge">WED-V1.1</span>
+                        <span class="update-text">优化了更新日志样式 是不是觉得WEB更新日志很cool? 之前的更新有好多 我懒得写awa</span>
+                    </li>
+                    <li class="highlight-container">
+                        <span class="version-badge">WED-V1</span>
+                        <span class="update-text">历史性技术更新 后台挂word文件太卡 那为什么不用浏览器WED?</span>
+                    </li>
+                    <li class="changelog-item highlight">
+                        <span class="version-badge">重制版4.2</span>
+                        <span class="update-text">重构部分广播</span>
+                    </li>
+                    <li class="changelog-item highlight">
+                        <span class="version-badge">重制版4.1.1</span>
+                        <span class="update-text">优化MTF广播。</span>
+                    </li>
+                    <li class="changelog-item highlight">
+                        <span class="version-badge">重制版4.1</span>
+                        <span class="update-text">更新CN-GAMMA-06。</span>
+                    </li>
+                    <li class="changelog-item highlight">
+                        <span class="version-badge">重制版4</span>
+                        <span class="update-text">WED网页端开发。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">重制版3.1</span>
+                        <span class="update-text">添加设施净化P-B-0系统、SCP全体释放计划事件，优化部分广播。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">重制版3.0</span>
+                        <span class="update-text">更换文件格式，美化文件样式。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">重制版2.3</span>
+                        <span class="update-text">重构所有广播。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">重制版2.2</span>
+                        <span class="update-text">更新了UIU的广播和GOC的非法启动核弹广播，还有设施主管的概要。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">重制版2.1.1</span>
+                        <span class="update-text">更新混沌扫描专员并更改撤离协议。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">重制版2.1</span>
+                        <span class="update-text">删除触发事件；删除无用事件；规则独立；协议更新。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">重制版2.0.4</span>
+                        <span class="update-text">更新了新的快反广播和UIU广播，并撤离和更新UIU新概要。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">重制版2.0.3</span>
+                        <span class="update-text">更新了游戏角色分类。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">重制版2.0.2</span>
+                        <span class="update-text">更新了设施主管的物品。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">重制版2.0.1</span>
+                        <span class="update-text">更新了UIU的中文广播和格鲁乌P广播。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">重制版2.0</span>
+                        <span class="update-text">更新了基金会势力事件。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">重制版1.9.1</span>
+                        <span class="update-text">更新了GOC和UIU的广播。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">重制版1.9</span>
+                        <span class="update-text">把所有的东西整理并把收容失效重新分类，将所有事件的号数改成所在分区的号数，并更新了基金会势力CASSIE广播的第11和12个。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">重制版1.8</span>
+                        <span class="update-text">更新了间谍。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">重制版1.7.1</span>
+                        <span class="update-text">更新了GOC的核弹启动广播。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">重制版1.7</span>
+                        <span class="update-text">增加 1.6 事件广播并且更改概要，更新快反广播。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">重制版1.6</span>
+                        <span class="update-text">增加事件 2.9.2 和事件 1.6（但是还没有做广播），并更改了蛇之手任务，增加更多注释，调整事件角色血量。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">重制版1.5</span>
+                        <span class="update-text">增加事件 3.7/3.8。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">重制版1.4</span>
+                        <span class="update-text">UIU任务移动到GOC任务，更新了规则，并把要分开的广播分开。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">重制版1.3</span>
+                        <span class="update-text">新加了UIU的新任务。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">重制版1.2</span>
+                        <span class="update-text">优化GOC广播并把娱乐模式的3114血量从原来1250调整到1500。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">重制版1.1</span>
+                        <span class="update-text">优化了广播和新加蛇之手。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">重制版1.0</span>
+                        <span class="update-text">重置了GOC广播并新加快反小队。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">V2.0</span>
+                        <span class="update-text">更新了事件2.9。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">V1.9.1</span>
+                        <span class="update-text">替换了各事件的班级颜色。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">V1.9</span>
+                        <span class="update-text">规则更新-采用《鸡蛋肠粉服务器细则 3.0》，从无规则变为有规则。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">V1.8.1</span>
+                        <span class="update-text">优化事件2.5。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">V1.8</span>
+                        <span class="update-text">添加事件 2.7、3.3.3、4.5。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">V1.7</span>
+                        <span class="update-text">添加了事件 2.5。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">V1.6.3</span>
+                        <span class="update-text">修改了事件 2.5。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">V1.6.2</span>
+                        <span class="update-text">修改了事件 2.5的广播写错文字的问题并且更新了规则。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">V1.6.1</span>
+                        <span class="update-text">将事件设施安全检查-重收容区域更改为设施安全检查。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">V1.6</span>
+                        <span class="update-text">更新了设施安全检查-重收容区域。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">V1.5.3</span>
+                        <span class="update-text">优化了DELTA核弹头紧急引爆程序的广播，使其变动更加准确。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">V1.5.2</span>
+                        <span class="update-text">更新了新的机动特遣队并且添加了注释和更改了 3.1.3 的大标题。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">V1.5.1</span>
+                        <span class="update-text">更新了角色任务。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">V1.5</span>
+                        <span class="update-text">更新了DELTA核弹头紧急引爆程序以及把GOC和UIU大标题颜色改动，又增加新事件黑客和研究失败。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">V1.4</span>
+                        <span class="update-text">更新了娱乐模式的规则，BATE核弹引爆序列以及优化了广播提醒。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">V1.3</span>
+                        <span class="update-text">优化了事件 3.2.2。暂时删除事件 5.1。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">V1.2</span>
+                        <span class="update-text">增加了事件 2.5、3.1.3。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">V1.1</span>
+                        <span class="update-text">优化了事件 4.3 的广播提示以及增加了新的事件。</span>
+                    </li>
+                    <li class="changelog-item">
+                        <span class="version-badge">V1.0</span>
+                        <span class="update-text">更新了事件。</span>
+                    </li>
+                </ul>
+            </details>
+        </div>
+    </div>
+
+    <div class="poem-container">
+        <div class="poem" id="daily-quote">
+            <!-- 每日一言将在这里动态显示 -->
+        </div>
+        <div class="poem-footer">
+            <span class="refresh-btn" id="refresh-quote">换一句</span>
+            <span class="quote-count" id="quote-count"></span>
+        </div>
+    </div>
+
+    <footer> <!-- 页脚及声明部分-->
+        <!-- 页脚内容 -->
+        <div id="footer-container" class="footer-container">
+            <div class="footer-content">
+                <div class="section">
+                    <div class="author-section">
+                        <h3 class="section-title">项目作者</h3>
+                        <div class="author-grid">
+                            <div class="author-card">
+                                <div class="avatar-container">
+                                    <img src="Jeff.jpg" alt="Jeff" class="author-avatar" width="96" height="96"
+                                        loading="lazy">
+                                </div>
+                                <div class="author-info">
+                                    <h4 class="author-name">Jeff</h4>
+                                    <p class="author-role">事件作者</p>
+                                    <a href="mailto:2816401189@qq.com" class="author-contact">
+                                        <svg class="icon" viewBox="0 0 24 24" width="18" height="18">
+                                            <path fill="currentColor"
+                                                d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z" />
+                                        </svg>
+                                        2816401189@qq.com
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="author-card">
+                                <div class="avatar-container">
+                                    <img src="MVP.jpg" alt="MVP" class="author-avatar" width="96" height="96"
+                                        loading="lazy">
+                                </div>
+                                <div class="author-info">
+                                    <h4 class="author-name">MVP</h4>
+                                    <p class="author-role">重制版作者 & 事件指导</p>
+                                    <a href="mailto:3220796067@qq.com" class="author-contact">
+                                        <svg class="icon" viewBox="0 0 24 24" width="18" height="18">
+                                            <path fill="currentColor"
+                                                d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z" />
+                                        </svg>
+                                        3220796067@qq.com
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section"><!-- 特别鸣谢区域 -->
+
+                    <div class="thanks-section">
+                        <h3 class="section-title">特别鸣谢</h3>
+                        <div class="main-thanks">
+                            <p>特别感谢 <strong>INS_LG</strong> 的事件参考与支持</p>
+                            <p>特别感谢 <strong>HYH</strong> 的事件参考</p>
+                        </div>
+
+                        <div class="contributors">
+                            <p class="contributors-title">感谢以下人员及制作组的贡献：</p>
+                            <ul class="contributor-list">
+                                <li>Jeff - WEB端技术支持</li>
+                                <li>MVP - 设计协助</li>
+                                <li>虚无 - 帮我在土豆服开</li>
+                                <li>HYH - 《随机事件》参考</li>
+                                <li>INS LG - 《特殊事件》参考</li>
+                                <li>紧急事件制作组 - 文档整理</li>
+                                <li>紧急事件制作组 - 内容审核</li>
+                                <li>SCP-SL [CN]Monika服务器 - 测试反馈</li>
+                                <li>SCP-SL SL土豆社区服务器 - 测试反馈</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- 版权信息区域 -->
+                <div class="section">
+                    <h3 class="section-title">版权信息</h3>
+                    <p class="section-text">本项目由 <strong>Jeff</strong> 和 <strong>MVP</strong>
+                        制作，部分内容参考编写于<a href="https://scp-wiki-cn.wikidot.com/" target="_blank" rel="noopener noreferrer"
+                            class="license-link"><strong>SCP基金会</strong></a>。</p>
+                    <p class="section-text">本项目的所有内容均遵循 <a href="https://creativecommons.org/licenses/by-sa/3.0/"
+                            target="_blank" rel="noopener noreferrer" class="license-link"><strong>CC BY-SA 3.0
+                            </strong></a> 协议。</p>
+                    <div class="license-section">
+                        <div class="license-info">
+                            <p class="license-text">
+                                <strong>注意:</strong>本作品采用 <a href="https://creativecommons.org/licenses/by-sa/3.0/"
+                                    target="_blank" rel="noopener noreferrer" class="license-link"><strong>知识共享
+                                        署名-相同方式共享 3.0
+                                        协议</strong></a> 进行许可
+                            </p>
+                            <p class="license-text">
+                                <strong>Attention:</strong>The project is licensed under a <a
+                                    href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank"
+                                    rel="noopener noreferrer" class="license-link"><strong>Creative
+                                        Commons
+                                        Attribution-ShareAlike 3.0 Unported License</strong></a>
+                            </p>
+                            <p class="wiki-link">
+                                编于 <a href="https://scp-wiki-cn.wikidot.com/" target="_blank" rel="noopener noreferrer"
+                                    class="license-link"><strong>SCP基金会</strong></a>
+                            </p>
+                        </div>
+
+                        <div class="license-icons">
+                            <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="CC"
+                                loading="lazy">
+                            <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="BY"
+                                loading="lazy">
+                            <img src="https://mirrors.creativecommons.org/presskit/icons/sa.svg" alt="SA"
+                                loading="lazy">
+                            <img src="https://scp-wiki-cn.wdfiles.com/local--files/main/scp-logo-en.png" alt="SCP"
+                                loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="quick-links-section">
+                <div class="quick-links-card">
+                    <h3 class="quick-links-heading">快速链接</h3>
+                    <div class="quick-links-content">
+                        <a href="D:/Main/Main.html" class="quick-links-action">
+                            <span class="quick-links-label">Main.html 富文本转换器</span>
+                        </a>
+                        <a href="https://qm.qq.com/q/AsqMFyOYTe" class="quick-links-action">
+                            <span class="quick-links-label">紧急事件策划部</span>
+                        </a>
+                        <a href="https://qm.qq.com/q/XfuU7Y0968" class="quick-links-action">
+                            <span class="quick-links-label">鸡蛋肠粉SL社区服务器总群</span>
+                        </a>
+                        <a href="https://qm.qq.com/q/Ju8EkATBi8" class="quick-links-action">
+                            <span class="quick-links-label">Monika社区 SCPSL</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 页面模块功能与滚动揭示动画 -->
+    <script src="poem.js"></script>
+    <script src="reveal.js"></script>
+
+</body>
+</html>

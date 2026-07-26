@@ -1,0 +1,249 @@
+/* === Ethereal Glass 更新日志 === */
+.changelog-container {
+    margin: var(--space-8, 32px) 0;
+    background: rgba(255, 255, 255, 0.02);
+    border: 0.5px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-2xl, 36px);
+    padding: var(--space-6, 24px);
+    transition: all 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+    box-shadow:
+        inset 0 1px 1px rgba(255, 255, 255, 0.02),
+        0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+.changelog-container:hover {
+    border-color: rgba(106, 130, 251, 0.1);
+    box-shadow:
+        inset 0 1px 1px rgba(255, 255, 255, 0.02),
+        0 8px 48px rgba(0, 0, 0, 0.3);
+}
+
+/* === 标题 === */
+.changelog-title {
+    font-family: var(--font-display, 'Plus Jakarta Sans', system-ui, sans-serif);
+    font-size: var(--text-2xl, 1.75rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin: 0 0 var(--space-5, 20px);
+    padding-bottom: var(--space-4, 16px);
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.04);
+    color: var(--color-text, rgba(255,255,255,0.85));
+    display: flex;
+    align-items: center;
+    gap: var(--space-3, 12px);
+}
+
+.changelog-title::before {
+    content: '📜';
+    font-size: 1.2em;
+    filter: drop-shadow(0 0 6px rgba(106, 130, 251, 0.2));
+}
+
+/* === 可折叠区域 === */
+.changelog-details {
+    border-radius: var(--radius-lg, 20px);
+    overflow: hidden;
+}
+
+.changelog-summary {
+    list-style: none;
+    padding: var(--space-4, 16px) var(--space-5, 20px);
+    background: rgba(255, 255, 255, 0.02);
+    border: 0.5px solid rgba(255, 255, 255, 0.04);
+    border-radius: var(--radius-lg, 20px);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif);
+    font-weight: 500;
+    font-size: var(--text-sm, 0.875rem);
+    color: var(--color-text, rgba(255,255,255,0.85));
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    outline: none;
+}
+
+.changelog-summary::-webkit-details-marker {
+    display: none;
+}
+
+.changelog-summary:hover {
+    background: rgba(106, 130, 251, 0.04);
+    border-color: rgba(106, 130, 251, 0.08);
+}
+
+.changelog-summary:focus-visible {
+    box-shadow: 0 0 0 3px rgba(106, 130, 251, 0.06);
+}
+
+.dropdown-icon {
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    color: var(--color-text-secondary, rgba(255,255,255,0.55));
+}
+
+.changelog-details[open] .dropdown-icon {
+    transform: rotate(180deg);
+}
+
+/* === 更新列表 === */
+.changelog-list {
+    margin-top: var(--space-4, 16px);
+    padding-left: 0;
+    list-style: none;
+    max-height: 400px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(106, 130, 251, 0.1) transparent;
+}
+
+.changelog-list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.changelog-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.changelog-list::-webkit-scrollbar-thumb {
+    background: rgba(106, 130, 251, 0.1);
+    border-radius: var(--radius-full, 9999px);
+}
+
+/* === 更新项 === */
+.changelog-item,
+.highlight-container {
+    padding: var(--space-3, 12px) var(--space-4, 16px);
+    margin-bottom: var(--space-2, 8px);
+    background: rgba(255, 255, 255, 0.01);
+    border: 0.5px solid rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-md, 14px);
+    border-left: 2px solid rgba(106, 130, 251, 0.1);
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3, 12px);
+    position: relative;
+    overflow: hidden;
+}
+
+.changelog-item:hover,
+.highlight-container:hover {
+    background: rgba(106, 130, 251, 0.02);
+    border-color: rgba(106, 130, 251, 0.06);
+    transform: translateX(3px);
+}
+
+/* === 版本标签 === */
+.version-badge {
+    background: rgba(106, 130, 251, 0.08);
+    color: var(--color-primary-light, #8ba3ff);
+    padding: var(--space-1, 4px) var(--space-3, 12px);
+    border-radius: var(--radius-full, 9999px);
+    font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif);
+    font-size: var(--text-xs, 0.75rem);
+    font-weight: 500;
+    min-width: 60px;
+    text-align: center;
+    flex-shrink: 0;
+    border: 0.5px solid rgba(106, 130, 251, 0.06);
+}
+
+.update-text {
+    flex: 1;
+    color: var(--color-text-secondary, rgba(255,255,255,0.55));
+    font-size: var(--text-sm, 0.875rem);
+    line-height: 1.6;
+}
+
+/* === 高亮容器 === */
+.highlight-container {
+    background: rgba(106, 130, 251, 0.02);
+    border-left-color: var(--color-primary, #6a82fb);
+}
+
+.highlight-container .version-badge {
+    background: rgba(106, 130, 251, 0.12);
+    border-color: rgba(106, 130, 251, 0.1);
+}
+
+/* === 最新版高亮 === */
+.changelog-item.highlight {
+    background: linear-gradient(90deg, rgba(106, 130, 251, 0.03), transparent);
+    border-left-color: var(--color-primary, #6a82fb);
+}
+
+.changelog-item.highlight .version-badge {
+    background: var(--color-primary, #6a82fb);
+    color: #fff;
+    border-color: transparent;
+}
+
+/* === 原生项 === */
+.changelog-item.native {
+    background: linear-gradient(90deg, rgba(106, 90, 205, 0.04), transparent);
+    border-left-color: #6a5acd;
+}
+
+.changelog-item.native .version-badge {
+    background: rgba(106, 90, 205, 0.12);
+    color: #a78bfa;
+    border-color: rgba(106, 90, 205, 0.08);
+}
+
+.changelog-item.native::after {
+    content: '🖥️';
+    position: absolute;
+    right: var(--space-4, 16px);
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.04;
+    font-size: 2.5rem;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* === 浅色主题 === */
+.light-theme .changelog-container {
+    background: #ffffff;
+}
+
+.light-theme .changelog-item {
+    background: rgba(0, 0, 0, 0.01);
+    border-color: rgba(0, 0, 0, 0.03);
+}
+
+.light-theme .update-text {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.light-theme .version-badge {
+    background: rgba(106, 130, 251, 0.06);
+    color: var(--color-primary, #6a82fb);
+}
+
+.light-theme .changelog-summary {
+    color: rgba(0, 0, 0, 0.85);
+}
+
+/* === 响应式 === */
+@media (max-width: 768px) {
+    .changelog-container > * {
+        padding: var(--space-4, 16px);
+    }
+
+    .changelog-title {
+        font-size: var(--text-xl, 1.35rem);
+    }
+
+    .changelog-item,
+    .highlight-container {
+        flex-direction: column;
+        gap: var(--space-2, 8px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .changelog-container * {
+        transition-duration: 0.01ms !important;
+    }
+}
