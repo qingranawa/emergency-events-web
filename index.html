@@ -15,27 +15,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- 使用details标签的目录导航 -->
-    <details class="toc-compact">
-        <summary class="toc-header">
-            <span class="toc-title">目录导航</span>
-            <svg class="toc-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
-                <path fill="currentColor" d="M7 10l5 5 5-5z" />
-            </svg>
-        </summary>
-        <nav class="toc-content">
-            <div class="toc-links">
-                <a href="#goi-events">GOI事件</a>
-                <a href="#foundation-events">基金会</a>
-                <a href="#emergency-events">紧急</a>
-                <a href="#containment-breaches">收容</a>
-                <a href="#changelog">日志</a>
-                <a href="#footer-container">声明</a>
-            </div>
-        </nav>
-    </details>
-
-
     <link rel="stylesheet" href="MainCSS.css">
     <!-- 主CSS -->
 
@@ -75,23 +54,18 @@
     <script src="theme-toggle.js"></script>
     <!-- 主题切换功能 -->
 
-    <!-- 顶部导航栏样式 -->
-    <link rel="stylesheet" href="toc-links.css">
-    <script src="toc-links.js"></script>
-    <!-- 顶部导航栏功能 -->
-
     <!-- 页面模块样式 -->
     <link rel="stylesheet" href="changelog-container.css">
     <link rel="stylesheet" href="poem.css">
     <link rel="stylesheet" href="footer-container.css">
+    <link rel="stylesheet" href="toc-links.css">
+    <link rel="stylesheet" href="motion.css">
     
 
     
 </head>
 
 <body>
-    
-
     <!-- 搜索触发按钮 - 更现代的浮动按钮 -->
     <button id="search-trigger" class="search-trigger" aria-label="打开搜索">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -136,7 +110,51 @@
         </div>
     </div>
 
-    <h1 class="main-title">Welcome to Emergencies - WEB</h1>
+    <nav class="toc-compact" aria-label="页面导航">
+        <div class="toc-shell">
+            <a class="toc-brand" href="#hero" aria-label="返回页面顶部">
+                <span class="toc-brand-mark" aria-hidden="true">✦</span>
+                <span class="toc-brand-copy">
+                    <span class="toc-brand-text">Emergencies</span>
+                    <span class="toc-brand-sub">EVENT ARCHIVE</span>
+                </span>
+            </a>
+            <ul class="toc-links">
+                <li><a href="#hero" class="active" aria-current="page">首页</a></li>
+                <li><a href="#goi-events">GOI 组织</a></li>
+                <li><a href="#foundation-events">基金会</a></li>
+                <li><a href="#emergency-events">紧急事件</a></li>
+                <li><a href="#containment-breaches">收容失效</a></li>
+                <li><a href="#changelog">更新日志</a></li>
+            </ul>
+            <button class="toc-menu-toggle" type="button" aria-label="打开导航菜单" aria-controls="toc-mobile-menu" aria-expanded="false">
+                <span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div id="toc-mobile-menu" class="toc-mobile-menu" aria-hidden="true">
+        <button class="toc-menu-close" type="button" aria-label="关闭导航菜单">×</button>
+        <p class="toc-mobile-eyebrow">EMERGENCY EVENTS</p>
+        <div class="toc-mobile-links">
+            <a href="#hero"><span>01</span>首页</a>
+            <a href="#goi-events"><span>02</span>GOI 组织</a>
+            <a href="#foundation-events"><span>03</span>基金会</a>
+            <a href="#emergency-events"><span>04</span>紧急事件</a>
+            <a href="#containment-breaches"><span>05</span>收容失效</a>
+            <a href="#changelog"><span>06</span>更新日志</a>
+        </div>
+    </div>
+
+    <div class="hero" id="hero">
+        <div class="hero-copy">
+            <h1 class="main-title">Welcome to Emergencies - WEB</h1>
+            <p class="hero-subtitle">SCP: Secret Laboratory · 紧急事件娱乐模式资料库</p>
+        </div>
+        <div class="hero-emblem" aria-hidden="true">
+            <img src="scp-foundation-emblem.svg" alt="">
+        </div>
+    </div>
 
     <!-- 页面内容 -->
     <div class="section">
@@ -1094,6 +1112,8 @@
                     <p class="section-text">本项目的所有内容均遵循 <a href="https://creativecommons.org/licenses/by-sa/3.0/"
                             target="_blank" rel="noopener noreferrer" class="license-link"><strong>CC BY-SA 3.0
                             </strong></a> 协议。</p>
+                    <p class="section-text">SCP 徽标来源于 <a href="https://commons.wikimedia.org/wiki/File:SCP_Foundation_(emblem).svg"
+                            target="_blank" rel="noopener noreferrer" class="license-link"><strong>Wikimedia Commons</strong></a>，遵循 CC BY-SA 3.0 协议。</p>
                     <div class="license-section">
                         <div class="license-info">
                             <p class="license-text">
@@ -1136,6 +1156,8 @@
     <!-- 页面模块功能与滚动揭示动画 -->
     <script src="poem.js"></script>
     <script src="reveal.js"></script>
+    <script src="toc-links.js"></script>
+    <script src="motion.js"></script>
 
 </body>
 </html>

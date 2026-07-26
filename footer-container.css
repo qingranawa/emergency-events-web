@@ -248,12 +248,12 @@
     height: 36px;
     opacity: 0.82;
     transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1), border-color 0.3s cubic-bezier(0.32, 0.72, 0, 1), background-color 0.3s cubic-bezier(0.32, 0.72, 0, 1);
-    filter: grayscale(100%) brightness(0) invert(1);
+    filter: saturate(1.15) brightness(1.12) contrast(1.08);
 }
 
 .license-icons img:hover {
     opacity: 1;
-    filter: grayscale(100%) brightness(0) invert(1) brightness(1.2);
+    filter: saturate(1.3) brightness(1.18) contrast(1.1);
     transform: scale(1.1);
 }
 
@@ -281,12 +281,12 @@
 
 .light-theme .license-icons img {
     opacity: 0.68;
-    filter: grayscale(100%);
+    filter: saturate(1.05) brightness(1.08) contrast(1.05);
 }
 
 .light-theme .license-icons img:hover {
     opacity: 0.95;
-    filter: grayscale(0);
+    filter: saturate(1.2) brightness(1.12) contrast(1.08);
 }
 
 /* === 响应式 === */
