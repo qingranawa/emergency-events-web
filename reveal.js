@@ -3,7 +3,7 @@
  * IntersectionObserver-based fade-up reveals
  * GPU-safe: animates only transform & opacity
  */
-document.addEventListener('DOMContentLoaded', () => {
+function initRevealAnimations() {
     'use strict';
 
     const observer = new IntersectionObserver((entries) => {
@@ -29,4 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         el.classList.add('will-reveal');
         observer.observe(el);
     });
-});
+}
+
+document.addEventListener('DOMContentLoaded', initRevealAnimations);
+document.addEventListener('content:ready', initRevealAnimations);
