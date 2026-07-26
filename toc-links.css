@@ -166,6 +166,18 @@
     background: rgba(106, 130, 251, 0.11);
 }
 
+.toc-links a.toc-admin-link {
+    color: var(--color-accent-1);
+    border: 1px solid rgba(241, 168, 208, 0.18);
+    background: rgba(241, 168, 208, 0.06);
+}
+
+.toc-links a.toc-admin-link:hover {
+    color: var(--color-text);
+    border-color: rgba(241, 168, 208, 0.4);
+    background: rgba(241, 168, 208, 0.12);
+}
+
 .toc-links a:hover::after,
 .toc-links a.active::after {
     transform: scaleX(1);
@@ -388,9 +400,13 @@
     }
 
     .toc-mobile-links a:hover,
-    .toc-mobile-links a.active {
-        color: var(--color-text);
-    }
+.toc-mobile-links a.active {
+    color: var(--color-text);
+}
+
+.toc-mobile-links a.toc-admin-link {
+    color: var(--color-accent-1);
+}
 
     .toc-mobile-links a.active span {
         color: var(--color-accent-1);

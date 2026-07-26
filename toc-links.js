@@ -28,7 +28,7 @@ function initTableOfContents() {
         window.setTimeout(() => element.classList.remove('is-targeted'), 900);
     };
 
-    tocLinks.forEach(link => link.addEventListener('click', event => {
+    tocLinks.filter(link => link.getAttribute('href')?.startsWith('#')).forEach(link => link.addEventListener('click', event => {
         event.preventDefault();
         smoothScroll(link.getAttribute('href'));
         closeMobileMenu();
