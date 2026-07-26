@@ -55,6 +55,7 @@ def extract_event_sections(source: str) -> list[dict]:
                 broadcasts.append(clean_markup(broadcast_match.group(1)))
             section["events"].append(
                 {
+                    "id": f"{section_id}-{event_index + 1:03d}",
                     "title": text_from_tag(event_block, "h3"),
                     "broadcasts": broadcasts,
                     "task": text_from_tag(event_block, "p", "task"),
@@ -140,6 +141,10 @@ def main() -> None:
         if not OUTPUT.exists():
             raise ValueError("index.html no longer contains legacy content and data/content.json is missing")
         document = json.loads(OUTPUT.read_text(encoding="utf-8"))
+        for section in document["event_sections"]:
+            for event_index, event in enumerate(section["events"]):
+                event.setdefault("id", f"{section['id']}-{event_index + 1:03d}")
+        OUTPUT.write_text(json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         if len(document["event_sections"]) != 4 or sum(len(section["events"]) for section in document["event_sections"]) != 29:
             raise ValueError("existing content document event count mismatch")
         if len(document["changelog"]["entries"]) != 60 or len(document["quotes"]) != 190:

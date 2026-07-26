@@ -77,7 +77,8 @@
             "<color=red>外部威胁警报警告。</color><SIZE=0.01> External Threat Alarm </size><SIZE=0.01> pitch_.2 .g3 .g6 pitch_1 . Facility diagnostic anomaly detected . . . .</SIZE>警告，设施检测异常。<split>所有人员请注意，<color=#990033>全球超自然联盟</color>已经侵入设施。 <SIZE=0.01> pitch_0.6 .G4 .G4 .G4 .G4 pitch_1 ATTENTION ALL SITE PERSONNEL THE G O C has BEGUN A R AID ON THE FACILITY </SIZE> <split>请所有人确保<color=#FF0000>核弹</color>的安全。<SIZE=0.01> Please ensure the safety of the alpha warhead for all Remaining </SIZE>"
           ],
           "task": "任务：去核弹室开启核弹头。",
-          "summary": "概要：将游戏中所有观察者变为教程角色，根据角色数量给予九尾狐中士（默认）及九尾狐列兵装备，传送至49家或96家。"
+          "summary": "概要：将游戏中所有观察者变为教程角色，根据角色数量给予九尾狐中士（默认）及九尾狐列兵装备，传送至49家或96家。",
+          "id": "goi-events-001"
         },
         {
           "title": "2. FBI特异事故处入侵设施（每局一次）",
@@ -85,7 +86,8 @@
             "<SIZE=0.01> PITCH_0.9 .G5 PITCH_1.2 .G5 .G5 .G5 PITCH_0.5 .G5 PITCH_1.11 </size><split>注意，本通告系统。<SIZE=0.01> Attention THIS JAM_040_2 IS PITCH_0.8 JAM_040_3 ANNOUNCE MENT System PITCH_0.2 .G5 PITCH_1.12 SYSTEM </size> <split>[<color=#FF7F50>FBI特异事故处</color>]本公告系统现在由军事指挥。 <SIZE=0.01> PITCH_0.87 Now under Military Command . . . </size>"
           ],
           "task": "任务：黑入设施的3个电板后撤离。",
-          "summary": "概要：将游戏中一定数量的观察者变为教程角色，根据角色数量给予九尾狐中士（默认）或九尾狐指挥官装备，传送至A大门（GATE A）。"
+          "summary": "概要：将游戏中一定数量的观察者变为教程角色，根据角色数量给予九尾狐中士（默认）或九尾狐指挥官装备，传送至A大门（GATE A）。",
+          "id": "goi-events-002"
         },
         {
           "title": "3. 混沌分裂者入侵设施(事件刷新)",
@@ -93,7 +95,8 @@
             "<color=red>外部威胁警报警告。</color> <SIZE=0.01> External Threat Alarm </size> <SIZE=0.01> pitch_.2 .g3 .g6 pitch_1 . Facility diagnostic anomaly detected . . . .</size> 警告，设施检测异常。<split>所有人员请注意，<color=#7FFF00>混沌分裂者</color>已经侵入设施。 <SIZE=0.01> pitch_0.6 .G4 .G4 .G4 .G4 pitch_1 ATTENTION ALL SITE PERSONNEL THE Chaos Insurgency has BEGUN A R AID ON THE FACILITY </size> <split>建议所有剩余人员按照标准疏散协议进行，直到MTF小队到达目的地。<SIZE=0.01> . . . . . . AllRemaining .G3 .G3 .G1 .G2 </size>"
           ],
           "task": "任务：拯救D级人员，消灭基金会势力",
-          "summary": "概要：刷新一车混沌"
+          "summary": "概要：刷新一车混沌",
+          "id": "goi-events-003"
         },
         {
           "title": "4. 蛇之手入侵设施(每局最多3次)",
@@ -101,7 +104,8 @@
             "<color=red>外部威胁警报警告。</color> <SIZE=0.01> External Threat Alarm </size> <SIZE=0.01> pitch_.2 .g3 .g6 pitch_1 . Facility diagnostic anomaly detected . . . .</size> 警告，设施检测异常。<split> 所有人员请注意，<color=#7FFF00>蛇之手</color>已经侵入设施。 <SIZE=0.01> pitch_0.6 .G4 .G4 .G4 pitch_1 All personnel are aware that the Serpent Hand has infiltrated the facility.G3 .G3 .G1 .G2 </size>"
           ],
           "task": "任务：帮助SCP获得胜利。",
-          "summary": "概要：将游戏中观察者(最多6个)变为教程角色,中士( 默认)或指挥官装备,血量调整为150。"
+          "summary": "概要：将游戏中观察者(最多6个)变为教程角色,中士( 默认)或指挥官装备,血量调整为150。",
+          "id": "goi-events-004"
         },
         {
           "title": "5. 格鲁乌P进入设施(每局最多3次)",
@@ -110,7 +114,8 @@
             "<color=yellow>内部威胁警报警告。</color> <SIZE=0.01> Internal Threat Alarm </size> <split>有SCP基金会势力进入设施。<SIZE=0.01> pitch_.2 .g4 .G3 pitch_1 . SCP Foundation armed personnel entered the facility <split> <SIZE=0.01> .G3 .G3 .G1 <split> <size=0.01> AllRemaining </size>建议所有幸存人员继续执行标准疏散方案，直至MTF小队抵达您所处的位置。"
           ],
           "task": "任务：帮助对应势力取得胜利。",
-          "summary": "概要：选择两个广播其中一个在游戏中播放，将游戏中6-10个观察者变为你想要的势力(基金会势力或者混沌分裂者势力，基金会势力刷新6-10个收容专家,混沌分裂者势力刷新6-8个征召兵)给予足够的子弹并给予效果肾上腺素,血量调整为150。"
+          "summary": "概要：选择两个广播其中一个在游戏中播放，将游戏中6-10个观察者变为你想要的势力(基金会势力或者混沌分裂者势力，基金会势力刷新6-10个收容专家,混沌分裂者势力刷新6-8个征召兵)给予足够的子弹并给予效果肾上腺素,血量调整为150。",
+          "id": "goi-events-005"
         }
       ]
     },
@@ -124,7 +129,8 @@
             "注意<size=0.01> pitch_.2 .g4 .g3 pitch_1 Attention </size><split>机动特遣部队<color=#70C3FF>”NU-7”落锤</color><size=0.01> MtfUnit NU 7 </size>已进入设施<size=0.01> HasEntered </size><split><size=0.01> AllRemaining </size>建议所有幸存人员继续执行标准疏散方案，直至MTF小队抵达您所处的位置。<split><size=0.01> NU 7 will report SCP containment and other status </size>NU-7 将报告SCP收容和其他状态。"
           ],
           "task": "",
-          "summary": "概要：刷新5名九尾狐指挥官，给予囚鸟，血量调整为175。"
+          "summary": "概要：刷新5名九尾狐指挥官，给予囚鸟，血量调整为175。",
+          "id": "foundation-events-001"
         },
         {
           "title": "2. 机动特遣队Alpha-1红右手进入设施(每局3次)",
@@ -132,7 +138,8 @@
             "机动特遣部队<color=#003DCA>”Alpha-1” 红右手</color><size=0.01> MtfUnit Alpha 1 </size>已进入设施<size=0.01> HasEntered </size> <split>所有存活单位立即向MTF团队报告<size=0.01> All Remaining units should report to MtfUnit immediately </size>"
           ],
           "task": "",
-          "summary": "概要：刷新6名九尾狐指挥官,血量调整为160。"
+          "summary": "概要：刷新6名九尾狐指挥官,血量调整为160。",
+          "id": "foundation-events-002"
         },
         {
           "title": "3. 机动特遣队Beta-7疯帽商进入设施(每局2次)",
@@ -140,7 +147,8 @@
             "机动特遣部队<color=#FFFF00>”beta-7”疯帽商</color><size=0.01> MtfUnit Beta 7 </size>已进入设施<size=0.01> HasEntered </size><split><size=0.01> The site is currentz expiration a Biological hazards from of heavy SCP anomaly </size>该设施目前正在经历生物危害形式的严重异常SCP暴露<split><size=0.01> AllRemaining </size>建议所有幸存人员继续执行标准疏散方案，直至MTF小队抵达您所处的位置。<split><size=0.01> UncalculatedSCPsLeft </size>目前还有未知个SCP项目等待被重新收容"
           ],
           "task": "",
-          "summary": "概要：刷新4~6名九尾狐收容专家,血量调整为150。"
+          "summary": "概要：刷新4~6名九尾狐收容专家,血量调整为150。",
+          "id": "foundation-events-003"
         },
         {
           "title": "4. 二级安全部队进入设施(每局1次)",
@@ -148,7 +156,8 @@
             "二级安全部队，<size=0.01> Security Forces 2 </size>已进入设施<size=0.01> HasEntered </size> <split><size=0.01> SCP 5 0 0 4 will cooperate with the Security Forces 2 to back the security of the facility </size>SCP-5004将协同二级安全部队恢复设施安全<split><size=0.01> AllRemaining </size>建议所有幸存人员继续执行标准疏散方案，直至MTF小队抵达您所处的位置。"
           ],
           "task": "",
-          "summary": "概要：刷新一名九尾狐指挥官,拥有一把囚鸟。当设施中存在SCP-5004时,则一直刷新九尾狐,血量调整为200。"
+          "summary": "概要：刷新一名九尾狐指挥官,拥有一把囚鸟。当设施中存在SCP-5004时,则一直刷新九尾狐,血量调整为200。",
+          "id": "foundation-events-004"
         },
         {
           "title": "5. 机动特遣队ETA-10非礼勿视进入设施(不怎么刷)",
@@ -156,7 +165,8 @@
             "机动特遣部队<color=#0096FF>”ETA-10”非礼勿视</color><size=0.01> MtfUnit ETA 10 </size>已进入设施<size=0.01> HasEntered </size> <split><size=0.01> AllRemaining </size>建议所有幸存人员继续执行标准疏散方案，直至MTF小队抵达您所处的位置。<split><size=0.01> AllSecured </size>所有SCP主体均已得到控制,等待被重新收容。"
           ],
           "task": "",
-          "summary": "概要：刷新5名九尾狐中士给予SCP-268效果（隐身),血量调整为90。"
+          "summary": "概要：刷新5名九尾狐中士给予SCP-268效果（隐身),血量调整为90。",
+          "id": "foundation-events-005"
         },
         {
           "title": "6. 机动特遣队Gamma-4金胡子的船员进入设施(每局1次)",
@@ -164,7 +174,8 @@
             "机动特遣部队<color=#EE9A00>”Gamma-4”金胡子的船员</color> <size=0.01> MtfUnit Gamma 4 </size>已进入设施<size=0.01> HasEntered </size> <split> <size=0.01> AllRemaining </size>建议所有幸存人员继续执行标准疏散方案，直至MTF小队抵达您所处的位置。 <split> <size=0.01> UncalculatedSCPsLeft </size>目前还有未知个SCP项目等待被重新收容。"
           ],
           "task": "",
-          "summary": "概要：刷新一名九尾狐指挥官,拥有一把囚鸟。当设施中存在SCP-5004时,则一直刷新九尾狐,血量调整为200。"
+          "summary": "概要：刷新一名九尾狐指挥官,拥有一把囚鸟。当设施中存在SCP-5004时,则一直刷新九尾狐,血量调整为200。",
+          "id": "foundation-events-006"
         },
         {
           "title": "7. 收容失效处理组CBHD进入设施(每局1次)",
@@ -172,7 +183,8 @@
             "<size=0.01> The C B H D HasEntered </size>收容失效处理组 (C.B.H.D) 已进入设施<split>该设施发生KETER级收容失效<size=0.01> the facility is ongoing a KETER class containment breach </size> <split> <size=0.01> All remaining personnel are advised to proceed with standard evacuation protocols </size>所有幸存人员需继续执行标准疏散方案<split> <size=0.01> UncalculatedSCPsLeft </size>目前还有未知个SCP项目等待被重新收容。"
           ],
           "task": "",
-          "summary": "概要：刷新5名九尾狐列兵，给予给100%（200）移动速度和50%（100）抗性,血量调整为95。"
+          "summary": "概要：刷新5名九尾狐列兵，给予给100%（200）移动速度和50%（100）抗性,血量调整为95。",
+          "id": "foundation-events-007"
         },
         {
           "title": "8. 机动特遣队Delta-5前线奔跑者进入设施(每局1次)",
@@ -180,7 +192,8 @@
             "机动特遣部队<color=#FFA07A>”Delta-5”前线奔跑者</color><size=0.01> MtfUnit delta 5 </size>已进入设施<size=0.01> HasEntered </size> <split><size=0.01> The facility has ongoing serious containment breach </size>该设施发生严重的收容失效<split>所有人员不要靠近设施出口。<size=0.01> All Personnel Do not get close the facility exit . . . </size>"
           ],
           "task": "",
-          "summary": "概要：刷新5名九尾狐中士,传送至设施中任意位置,血量调整为150."
+          "summary": "概要：刷新5名九尾狐中士,传送至设施中任意位置,血量调整为150.",
+          "id": "foundation-events-008"
         },
         {
           "title": "9 机动特遣队Gamma-5红鲱鱼进入设施(每局1次)",
@@ -188,7 +201,8 @@
             "机动特遣部队<color=#8B4C39>”Gamma-5”红鲱鱼</color>代号:Alpha-5<size=0.01> MtfUnit gamma 5 designated Nato_A 5 </size>已进入设施<size=0.01> HasEntered </size> <split><size=0.01> The A P 5 protocol is activated </size>AP-5协议已启动<split>所有人员不要靠近设施出口。<size=0.01> All Personnel Do not get close the facility exit . . . </size>"
           ],
           "task": "",
-          "summary": "刷新7名九尾狐指挥官,给予所有人AMNESIA VISION效果,血量调整为150。"
+          "summary": "刷新7名九尾狐指挥官,给予所有人AMNESIA VISION效果,血量调整为150。",
+          "id": "foundation-events-009"
         },
         {
           "title": "10 快速反应部队",
@@ -196,7 +210,8 @@
             "<SIZE=0.01> .g1 .g2 quick response team <split>[<color=#40E0D0>快速反应部队警报</color>] 撤退并重新集结 <SIZE=0.01> alerting withdraw and regroup comfirmed a backup squad is being dispatched bagged a s a p <split> 确认正在尽快派遣后备小队<SIZE=0.01> all units exercise extreme caution <split> 所有单位都要极其小心。"
           ],
           "task": "",
-          "summary": "概要：随便刷"
+          "summary": "概要：随便刷",
+          "id": "foundation-events-010"
         },
         {
           "title": "11 机动特遣队Alpha-9最后的希望进入设施",
@@ -204,7 +219,8 @@
             "机动特遣部队<color=#082E54>”Alpha-9”最后的希望</color><size=0.01> MtfUnit Alpha 9 </size>已进入设施<size=0.01> HasEntered </size><split><size=0.01> This site is undergoing multiple S C P by anomalous objects </size><split>此站点正经历多次异常对象的破坏 <split>带着最后希望的机动特遣队已经着陆 <size=0.01>MtfUnit with the last wish has landed</size> <split>一旦局势得到控制 <size=0.01> Once the situation is under control </size> <split>Alpha-9会提供状态报告<size=0.01> Alpha 9 will available status reports </size>"
           ],
           "task": "",
-          "summary": "概要：刷新一飞机九尾狐并给与肾上腺素效果(无限体力),血量调整为150。"
+          "summary": "概要：刷新一飞机九尾狐并给与肾上腺素效果(无限体力),血量调整为150。",
+          "id": "foundation-events-011"
         },
         {
           "title": "13 机动特遣队Tau-5轮回进入设施",
@@ -212,7 +228,8 @@
             "机动特遣部队<color=#8B1A1A>”Tau”轮回</color>代号:Alpha-7<size=0.01> MtfUnit delta 5 designated Nato_A 7 </size>已紧急进入设施<size=0.01> EMERGENCY HasEntered </size>"
           ],
           "task": "",
-          "summary": "概要：作为核弹爆炸前，最后一波飞机刷新。"
+          "summary": "概要：作为核弹爆炸前，最后一波飞机刷新。",
+          "id": "foundation-events-012"
         },
         {
           "title": "13 机动特遣队CN-GAMMA-6进入设施",
@@ -220,7 +237,8 @@
             "机动特遣C.B.R.N单位<color=#b1d85c>”CN-Gamma-6”免疫系统</color><size=0.01> Mobile Task Force C B R N unit C N gamma 6 </size>已进入设施<size=0.01> HasEntered </size><split><size=0.01> The site is currentz expiration a Biological and Nuclear hazards from of heavy anomaly </size>该设施目前正在经历生物危害及核危害形式的严重暴露<split>设施紧急疏散撤离协议生效,<size=0.01> THE FACILITY EMERGENCY EVACUATE Protocol initiated </size>所有人员立即撤离<size=0.01> all personnel evacuated immediately </size>"
           ],
           "task": "",
-          "summary": "概要：刷新一飞机收容专家。"
+          "summary": "概要：刷新一飞机收容专家。",
+          "id": "foundation-events-013"
         }
       ]
     },
@@ -234,7 +252,8 @@
             "<color=#00FF00>[ARI]</color>ARI安全系统生效, 设施电力系统已被AR-500接管<size=0.01> A R I Security system initiated The power system of the facility has been taken over by A R 500 Protocol </size>"
           ],
           "task": "",
-          "summary": "概要：将设施所有门锁定并打开（SCP-079家除外），通常持续300秒。"
+          "summary": "概要：将设施所有门锁定并打开（SCP-079家除外），通常持续300秒。",
+          "id": "emergency-events-001"
         },
         {
           "title": "2 ARI接管设施电力系统",
@@ -242,7 +261,8 @@
             "<color=#00FF00>[ARI]</color>ARI安全系统生效, 设施电力系统已被AR-500接管<size=0.01> A R I Security system initiated The power system of the facility has been taken over by A R 500 Protocol </size>"
           ],
           "task": "",
-          "summary": "概要：开灯。"
+          "summary": "概要：开灯。",
+          "id": "emergency-events-002"
         },
         {
           "title": "3 AR-200控制ALPHA核弹头",
@@ -250,7 +270,8 @@
             "AR-100安全协议终止。由ARI安全系统命令编辑的爆炸序列失效，所有人员恢复标准工作概要。 <size=0.01> Termination of AR 100 protocol . detonation sequence redacted by A R I Security system command ALL personnel resume standard work </size>"
           ],
           "task": "",
-          "summary": "概要：关闭场上正在执行的ALPHA核弹头引爆序列。"
+          "summary": "概要：关闭场上正在执行的ALPHA核弹头引爆序列。",
+          "id": "emergency-events-003"
         },
         {
           "title": "4 Espilon-11禁止靠近广播(保护地表安全)",
@@ -258,7 +279,8 @@
             "所有生还人员注意<size=0.01> pitch_.2 .g4 .g5 pitch_1 Attention All Remaining Personnel </size><split>该设施发生KETER级收容失效<size=0.01> the facility is ongoing a KETER class containment breach </size><split></size>所有人员不要靠近设施出口。<size=0.01> All Personnel Do not get close the facility exit . . . </size><split>重复<size=0.01> REPEAT </size><split>不要靠近设施A B大门。<size=0.01> Do not get close the facility A B GATE </size>"
           ],
           "task": "",
-          "summary": "概要：A大门封锁。"
+          "summary": "概要：A大门封锁。",
+          "id": "emergency-events-004"
         },
         {
           "title": "6 设施紧急疏散协议启动",
@@ -266,7 +288,8 @@
             "所有人员注意<size=0.01> pitch_.2 .g4 .g4 pitch_1 . Attention all personnel </size><split>设施紧急疏散撤离协议生效,<size=0.01> THE FACILITY EMERGENCY EVACUATE Protocol initiated </size>所有人员立即撤离<size=0.01> all personnel evacuated immediately </size>"
           ],
           "task": "",
-          "summary": "概要：关闭场上正在执行的ALPHA核弹头引爆序列。"
+          "summary": "概要：关闭场上正在执行的ALPHA核弹头引爆序列。",
+          "id": "emergency-events-005"
         },
         {
           "title": "7 设施电力系统被攻击",
@@ -274,7 +297,8 @@
             "<color=YELLOW>[FORM SITE02]</color>所有人员注意, 设施电力系统被未知单位攻击<size=0.01> Attention all personnel The facility power system was attacked by unknown units. </size><split>电力系统即将停止支持<size=0.01> The power system stops supporting </size>"
           ],
           "task": "",
-          "summary": "概要：关闭设施灯光"
+          "summary": "概要：关闭设施灯光",
+          "id": "emergency-events-006"
         },
         {
           "title": "8 设施净化P-B-0系统",
@@ -282,7 +306,8 @@
             "<color=YELLOW>[FORM_05_COMMAND]</color>所有人员注意<size=0.01> Attention all personnel . </size><split><color=red>[05_ORDER]</color>设施P-B-0全体净化程序启动<size=0.01> facility P B 0 DECONTAMINATION SEQUENCE activated </size><split><color=YELLOW>[5分钟倒计时]</color>所有人员立即撤离至地表区域<size=0.01> all personnel evacuated to the surface zone immediately </size>"
           ],
           "task": "",
-          "summary": "概要：计时5分钟，计时器归零时为未在地表的单位添加DECONTAMINATION效果。"
+          "summary": "概要：计时5分钟，计时器归零时为未在地表的单位添加DECONTAMINATION效果。",
+          "id": "emergency-events-007"
         }
       ]
     },
@@ -296,7 +321,8 @@
             "<color=RED>[FROM SITE02]</color>危险！<size=0.01> Danger </size>所有人员注意<color=red>SCP-096</color>收容失效! <size=0.01> Attention all personnel The SCP 0 9 6 Containment breach </size><split>所有剩余人员按照标准疏散协议进行，直到MTF小队到达目的地。<size=0.01> AllRemaining </size>"
           ],
           "task": "",
-          "summary": "概要：刷新一名SCP-096。"
+          "summary": "概要：刷新一名SCP-096。",
+          "id": "containment-breaches-001"
         },
         {
           "title": "2 收容失效 173",
@@ -304,7 +330,8 @@
             "<color=RED>[FROM SITE02]</color>危险！<size=0.01> Danger </size>所有人员注意<color=red>SCP-173</color>收容失效! <size=0.01> Attention all personnel The SCP 1 7 3 Containment breach </size><split>所有剩余人员按照标准疏散协议进行，直到MTF小队到达目的地。<size=0.01> AllRemaining </size>"
           ],
           "task": "",
-          "summary": "概要：刷新一名SCP-173。"
+          "summary": "概要：刷新一名SCP-173。",
+          "id": "containment-breaches-002"
         },
         {
           "title": "3 收容失效 3035",
@@ -312,7 +339,8 @@
             "<color=RED>[FROM SITE02]</color>危险！<size=0.01> Danger </size>所有人员注意<color=red>SCP-3035</color>收容失效! <size=0.01> Attention all personnel The SCP 3 0 3 5 Containment breach </size><split>所有剩余人员按照标准疏散协议进行，直到MTF小队到达目的地。<size=0.01> AllRemaining </size>"
           ],
           "task": "",
-          "summary": "概要：刷新一名教程角色,拥有手提灯。逃出设施时变为除SCP-079以外的随机一名SCP角色。"
+          "summary": "概要：刷新一名教程角色,拥有手提灯。逃出设施时变为除SCP-079以外的随机一名SCP角色。",
+          "id": "containment-breaches-003"
         },
         {
           "title": "4 收容失效 079",
@@ -320,7 +348,8 @@
             "<color=RED>[FROM SITE02]</color>危险！<size=0.01> Danger </size>所有人员注意<color=red>SCP-079</color>收容失效! 攻击设施控制系统<size=0.01> Attention all personnel The SCP 0 7 9 Containment breach . attack facility control system </size><split>所有剩余人员按照标准疏散协议进行，直到MTF小队到达目的地。<size=0.01> AllRemaining </size>"
           ],
           "task": "",
-          "summary": "概要：刷新一名SCP-079。"
+          "summary": "概要：刷新一名SCP-079。",
+          "id": "containment-breaches-004"
         }
       ]
     }

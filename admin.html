@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>管理后台 · 紧急事件</title>
+    <link rel="stylesheet" href="MainCSS.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body class="admin-page">
+    <main class="admin-shell">
+        <section id="login-panel" class="admin-panel login-panel">
+            <div class="admin-kicker">EMERGENCY EVENTS / ADMIN</div>
+            <h1>管理员登录</h1>
+            <p class="admin-muted">登录后管理事件广播、任务和概要。</p>
+            <form id="login-form" class="admin-form">
+                <label>管理员账号<input id="login-username" name="username" autocomplete="username" required></label>
+                <label>密码<input id="login-password" name="password" type="password" autocomplete="current-password" required></label>
+                <button class="admin-primary" type="submit">登录后台</button>
+                <p id="login-message" class="admin-message" role="alert"></p>
+            </form>
+        </section>
+
+        <section id="dashboard-panel" class="dashboard-panel" hidden>
+            <header class="admin-header">
+                <div>
+                    <div class="admin-kicker">EMERGENCY EVENTS / CONTENT CONTROL</div>
+                    <h1>内容管理后台</h1>
+                </div>
+                <div class="admin-header-actions">
+                    <span id="admin-user" class="admin-user"></span>
+                    <button id="logout-button" class="admin-ghost" type="button">退出登录</button>
+                </div>
+            </header>
+
+            <div class="admin-layout">
+                <aside class="admin-sidebar">
+                    <div class="sidebar-heading"><span>事件分区</span><span id="event-count" class="count-badge"></span></div>
+                    <div id="section-list" class="section-list"></div>
+                </aside>
+
+                <section class="editor-panel">
+                    <div class="editor-toolbar">
+                        <div>
+                            <span class="admin-kicker">EVENT EDITOR</span>
+                            <h2 id="editor-heading">选择一个事件</h2>
+                        </div>
+                        <div class="editor-actions">
+                            <button id="new-event-button" class="admin-ghost" type="button">新增事件</button>
+                            <button id="save-button" class="admin-primary" type="button" disabled>保存修改</button>
+                        </div>
+                    </div>
+                    <p id="save-message" class="admin-message" role="status"></p>
+
+                    <div id="event-editor" class="event-editor" hidden>
+                        <div class="event-picker-row">
+                            <label>当前分区<select id="section-select"></select></label>
+                            <label>当前事件<select id="event-select"></select></label>
+                        </div>
+                        <label>事件标题<input id="event-title" maxlength="300"></label>
+                        <div class="field-heading"><span>广播内容</span><button id="add-broadcast-button" class="text-button" type="button">＋ 添加广播</button></div>
+                        <div id="broadcast-list" class="broadcast-list"></div>
+                        <label>任务<textarea id="event-task" rows="3" maxlength="5000"></textarea></label>
+                        <label>概要<textarea id="event-summary" rows="5" maxlength="10000"></textarea></label>
+                        <button id="delete-event-button" class="danger-button" type="button">删除当前事件</button>
+                    </div>
+                    <div id="empty-editor" class="empty-editor">从左侧选择分区，再选择一个事件开始编辑。</div>
+                </section>
+            </div>
+        </section>
+    </main>
+    <script src="admin.js"></script>
+</body>
+
+</html>
