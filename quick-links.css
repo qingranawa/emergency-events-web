@@ -1,0 +1,93 @@
+/* === Ethereal Glass 快速链接 === */
+.quick-links-section {
+    margin-bottom: var(--space-8, 32px);
+    background: rgba(255, 255, 255, 0.02);
+    border: 0.5px solid rgba(255, 255, 255, 0.04);
+    border-radius: var(--radius-2xl, 36px);
+    padding: var(--space-6, 24px);
+    transition: all 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+    box-shadow:
+        inset 0 1px 1px rgba(255, 255, 255, 0.02),
+        0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+.quick-links-section:hover {
+    border-color: rgba(106, 130, 251, 0.1);
+}
+
+.quick-links-card {
+    min-height: 1px;
+}
+
+.quick-links-heading {
+    font-family: var(--font-display, 'Plus Jakarta Sans', system-ui, sans-serif);
+    font-size: var(--text-lg, 1.125rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin: 0 0 var(--space-4, 16px) 0;
+    color: var(--color-text, rgba(255,255,255,0.85));
+    padding-left: var(--space-3, 12px);
+    border-left: 2px solid var(--color-primary, #6a82fb);
+}
+
+.quick-links-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2, 8px);
+}
+
+.quick-links-action {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-2, 8px) var(--space-4, 16px);
+    color: var(--color-primary-light, #8ba3ff);
+    text-decoration: none;
+    border-radius: var(--radius-full, 9999px);
+    background: rgba(106, 130, 251, 0.03);
+    border: 0.5px solid rgba(106, 130, 251, 0.06);
+    font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif);
+    font-size: var(--text-sm, 0.875rem);
+    font-weight: 500;
+    transition: all 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.quick-links-action::before {
+    display: none;
+}
+
+.quick-links-action:hover {
+    background: rgba(106, 130, 251, 0.06);
+    border-color: rgba(106, 130, 251, 0.12);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(106, 130, 251, 0.06);
+}
+
+.quick-links-label {
+    position: relative;
+}
+
+/* === 浅色主题 === */
+.light-theme .quick-links-section {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.light-theme .quick-links-action {
+    background: rgba(106, 130, 251, 0.02);
+    border-color: rgba(106, 130, 251, 0.04);
+}
+
+/* === 响应式 === */
+@media (max-width: 768px) {
+    .quick-links-section > * {
+        padding: var(--space-4, 16px);
+    }
+
+    .quick-links-content {
+        flex-direction: column;
+    }
+
+    .quick-links-action {
+        width: 100%;
+        justify-content: center;
+    }
+}

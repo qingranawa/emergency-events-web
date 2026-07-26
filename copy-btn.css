@@ -1,0 +1,101 @@
+/* === Ethereal Glass 复制按钮 === */
+.copy-btn {
+    position: absolute;
+    top: var(--space-4, 16px);
+    right: var(--space-4, 16px);
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--color-text-tertiary, rgba(255,255,255,0.35));
+    border: 0.5px solid rgba(255, 255, 255, 0.04);
+    border-radius: var(--radius-full, 9999px);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+    opacity: 0;
+    transform: scale(0.9);
+    z-index: 1;
+}
+
+.broadcast:hover .copy-btn {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.copy-btn:hover {
+    background: rgba(106, 130, 251, 0.1);
+    border-color: rgba(106, 130, 251, 0.15);
+    color: var(--color-primary-light, #8ba3ff);
+    transform: scale(1.1);
+}
+
+.copy-btn:active {
+    transform: scale(0.95);
+}
+
+.copy-btn svg {
+    width: 16px;
+    height: 16px;
+    stroke-width: 1.5;
+}
+
+/* === 复制成功 === */
+.copy-btn.copied {
+    background: rgba(100, 221, 142, 0.08);
+    border-color: rgba(100, 221, 142, 0.15);
+    color: #64dd8e;
+}
+
+/* === Toast 通知 === */
+.copy-toast {
+    position: fixed;
+    bottom: var(--space-6, 24px);
+    left: 50%;
+    transform: translateX(-50%) translateY(16px);
+    padding: var(--space-3, 12px) var(--space-5, 20px);
+    background: rgba(5, 5, 5, 0.8);
+    color: var(--color-text, rgba(255,255,255,0.85));
+    border: 0.5px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-full, 9999px);
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: var(--text-sm, 0.875rem);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2, 8px);
+}
+
+.copy-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.copy-toast svg {
+    width: 16px;
+    height: 16px;
+    stroke-width: 1.5;
+}
+
+/* === 浅色主题 === */
+.light-theme .copy-btn {
+    color: rgba(0, 0, 0, 0.35);
+    border-color: rgba(0, 0, 0, 0.04);
+}
+
+.light-theme .copy-toast {
+    background: rgba(255, 255, 255, 0.8);
+    color: rgba(0, 0, 0, 0.85);
+    border-color: rgba(0, 0, 0, 0.06);
+}
+
+.light-theme .copy-btn:hover {
+    background: rgba(106, 130, 251, 0.08);
+    border-color: rgba(106, 130, 251, 0.1);
+}
