@@ -3,15 +3,25 @@ const SESSION_COOKIE = 'emergency_admin_session';
 const SESSION_TTL_SECONDS = 60 * 60 * 24 * 7;
 const PASSWORD_ITERATIONS = 120000;
 
-const toBase64Url = bytes => btoa(String.fromCharCode(...bytes))
-    .replace(/\+/g, '-')
-    .replace(/\//g, '_')
-    .replace(/=+$/g, '');
+const toBase64Url = bytes => {
+    const view = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
+    let binary = '';
+    for (const byte of view) binary += String.fromCharCode(byte);
+    return btoa(binary)
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_')
+        .replace(/=+$/g, '');
+};
 
 const fromBase64Url = value => {
     const normalized = value.replace(/-/g, '+').replace(/_/g, '/');
     const padded = normalized + '='.repeat((4 - normalized.length % 4) % 4);
-    return Uint8Array.from(atob(padded), character => character.charCodeAt(0));
+    const binary = atob(padded);
+    const bytes = new Uint8Array(binary.length);
+    for (let index = 0; index < binary.length; index += 1) {
+        bytes[index] = binary.charCodeAt(index);
+    }
+    return bytes.buffer;
 };
 
 const randomToken = (bytes = 32) => {
