@@ -216,7 +216,7 @@
             const card = createElement('article', 'author-card');
             const avatarWrap = createElement('div', 'avatar-container');
             const avatar = createElement('img', 'author-avatar');
-            avatar.src = author.avatar;
+            avatar.src = `assets/images/${author.avatar}`;
             avatar.alt = author.name;
             avatar.width = 96;
             avatar.height = 96;
