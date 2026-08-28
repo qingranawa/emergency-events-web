@@ -67,7 +67,7 @@ body {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-.container { width: min(calc(100% - 40px), var(--max)); margin: auto; }
+.container { width: min(calc(100vw - 40px), var(--max)); margin: auto; }
 .mono { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; }
@@ -97,9 +97,10 @@ nav { min-height: 58px; display: flex; align-items: center; justify-content: spa
 .menu-btn { display: none; width: auto; padding: 0 12px; }
 
 .hero { min-height: calc(100svh - 58px); display: flex; align-items: center; padding: 48px 0; }
-.hero-grid { display: grid; grid-template-columns: 1.12fr .88fr; gap: 46px; align-items: center; }
+.hero-grid { display: grid; grid-template-columns: 1.12fr .88fr; gap: 46px; align-items: center; min-width: 0; }
+.hero-grid > * { min-width: 0; }
 .eyebrow { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 8px 12px; color: var(--text-soft); background: var(--panel); font-size: 11px; letter-spacing: 1.5px; }
-h1 { max-width: 800px; margin: 20px 0 18px; font-size: clamp(42px, 4.2vw, 62px); line-height: 1.06; letter-spacing: -3px; font-weight: 650; }
+h1 { max-width: 800px; margin: 20px 0 18px; font-size: clamp(40px, 3.8vw, 52px); line-height: 1.06; letter-spacing: -2.5px; font-weight: 650; }
 h1 span { color: var(--text-dim); }
 .hero-desc { max-width: 680px; margin: 0; color: var(--text-soft); font-size: 16px; line-height: 1.75; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
@@ -116,7 +117,7 @@ h1 span { color: var(--text-dim); }
 .decision-list { margin: 0; padding: 0; list-style: none; }
 .decision-list li { display: grid; grid-template-columns: 30px 1fr auto; align-items: center; gap: 12px; padding: 11px 0; border-top: 1px solid var(--line); color: var(--text-soft); font-size: 13px; }
 .decision-list li:first-child { border-top: 0; }
-.decision-list b { color: var(--text); font-weight: 550; }
+.decision-list b { min-width: 0; color: var(--text); font-weight: 550; }
 .decision-list em { color: var(--success); font-size: 11px; font-style: normal; }
 
 section { padding: 110px 0; }
@@ -141,6 +142,7 @@ section { padding: 110px 0; }
 .guardrail { padding: 30px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); }
 .guardrail h3 { margin: 0 0 13px; font-size: 21px; }
 .guardrail p { margin: 0; color: var(--text-soft); line-height: 1.8; }
+.system-status { margin-top: 20px; color: var(--text-dim); font-size: 10px; letter-spacing: 1px; }
 .status-table { overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); }
 .status-row { display: grid; grid-template-columns: 1.1fr 1.4fr .75fr; gap: 20px; align-items: center; padding: 21px 24px; border-top: 1px solid var(--line); }
 .status-row:first-child { border-top: 0; }
@@ -149,6 +151,12 @@ section { padding: 110px 0; }
 .state.ready { color: var(--success); }
 .state.observe { color: var(--warning); }
 .state.pending { color: var(--text-dim); }
+.download-panel { display: flex; align-items: end; justify-content: space-between; gap: 32px; padding: 34px; border: 1px solid var(--line-strong); border-radius: var(--radius); background: var(--panel); }
+.download-copy { max-width: 650px; }
+.download-copy h2 { margin: 10px 0 14px; font-size: clamp(30px, 4vw, 48px); line-height: 1.08; letter-spacing: -1.5px; }
+.download-copy p { margin: 0; color: var(--text-soft); line-height: 1.8; }
+.download-actions { display: flex; flex-wrap: wrap; gap: 10px; flex-shrink: 0; }
+.engineering-strip { margin-top: 14px; padding: 16px 20px; border: 1px solid var(--line); border-radius: 12px; color: var(--text-soft); background: color-mix(in srgb, var(--panel) 72%, transparent); font-size: 12px; letter-spacing: .4px; }
 
 footer { border-top: 1px solid var(--line); padding: 36px 0 42px; }
 .footer-row { display: flex; justify-content: space-between; gap: 24px; color: var(--text-dim); font-size: 12px; }
@@ -176,13 +184,15 @@ footer { border-top: 1px solid var(--line); padding: 36px 0 42px; }
     .section-desc { margin-top: 20px; }
     .status-row { grid-template-columns: 1fr; gap: 8px; }
     .state { justify-self: start; }
+    .download-panel { display: block; }
+    .download-actions { margin-top: 24px; }
 }
 
 @media (max-width: 520px) {
-    .container { width: min(calc(100% - 32px), var(--max)); }
+    .container { width: min(calc(100vw - 32px), var(--max)); }
     .brand-name { font-size: 13px; }
     .logo { width: 38px; height: 38px; }
-    h1 { font-size: clamp(42px, 14vw, 62px); letter-spacing: -3px; }
+    h1 { font-size: clamp(38px, 11vw, 52px); letter-spacing: -2px; }
     .hero-desc { font-size: 16px; }
     .icon-btn { display: none; }
     section { padding: 76px 0; }
@@ -200,16 +210,17 @@ footer { border-top: 1px solid var(--line); padding: 36px 0 42px; }
                 <div class="logo mono">EE</div>
                 <div>
                     <div class="brand-name">Emergency Events</div>
-                    <div class="brand-sub">D-LRC SYSTEM</div>
+                    <div class="brand-sub">DYNAMIC EVENT FRAMEWORK</div>
                 </div>
             </a>
             <div id="site-navigation" class="nav-links">
                 <a class="nav-link" href="index.html">首页</a>
                 <a class="nav-link is-current" href="plugin-overview.html" aria-current="page">插件概览</a>
                 <button class="nav-link" type="button" data-pending="D-LRC 系统架构">D-LRC <span>即将开放</span></button>
-                <button class="nav-link" type="button" data-pending="角色">角色 <span>即将开放</span></button>
-                <button class="nav-link" type="button" data-pending="机制">机制 <span>即将开放</span></button>
-                <button class="nav-link" type="button" data-pending="特性">特性 <span>即将开放</span></button>
+                <a class="nav-link" href="#factions">阵营</a>
+                <a class="nav-link" href="#events">事件</a>
+                <a class="nav-link" href="#systems">机制</a>
+                <a class="nav-link nav-github" href="https://github.com/qingranawa/Emergency-events" target="_blank" rel="noreferrer">GitHub</a>
             </div>
             <div class="nav-right">
                 <div class="nav-status"><span class="status-dot"></span>CORE ONLINE</div>
@@ -225,26 +236,104 @@ footer { border-top: 1px solid var(--line); padding: 36px 0 42px; }
         <div class="container hero-grid">
             <div>
                 <div class="eyebrow mono">EMERGENCY EVENTS · PLUGIN OVERVIEW</div>
-                <h1>动态危机响应。<br><span>不是定时随机事件。</span></h1>
-                <p class="hero-desc">Emergency Events 面向 SCP: Secret Laboratory / EXILED 持续观察整场回合，再依据真实战局决定设施需要何种响应、哪些事件具备资格，以及它们应以多大规模出现。</p>
+                <h1>Emergency Events<br><span>丰富阵营。更多动态事件。</span><br><span>每一局，都可能<br>走向不同方向。</span></h1>
+                <p class="hero-desc">Emergency Events 为 SCP: Secret Laboratory / EXILED 带来多阵营、多类型的动态事件框架。事件不会按固定时间表出现，而是根据这一局正在发生的事情，决定谁能介入、以什么方式介入。</p>
                 <div class="hero-actions">
                     <a class="btn primary" href="https://github.com/qingranawa/Emergency-events" target="_blank" rel="noreferrer">GitHub 仓库</a>
                     <a class="btn" href="https://github.com/qingranawa/Emergency-events/releases" target="_blank" rel="noreferrer">下载插件 / Releases</a>
-                    <a class="btn" href="index.html">查看 D-LRC 系统</a>
+                    <a class="btn" href="#systems">了解插件系统</a>
                 </div>
-                <div class="hero-meta mono">CORE RUNTIME READY · EVENT PACK PENDING</div>
+                <div class="hero-meta mono">CORE FRAMEWORK READY · EVENT CONTENT IN DEVELOPMENT</div>
             </div>
-            <aside class="director-panel" aria-label="动态决策链">
-                <div class="panel-label mono">ROUND DIRECTOR / LIVE MODEL</div>
-                <h2 class="panel-title">每次事件都先问：<br>现在的局势允许它发生吗？</h2>
+            <aside class="director-panel" aria-label="阵营与事件生态">
+                <div class="panel-label mono">FACTIONS / EVENT ECOSYSTEM</div>
+                <h2 class="panel-title">不同势力，<br>不同目标，不同介入方式。</h2>
                 <ol class="decision-list">
-                    <li><span class="mono">01</span><b>读取回合状态</b><em>LIVE</em></li>
-                    <li><span class="mono">02</span><b>计算控制与响应等级</b><em>D-LRC</em></li>
-                    <li><span class="mono">03</span><b>识别当前危机与设施失序</b><em>CRISIS / FDI</em></li>
-                    <li><span class="mono">04</span><b>筛选并重新验证候选事件</b><em>DIRECTOR</em></li>
-                    <li><span class="mono">05</span><b>执行、提交或安全回滚</b><em>FAIL-SAFE</em></li>
+                    <li><span class="mono">01</span><b>基金会响应力量</b><em>IN DEVELOPMENT</em></li>
+                    <li><span class="mono">02</span><b>混沌渗透与特殊行动</b><em>IN DEVELOPMENT</em></li>
+                    <li><span class="mono">03</span><b>第三方势力介入</b><em>PLANNED</em></li>
+                    <li><span class="mono">04</span><b>设施异常与战略事件</b><em>IN DEVELOPMENT</em></li>
+                    <li><span class="mono">05</span><b>事件后续与连续响应</b><em>FRAMEWORK READY</em></li>
                 </ol>
             </aside>
+        </div>
+    </section>
+
+    <section id="factions">
+        <div class="container">
+            <div class="section-head">
+                <div>
+                    <div class="section-kicker mono">FACTIONS / ORGANIZATIONS</div>
+                    <h2 class="section-title">不只是基金会与混沌。</h2>
+                </div>
+                <p class="section-desc">框架为不同组织、专业单位与第三方势力预留统一的事件入口。具体阵营会随着独立 Event Pack 逐步加入，不把尚未发布的内容提前伪装成现成玩法。</p>
+            </div>
+            <div class="system-grid">
+                <article class="system-card"><div class="system-mark mono">F01 / FOUNDATION</div><h3>基金会响应力量</h3><p>面向设施失控与特定危机的专业基金会介入。</p><div class="system-status mono">EVENT CONTENT IN DEVELOPMENT</div></article>
+                <article class="system-card"><div class="system-mark mono">F02 / CHAOS INSURGENCY</div><h3>混沌特殊行动</h3><p>从渗透、增援到特殊单位，形成与基金会不同的行动目标。</p><div class="system-status mono">EVENT CONTENT IN DEVELOPMENT</div></article>
+                <article class="system-card"><div class="system-mark mono">F03 / SPECIALIZED RESPONSE</div><h3>专业危机响应</h3><p>只有指定 D-LRC 等级与危机标签同时满足时才会获得资格。</p><div class="system-status mono">FRAMEWORK READY</div></article>
+                <article class="system-card"><div class="system-mark mono">F04 / GOI</div><h3>第三方组织</h3><p>为未来的独立组织与外部介入事件保留扩展空间。</p><div class="system-status mono">PLANNED / PROVIDER PROVISIONAL</div></article>
+                <article class="system-card"><div class="system-mark mono">F05 / INFILTRATORS</div><h3>开局渗透力量</h3><p>安保人员与混沌渗透者以对称轻武装进入设施，争夺武器库与权限。</p><div class="system-status mono">CORE GAMEPLAY</div></article>
+                <article class="system-card"><div class="system-mark mono">F06 / EVENT PACKS</div><h3>独立事件包</h3><p>阵营、职业、武器与出生点由 Event Pack 实现，核心 Director 保持解耦。</p><div class="system-status mono">ARCHITECTURE READY</div></article>
+            </div>
+        </div>
+    </section>
+
+    <section id="events">
+        <div class="container">
+            <div class="section-head">
+                <div>
+                    <div class="section-kicker mono">DYNAMIC EVENTS</div>
+                    <h2 class="section-title">事件不只是“刷一队人”。</h2>
+                </div>
+                <p class="section-desc">每类事件都有自己的资格条件、目标和影响方式。系统先理解当前回合，再从可用的内容包中选择适合此刻的介入。</p>
+            </div>
+            <div class="system-grid">
+                <article class="system-card"><div class="system-mark mono">E01 / PROFESSIONAL RESPONSE</div><h3>专业危机响应</h3><p>针对特定危机的专业单位，只在 D-LRC 等级与危机标签同时匹配时出现。</p><div class="system-status mono">FRAMEWORK READY</div></article>
+                <article class="system-card"><div class="system-mark mono">E02 / FACTION INTERVENTION</div><h3>阵营介入</h3><p>不同组织以不同目标加入回合，让力量关系出现新的变量。</p><div class="system-status mono">CONTENT IN DEVELOPMENT</div></article>
+                <article class="system-card"><div class="system-mark mono">E03 / FACILITY INCIDENT</div><h3>设施异常</h3><p>设施失序、区域故障与内部异常会改变后续事件的资格与节奏。</p><div class="system-status mono">CONTENT IN DEVELOPMENT</div></article>
+                <article class="system-card"><div class="system-mark mono">E04 / STRATEGIC EVENT</div><h3>战略事件</h3><p>不是单点战斗，而是围绕设施控制、资源与增援窗口改变战局。</p><div class="system-status mono">CONTENT IN DEVELOPMENT</div></article>
+                <article class="system-card"><div class="system-mark mono">E05 / CHAIN EVENT</div><h3>连续响应</h3><p>一次事件可以留下后续影响，下一次判断会读取前一阶段的结果。</p><div class="system-status mono">FRAMEWORK READY</div></article>
+                <article class="system-card"><div class="system-mark mono">E06 / ADAPTIVE POPULATION</div><h3>人口自适应</h3><p>同一事件由 Population Profile 调整规模、编制与装备，不复制五份事件定义。</p><div class="system-status mono">ARCHITECTURE READY</div></article>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="section-head">
+                <div><div class="section-kicker mono">A ROUND WITH EMERGENCY EVENTS</div><h2 class="section-title">一局游戏不会按照固定剧本发展。</h2></div>
+                <p class="section-desc">插件从开局就改变力量关系，再根据战局变化筛选后续事件；每次介入都可能成为下一次判断的输入。</p>
+            </div>
+            <div class="guardrails">
+                <article class="guardrail"><h3>ROUND OPENING / OPENING GAMEPLAY</h3><p>安保人员与混沌渗透者以对称轻武装开局，分别出生到 LCZ A/B 电梯，争夺武器库与权限。SCP 数量随人数变化，第二只 SCP-939 是随机候选，不是固定必出。</p></article>
+                <article class="guardrail"><h3>FACILITY MEMORY / FDI</h3><p>FDI 不是快照重算，而是 PreviousFDI + EventDelta 的持续记忆，并以 LOW / MEDIUM / HIGH 表示失序程度。安静且局势允许时才进行 Order Recovery，三档恢复速度不同。</p></article>
+                <article class="guardrail"><h3>PROFESSIONAL RESPONSE</h3><p>某些事件不是普通事件，而是针对特定危机的专业响应。指定 D-LRC 等级与危机标签同时满足时，事件才有资格介入。</p></article>
+                <article class="guardrail"><h3>POPULATION PROFILE</h3><p>同一个 EventId 不需要复制为 E/D/C/B/A 五个事件；人口差异由 Profile 调整规模、编制和装备，始终留在当前人口档位内。</p></article>
+            </div>
+            <div class="chain">
+                <article class="chain-item"><div class="chain-number mono">01 / OPENING</div><h3>普通开局</h3><p>安保人员、混沌渗透者与 SCP 开始争夺设施。</p></article>
+                <article class="chain-item"><div class="chain-number mono">02 / PRESSURE</div><h3>局势开始恶化</h3><p>SCP 威胁、基金会损失或设施异常不断改变局面。</p></article>
+                <article class="chain-item"><div class="chain-number mono">03 / CRISIS</div><h3>新的危机形成</h3><p>某种危机逐渐满足专业响应条件。</p></article>
+                <article class="chain-item"><div class="chain-number mono">04 / INTERVENTION</div><h3>新的阵营介入</h3><p>适合当前局势的专业单位或第三方事件取得资格。</p></article>
+                <article class="chain-item"><div class="chain-number mono">05 / AFTERMATH</div><h3>战局再次改变</h3><p>新事件改变力量关系，并影响下一次判断。</p></article>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="section-head">
+                <div><div class="section-kicker mono">EVENT QUALIFICATION</div><h2 class="section-title">事件不是被抽出来的。<br>它需要先取得资格。</h2></div>
+                <p class="section-desc">事件开始前会重新确认人数、危机与当前响应状态；条件失效时安全取消，不强行打断正在进行的回合。</p>
+            </div>
+            <div class="chain">
+                <article class="chain-item"><div class="chain-number mono">01 / OBSERVE</div><h3>观察当前战局</h3><p>读取回合正在发生的事实与力量变化。</p></article>
+                <article class="chain-item"><div class="chain-number mono">02 / EVALUATE</div><h3>判断当前响应与危机</h3><p>确认当前状态是否允许新的介入方式。</p></article>
+                <article class="chain-item"><div class="chain-number mono">03 / QUALIFY</div><h3>找出适合的事件</h3><p>让真正匹配当前局势的内容进入候选。</p></article>
+                <article class="chain-item"><div class="chain-number mono">04 / REVALIDATE</div><h3>事件开始前再次确认</h3><p>条件变化就退出候选，不把过期判断带入回合。</p></article>
+                <article class="chain-item"><div class="chain-number mono">05 / COMMIT</div><h3>正式介入或安全取消</h3><p>只有确认提交的事件才会改变战局。</p></article>
+            </div>
         </div>
     </section>
 
@@ -252,18 +341,19 @@ footer { border-top: 1px solid var(--line); padding: 36px 0 42px; }
         <div class="container">
             <div class="section-head">
                 <div>
-                    <div class="section-kicker mono">SYSTEM MAP</div>
-                    <h2 class="section-title">一套围绕真实战局运行的模块化框架。</h2>
+                    <div class="section-kicker mono">UNDER THE HOOD</div>
+                    <h2 class="section-title">这些内容如何在后台运行。</h2>
                 </div>
-                <p class="section-desc">每个模块负责一种事实或决策，既能独立演化，又共同服务于“让特殊事件成为战局的一部分”这一目标。</p>
+                <p class="section-desc">核心系统把回合事实、危机判断、事件资格和遥测分开处理，让新阵营与新事件可以独立加入。</p>
             </div>
             <div class="system-grid">
-                <article class="system-card"><div class="system-mark mono">M01 / ROUND CORE</div><h3>人口与开局结构</h3><p>开局锁定 E–A 人口档位，同时让安保与混沌渗透者以对称轻武装分赴 LCZ A/B 电梯，争夺武器库与权限。</p></article>
-                <article class="system-card"><div class="system-mark mono">M02 / REINFORCEMENT</div><h3>原版增援，有界介入</h3><p>禁用 Mini-Wave；Primary Wave 仍由原版决定，但按 E/D/C/B/A 施加 6/6/8/14/18 人 Cap，并仅以 MTF 表现评价基金会增援失败。</p></article>
-                <article class="system-card"><div class="system-mark mono">M03 / D-LRC</div><h3>动态响应代码</h3><p>通过人口档、响应等级与危机标签描述当前设施状态，并在回合中持续重新评估。</p></article>
-                <article class="system-card"><div class="system-mark mono">M04 / CRISIS + FDI</div><h3>危机与失序</h3><p>识别 BIO、SYS、CON、SEC、GOI、WAR、END；FDI 以 Previous FDI + Event Delta 累积，不是每轮快照重算。</p></article>
-                <article class="system-card"><div class="system-mark mono">M05 / EVENT DIRECTOR</div><h3>选择、复核、解耦</h3><p>Director 只负责 Eligibility、Population Plan 与 Profile；职业、武器与 Spawn 由 Event Pack 实现。</p></article>
-                <article class="system-card"><div class="system-mark mono">OBSERVER / TELEMETRY</div><h3>可解释的平衡数据</h3><p>记录 D-LRC Evaluation、Crisis Transition、FDI Settlement、Primary Wave 与 Round Summary，但不制造第二套真相。</p></article>
+                <article class="system-card"><div class="system-mark mono">M01 / ROUND CORE</div><h3>Round Core</h3><p>管理回合基础、人口档位与开局结构。</p><div class="system-status mono">READY</div></article>
+                <article class="system-card"><div class="system-mark mono">M02 / REINFORCEMENT</div><h3>Reinforcement Integration</h3><p>与原版 Primary Wave 协作；Mini-Wave 禁用，并按 E/D/C/B/A 设置 Primary Wave Cap。Foundation Reinforcement Failure 只评价 Foundation / MTF，不把 Chaos 惨败算成基金会支援失败。</p><div class="system-status mono">READY</div></article>
+                <article class="system-card"><div class="system-mark mono">M03 / D-LRC</div><h3>D-LRC</h3><p>持续判断设施当前整体响应状态，并为事件资格提供依据。</p><div class="system-status mono">PAGE COMING SOON</div></article>
+                <article class="system-card"><div class="system-mark mono">M04 / CRISIS</div><h3>Crisis System</h3><p>识别当前存在的危机类别，让专业响应知道自己正在回应什么。</p><div class="system-status mono">READY</div></article>
+                <article class="system-card"><div class="system-mark mono">M05 / FDI</div><h3>Facility Disorder Index</h3><p>记录设施整体混乱程度与秩序恢复，让失序影响跨越一次判断持续存在。</p><div class="system-status mono">READY</div></article>
+                <article class="system-card"><div class="system-mark mono">M06 / DIRECTOR</div><h3>Event Director</h3><p>只负责 Eligibility、Population Plan 与 Profile；具体职业、武器和 Spawn 由 Event Pack 实现。</p><div class="system-status mono">FRAMEWORK READY</div></article>
+                <article class="system-card"><div class="system-mark mono">OBSERVER / TELEMETRY</div><h3>Telemetry</h3><p>记录 D-LRC Evaluation、Crisis Transition、FDI Settlement、Primary Wave、Round Summary 与匿名 Spectator Wait；不记录 SteamID、IP 或昵称。</p><div class="system-status mono">RUNTIME AVAILABLE</div></article>
             </div>
         </div>
     </section>
@@ -271,14 +361,18 @@ footer { border-top: 1px solid var(--line); padding: 36px 0 42px; }
     <section>
         <div class="container">
             <div class="section-head">
-                <div><div class="section-kicker mono">ROUND OPENING / FACILITY MEMORY</div><h2 class="section-title">它也改变开局，<br>并记住设施经历过什么。</h2></div>
-                <p class="section-desc">Emergency Events 不只在后半局挑选事件；它从开局就建立对称的争夺结构，并让 FDI 保留整局失序留下的影响。</p>
+                <div><div class="section-kicker mono">WHY EMERGENCY EVENTS</div><h2 class="section-title">让每一局都留下新的问题。</h2></div>
+                <p class="section-desc">它把动态事件放进真实战局，同时为服主、内容作者与后续开发保留清晰边界。</p>
             </div>
             <div class="guardrails">
-                <article class="guardrail"><h3>Opening Gameplay</h3><p>安保人员与混沌渗透者以轻武装开局，分别出生于 LCZ A/B 电梯。双方通过进入设施、争夺武器和通行权限获取优势；SCP 总数也会随人口变化，第二只 SCP-939 只是随机候选而非固定必出。</p></article>
-                <article class="guardrail"><h3>FDI · Facility Disorder Index</h3><p>FDI 以 Previous FDI + Event Delta 形成持续记忆，并以 LOW / MEDIUM / HIGH 解释设施失序。只有局势稳定、没有活跃危机且静默窗口满足时才触发 Order Recovery；HIGH、MEDIUM、LOW 的恢复速度也不同。</p></article>
-                <article class="guardrail"><h3>Professional Response</h3><p>某些事件不是普通事件，而是针对特定危机的专业响应。只有指定 D-LRC 等级与危机标签同时满足时才有资格出现；真正 Commit 前的取消或 Rollback 不会消耗同一 Crisis Episode 的响应资格。</p></article>
-                <article class="guardrail"><h3>Population Profile</h3><p>同一个 EventId 不需要复制为 E/D/C/B/A 五个事件。每个事件可包含五套 Population Profile，在当前锁定档位内决定 Target、Minimum 与 Downscale，绝不跨档偷换规模。</p></article>
+                <article class="guardrail"><h3>Multi-Faction</h3><p>为不同组织与专业单位提供统一事件框架。</p></article>
+                <article class="guardrail"><h3>Situation-Aware</h3><p>事件根据当前战况获得资格，而不是固定时间随机抽取。</p></article>
+                <article class="guardrail"><h3>Population-Aware</h3><p>同一个事件可以根据人口档位改变规模、编制和装备方案。</p></article>
+                <article class="guardrail"><h3>Vanilla-Friendly</h3><p>尽可能与原版 Primary Wave 协作，而不是重新实现整套 Respawn。</p></article>
+                <article class="guardrail"><h3>Runtime Safe</h3><p>事件启动前重新检查人数、危机和响应状态，条件失效就安全退出。</p></article>
+                <article class="guardrail"><h3>Modular</h3><p>事件内容与核心 Director 分离，新内容不需要改写核心判断。</p></article>
+                <article class="guardrail"><h3>Observable</h3><p>日志和 Telemetry 可以解释系统为什么做出某个决定。</p></article>
+                <article class="guardrail"><h3>Data-Driven</h3><p>Balance Harness 覆盖 E–A 全档模拟、Semantic Scenarios 与多 seed；Telemetry 再接入真实服务器数据，不凭感觉直接改阈值。</p></article>
             </div>
         </div>
     </section>
@@ -286,61 +380,35 @@ footer { border-top: 1px solid var(--line); padding: 36px 0 42px; }
     <section>
         <div class="container">
             <div class="section-head">
-                <div><div class="section-kicker mono">DECISION CHAIN</div><h2 class="section-title">事件不是被抽出来的。<br>它需要先取得资格。</h2></div>
-                <p class="section-desc">从候选到提交的每一步都保留重新验证与回滚出口，避免上一秒成立的条件在下一秒失效后仍被强行执行。</p>
-            </div>
-            <div class="chain">
-                <article class="chain-item"><div class="chain-number mono">01 / OBSERVE</div><h3>读取事实</h3><p>人口、SCP 威胁、增援表现、时间与战略风险共同构成当前局势。</p></article>
-                <article class="chain-item"><div class="chain-number mono">02 / EVALUATE</div><h3>判断控制</h3><p>Response Score 先形成理论等级，再由 Control State 限制最终响应上限。</p></article>
-                <article class="chain-item"><div class="chain-number mono">03 / QUALIFY</div><h3>检查资格</h3><p>危机标签、专业响应、设施状态、可用玩家与人口 Profile 必须同时匹配。</p></article>
-                <article class="chain-item"><div class="chain-number mono">04 / REVALIDATE</div><h3>执行前复核</h3><p>事件选中后仍会检查人员、危机与响应等级，条件失效就安全终止。</p></article>
-                <article class="chain-item"><div class="chain-number mono">05 / COMMIT</div><h3>提交或回滚</h3><p>只有真正 Commit 的专业响应才消耗资格，StartFail 与 Rollback 不会浪费机会。</p></article>
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <div class="container">
-            <div class="section-head">
-                <div><div class="section-kicker mono">OPERATING PRINCIPLES</div><h2 class="section-title">系统要响应局势，也要保护一整局游戏。</h2></div>
-                <p class="section-desc">Emergency Events 设计为尽量接入原版规则，而不是重写整套 SCP:SL；外围功能失败也不应拖垮核心 Gameplay。</p>
-            </div>
-            <div class="guardrails">
-                <article class="guardrail"><h3>Vanilla-Friendly</h3><p>Primary Wave 的阵营选择、Token、原版计时、装备与 Spawn 仍由原版负责。插件只记录和约束，不把原版系统整体推翻。</p></article>
-                <article class="guardrail"><h3>Fail-Safe</h3><p>遥测写入、候选事件或环境验证失败时，系统记录原因并继续运行；事件可回滚，Director Busy 会被释放。</p></article>
-                <article class="guardrail"><h3>Population-Aware</h3><p>同一个 EventId 可以有 E–A 五套人口 Profile。人数不足时只在当前档位内 Downscale，绝不偷偷换到另一人口档。</p></article>
-                <article class="guardrail"><h3>Observable & Privacy-Aware</h3><p>遥测记录 D-LRC Evaluation、Crisis Transition、FDI Settlement、Primary Wave、Round Summary 与匿名 Spectator Wait；不记录 SteamID、IP、昵称或跨局身份。</p></article>
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <div class="container">
-            <div class="section-head">
-                <div><div class="section-kicker mono">ENGINEERING STATUS</div><h2 class="section-title">以数据调整平衡，<br>以证据约束结论。</h2></div>
-                <p class="section-desc">模拟用于发现问题，Telemetry 用于收集真人服务器事实。它们服务于正式 Gameplay 系统，而不是凭感觉另起一套规则。</p>
-            </div>
-            <div class="guardrails">
-                <article class="guardrail"><h3>Balance Harness</h3><p>覆盖 E–A 全部人口档、Semantic Scenarios 与多 Seed 随机状态；用于观察 L4/L5 可达性和 Control State 的实际约束，而不是直接凭模拟结果粗暴改阈值。</p></article>
-                <article class="guardrail"><h3>工程验证</h3><p>182 automated tests · Release build clean · RuntimeHarness available · Live player validation pending。自动化与运行探针提供工程证据，但不替代真人实服验证。</p></article>
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <div class="container">
-            <div class="section-head">
-                <div><div class="section-kicker mono">CURRENT STATUS</div><h2 class="section-title">当前能力与边界。</h2></div>
-                <p class="section-desc">概览页只展示当前确认的状态。自动化通过与框架就绪不等同于所有内容已经完成真人实服验证。</p>
+                <div><div class="section-kicker mono">DEVELOPMENT STATUS</div><h2 class="section-title">当前能力与边界。</h2></div>
+                <p class="section-desc">Core runtime 与 Director framework 已准备好，但正式事件内容和真人实服验证仍在持续推进。</p>
             </div>
             <div class="status-table">
-                <div class="status-row"><strong>M01 Round Core</strong><span>人口档位与回合基础管理。</span><span class="state ready mono">READY</span></div>
-                <div class="status-row"><strong>M02 Reinforcement Integration</strong><span>原版 Primary Wave 集成与增援表现记录。</span><span class="state ready mono">READY</span></div>
-                <div class="status-row"><strong>M03 D-LRC Evaluator</strong><span>逻辑就绪，平衡继续通过模拟与遥测观察。</span><span class="state observe mono">OBSERVING</span></div>
-                <div class="status-row"><strong>M04 Crisis / M04.5 FDI</strong><span>危机识别、失序结算与 Order Recovery。</span><span class="state ready mono">READY</span></div>
-                <div class="status-row"><strong>M05 Event Director</strong><span>事件资格、重新验证与生命周期框架。</span><span class="state observe mono">FRAMEWORK READY</span></div>
-                <div class="status-row"><strong>Formal Event Pack / Live Validation</strong><span>正式事件包尚未发布，真人实服验证仍待进行。</span><span class="state pending mono">PENDING</span></div>
-                <div class="status-row"><strong>M06 O4 Panel</strong><span>按设计暂缓，不在当前发布范围内。</span><span class="state pending mono">DEFERRED</span></div>
+                <div class="status-row"><strong>Core Runtime</strong><span>回合基础、开局结构与安全生命周期。</span><span class="state ready mono">READY</span></div>
+                <div class="status-row"><strong>D-LRC / Crisis / FDI</strong><span>响应评估、危机识别与设施失序记忆。</span><span class="state observe mono">OBSERVING BALANCE</span></div>
+                <div class="status-row"><strong>Event Director</strong><span>资格判断、重新验证与内容包解耦框架。</span><span class="state ready mono">FRAMEWORK READY</span></div>
+                <div class="status-row"><strong>Event Pack Architecture</strong><span>阵营、职业、装备和 Spawn 的扩展边界。</span><span class="state ready mono">READY</span></div>
+                <div class="status-row"><strong>Production Factions</strong><span>正式阵营内容持续开发中。</span><span class="state observe mono">IN DEVELOPMENT</span></div>
+                <div class="status-row"><strong>Production Events</strong><span>正式事件包尚未发布。</span><span class="state observe mono">IN DEVELOPMENT</span></div>
+                <div class="status-row"><strong>O4 Panel</strong><span>按设计暂缓，不在当前发布范围内。</span><span class="state pending mono">DEFERRED</span></div>
+                <div class="status-row"><strong>Live Player Validation</strong><span>真人服务器验证仍待进行。</span><span class="state pending mono">PENDING</span></div>
+            </div>
+            <div class="engineering-strip mono">182 automated tests · Release build clean · Runtime probes available · Live validation pending</div>
+        </div>
+    </section>
+
+    <section class="download-section" id="download">
+        <div class="container">
+            <div class="download-panel">
+                <div class="download-copy">
+                    <div class="section-kicker mono">OPEN SOURCE / DOWNLOAD</div>
+                    <h2>Emergency Events 仍在持续开发。</h2>
+                    <p>核心运行时与扩展框架已经就绪。正式事件包会在完成内容制作与真人验证后发布；现在可以先查看源码、跟进开发，或收藏 Releases 页面。</p>
+                </div>
+                <div class="download-actions">
+                    <a class="btn primary" href="https://github.com/qingranawa/Emergency-events" target="_blank" rel="noreferrer">GitHub 仓库</a>
+                    <a class="btn" href="https://github.com/qingranawa/Emergency-events/releases" target="_blank" rel="noreferrer">Releases · Coming Soon</a>
+                </div>
             </div>
         </div>
     </section>
