@@ -24,7 +24,6 @@ class BroadcastSearch {
         this.setupEventListeners();
         this.detectSystemTheme();
         this.loadSearchData();
-        document.addEventListener('content:ready', () => this.loadSearchData());
 
         // 暴露给开发工具调试
         if (window.__DEV__) {

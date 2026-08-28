@@ -1,19 +1,42 @@
-/* === Ethereal Glass 复制按钮 === */
+/* 图标化复制按钮 */
 .copy-btn {
     position: absolute;
-    top: var(--space-4, 16px);
-    right: var(--space-4, 16px);
-    width: 34px;
-    height: 34px;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.02);
-    color: var(--color-text-tertiary, rgba(255,255,255,0.35));
-    border: 0.5px solid rgba(255, 255, 255, 0.04);
-    border-radius: var(--radius-full, 9999px);
+    background: rgba(112, 195, 255, 0.15);
+    color: #70c3ff;
+    border: none;
+    border-radius: 8px;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+    transition: all 0.3s cubic-bezier(0.2, 0, 0.1, 1);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    transform: scale(0.9);
+    z-index: 1;
+}
+
+/* 图标化复制按钮 */
+.light-theme .copy-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(9, 69, 112, 0);
+    color: #3b82f6;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.2, 0, 0.1, 1);
+    backdrop-filter: blur(4px);
     opacity: 0;
     transform: scale(0.9);
     z-index: 1;
@@ -25,10 +48,9 @@
 }
 
 .copy-btn:hover {
-    background: rgba(106, 130, 251, 0.1);
-    border-color: rgba(106, 130, 251, 0.15);
-    color: var(--color-primary-light, #8ba3ff);
+    background: rgba(112, 195, 255, 0.3);
     transform: scale(1.1);
+    color: #4876FF;
 }
 
 .copy-btn:active {
@@ -36,40 +58,36 @@
 }
 
 .copy-btn svg {
-    width: 16px;
-    height: 16px;
-    stroke-width: 1.5;
+    width: 18px;
+    height: 18px;
+    transition: all 0.2s ease;
 }
 
-/* === 复制成功 === */
+/* 复制成功状态 */
 .copy-btn.copied {
-    background: rgba(100, 221, 142, 0.08);
-    border-color: rgba(100, 221, 142, 0.15);
+    background: rgba(100, 221, 142, 0.2);
     color: #64dd8e;
 }
 
-/* === Toast 通知 === */
+/* 通知样式 */
 .copy-toast {
     position: fixed;
-    bottom: var(--space-6, 24px);
+    bottom: 24px;
     left: 50%;
-    transform: translateX(-50%) translateY(16px);
-    padding: var(--space-3, 12px) var(--space-5, 20px);
-    background: rgba(5, 5, 5, 0.8);
-    color: var(--color-text, rgba(255,255,255,0.85));
-    border: 0.5px solid rgba(255, 255, 255, 0.06);
-    border-radius: var(--radius-full, 9999px);
-    font-family: 'Space Grotesk', system-ui, sans-serif;
-    font-size: var(--text-sm, 0.875rem);
+    transform: translateX(-50%) translateY(20px);
+    padding: 10px 20px;
+    background: rgba(40, 40, 40, 0.95);
+    color: white;
+    border-radius: 8px;
+    font-size: 14px;
     opacity: 0;
-    transition: all 0.4s cubic-bezier(0.32, 0.72, 0, 1);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     z-index: 1000;
     display: flex;
     align-items: center;
-    gap: var(--space-2, 8px);
+    gap: 8px;
 }
 
 .copy-toast.show {
@@ -80,22 +98,4 @@
 .copy-toast svg {
     width: 16px;
     height: 16px;
-    stroke-width: 1.5;
-}
-
-/* === 浅色主题 === */
-.light-theme .copy-btn {
-    color: rgba(0, 0, 0, 0.35);
-    border-color: rgba(0, 0, 0, 0.04);
-}
-
-.light-theme .copy-toast {
-    background: rgba(255, 255, 255, 0.8);
-    color: rgba(0, 0, 0, 0.85);
-    border-color: rgba(0, 0, 0, 0.06);
-}
-
-.light-theme .copy-btn:hover {
-    background: rgba(106, 130, 251, 0.08);
-    border-color: rgba(106, 130, 251, 0.1);
 }

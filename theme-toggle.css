@@ -1,11 +1,88 @@
-/* === 主题切换 — 补充样式 === */
-/* 基础样式在 MainCSS.css 中定义，这里仅处理过渡和减少运动 */
+/* 基础按钮样式 */
+#theme-toggle {
+    --btn-bg: transparent;
+    /* 按钮背景色 */
+    --btn-text: inherit;
+    --btn-border: rgba(255, 255, 255, 0.1);
+    --btn-hover-bg: rgba(112, 195, 255, 0.1);
+    --btn-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --btn-text-gradient: linear-gradient(90deg, #87CEFF, #4876FF);
 
-body {
-    transition: background-color 0.5s cubic-bezier(0.32, 0.72, 0, 1), color 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    background: var(--btn-bg);
+    color: var(--btn-text);
+    border: 1px solid var(--btn-border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+    position: relative;
+    overflow: hidden;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    backdrop-filter: blur(8px);
+    z-index: 1;
+    margin: 0;
 }
 
+/* 按钮文本样式 */
+.theme-text {
+    background: var(--btn-text-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    transition: all 0.3s ease;
+}
+
+/* 按钮图标样式 */
+.theme-icon {
+    font-size: 1.2em;
+    transition: transform 0.3s ease;
+}
+
+/* 悬停效果 */
+#theme-toggle:hover {
+    background-color: var(--btn-hover-bg);
+    transform: translateY(-2px);
+    box-shadow: var(--btn-shadow);
+    outline: none;
+}
+
+#theme-toggle:hover .theme-text {
+    text-shadow: 0 0 8px rgba(112, 195, 255, 0.4);
+}
+
+#theme-toggle:hover .theme-icon {
+    transform: rotate(30deg);
+}
+
+/* 点击效果 */
+#theme-toggle:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 浅色主题样式 */
+.light-theme #theme-toggle {
+    --btn-bg: rgba(112, 195, 255, 0.1);
+    --btn-text: #333;
+    --btn-border: rgba(0, 0, 0, 0.1);
+    --btn-hover-bg: rgba(58, 95, 195, 0.1);
+    --btn-text-gradient: linear-gradient(90deg, #4876FF, #3a5fc3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 主题切换动画 */
+body {
+    transition: background-color 0.5s ease, color 0.3s ease;
+}
+
+/* 减少运动设置 */
 @media (prefers-reduced-motion: reduce) {
+
     #theme-toggle,
     #theme-toggle *,
     body {

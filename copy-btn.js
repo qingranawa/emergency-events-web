@@ -12,10 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // 忽略两个及以上的连续空白字符
         text = text.replace(/\s{2,}/g, ' ');
 
-        // 只在首次点击时记录初始 SVG，后续复制始终恢复到同一个图标。
-        if (!copyBtn.dataset.originalIcon) {
-            copyBtn.dataset.originalIcon = copyBtn.innerHTML;
-        }
+        // 保存原始图标
+        const originalIcon = copyBtn.innerHTML;
 
         // 显示复制中状态
         copyBtn.innerHTML = `
@@ -63,7 +61,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // 2秒后恢复原状
         setTimeout(() => {
             button.classList.remove('copied');
-            button.innerHTML = button.dataset.originalIcon;
+            button.innerHTML = `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/>
+                </svg>
+            `;
         }, 2000);
     }
 

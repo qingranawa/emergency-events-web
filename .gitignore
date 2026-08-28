@@ -1,5 +1,0 @@
-.wrangler/
-.wrangler-test/
-__pycache__/
-.dev.vars*
-.env*

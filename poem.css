@@ -1,130 +1,138 @@
-/* === Ethereal Glass 一言模块 === */
+/* 一言模块优化样式 */
 :root {
-    --poem-primary: var(--color-primary-light, #8ba3ff);
-    --poem-secondary: var(--color-text-secondary, rgba(255,255,255,0.55));
+    --poem-primary: #8a63ff;
+    --poem-secondary: #ab82ff;
+    --poem-bg: rgba(255, 255, 255, 0.1);
+    --poem-hover-bg: rgba(255, 255, 255, 0.15);
+    --poem-shadow: 0 4px 20px rgba(138, 99, 255, 0.2);
+    --poem-hover-shadow: 0 8px 30px rgba(138, 99, 255, 0.3);
+    --poem-radius: 16px;
+    --poem-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
+/* 基础容器 */
 .poem-container,
 .quote-container {
-    max-width: min(700px, 90%);
-    margin: var(--space-8, 32px) auto;
+    max-width: min(800px, 90%);
+    margin: 2rem auto;
     position: relative;
 }
 
+/* 统一卡片样式 */
 .poem,
 .quote-container {
     font-style: italic;
-    color: var(--color-text, rgba(255,255,255,0.85));
+    color: var(--poem-primary);
     text-align: center;
-    padding: var(--space-8, 32px) var(--space-6, 24px);
-    background: rgba(255, 255, 255, 0.02);
-    border: 0.5px solid rgba(255, 255, 255, 0.05);
-    border-radius: var(--radius-2xl, 36px);
-    box-shadow:
-        inset 0 1px 1px rgba(255, 255, 255, 0.02),
-        0 4px 24px rgba(0, 0, 0, 0.2);
-    transition: all 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+    padding: 2rem;
+    background: var(--poem-bg);
+    border-radius: var(--poem-radius);
+    box-shadow: var(--poem-shadow);
+    backdrop-filter: blur(10px);
+    transition: var(--poem-transition);
+    position: relative;
+    overflow: hidden;
     opacity: 0;
     transform: translateY(20px);
 }
 
+/* 动画效果 */
 .poem.animate-in,
 .quote-container.animate-in {
-    animation: poemFadeIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: fadeInUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-@keyframes poemFadeIn {
+@keyframes fadeInUp {
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
+/* 悬停效果 */
 .poem:hover,
 .quote-container:hover {
-    border-color: rgba(106, 130, 251, 0.1);
-    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+    background: var(--poem-hover-bg);
+    transform: translateY(-3px);
+    box-shadow: var(--poem-hover-shadow);
 }
 
-/* 文字 */
+/* 文字内容 */
 .quote-text,
 .poem {
-    font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif);
-    font-size: clamp(var(--text-base, 1rem), 2.5vw, var(--text-lg, 1.125rem));
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
     line-height: 1.8;
-    color: var(--color-text, rgba(255,255,255,0.85));
+    margin: 0 0 1rem;
 }
 
-.quote-text {
-    display: inline;
-    background-image: linear-gradient(135deg, var(--color-primary-light), var(--color-accent-1));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
+/* 底部信息栏 */
 .poem-footer,
 .quote-footer {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-top: var(--space-4, 16px);
-    font-size: var(--text-sm, 0.875rem);
-    color: var(--color-text-secondary, rgba(255,255,255,0.55));
+    font-size: 0.9rem;
+    color: var(--poem-secondary);
 }
 
-/* 刷新按钮 — 岛式 */
+/* 刷新按钮统一样式 */
 .refresh-btn {
     cursor: pointer;
-    background: rgba(255, 255, 255, 0.02);
-    color: var(--color-text, rgba(255,255,255,0.85));
-    border: 0.5px solid rgba(255, 255, 255, 0.06);
-    padding: var(--space-2, 8px) var(--space-4, 16px);
-    border-radius: var(--radius-full, 9999px);
-    font-family: var(--font-body, 'Space Grotesk', system-ui, sans-serif);
-    font-size: var(--text-sm, 0.875rem);
-    transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1), background-color 0.3s cubic-bezier(0.32, 0.72, 0, 1), border-color 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    padding: 0.5rem 1.25rem;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    transition: var(--poem-transition);
+}
+
+.light-theme .refresh-btn {
+    background: rgba(129, 81, 131, 0.23);
+    color: #000;
 }
 
 .refresh-btn:hover {
-    background: rgba(106, 130, 251, 0.04);
-    border-color: rgba(106, 130, 251, 0.12);
-    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
 }
 
 .refresh-btn:active {
-    transform: scale(0.97);
+    transform: translateY(0);
 }
 
-/* 背景装饰 */
+/* 背景装饰元素 */
 .poem::before,
 .quote-container::before {
-    content: none;
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(138, 99, 255, 0.05) 0%, transparent 70%);
+    z-index: -1;
 }
 
-/* === 浅色主题 === */
-.light-theme .refresh-btn {
-    background: rgba(0, 0, 0, 0.02);
-    color: rgba(0, 0, 0, 0.85);
-    border-color: rgba(0, 0, 0, 0.06);
-}
-
-.light-theme .refresh-btn:hover {
-    background: rgba(106, 130, 251, 0.02);
-    border-color: rgba(106, 130, 251, 0.06);
-}
-
-/* === 响应式 === */
+/* 响应式设计 */
 @media (max-width: 768px) {
+
     .poem,
     .quote-container {
         padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .poem,
+    .quote-container {
+        padding: 1.25rem;
     }
 
     .poem-footer,
     .quote-footer {
         flex-direction: column;
-        gap: var(--space-2, 8px);
+        gap: 0.5rem;
         align-items: center;
     }
 }

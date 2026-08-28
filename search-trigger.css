@@ -1,52 +1,66 @@
-/* === Ethereal Glass 搜索模态 === */
+/* === 现代 CSS 变量定义 === */
 :root {
-    --search-bg: rgba(8, 8, 12, 0.85);
-    --search-border: rgba(255, 255, 255, 0.06);
-    --search-glow: rgba(106, 130, 251, 0.1);
+    --primary-color: #4a6bff;
+    --primary-light: #7d9aff;
+    --primary-dark: #3a56cc;
+    --text-color: #f8fafc;
+    --text-secondary: #e2e8f0;
+    --bg-color: #1a202c;
+    --bg-secondary: #2d3748;
+    --border-color: #4a5568;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    --transition-time: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --border-radius: 12px;
+    --highlight-bg: rgba(74, 107, 255, 0.2);
+    --glass-bg: rgba(26, 32, 44, 0.95);
+    --backdrop-blur: 8px;
 }
 
 .light-theme {
-    --search-bg: rgba(255, 255, 255, 0.85);
-    --search-border: rgba(0, 0, 0, 0.06);
+    --text-color: #1a202c;
+    --text-secondary: #4a5568;
+    --bg-color: #ffffff;
+    --bg-secondary: #f7fafc;
+    --border-color: #e2e8f0;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    --highlight-bg: rgba(74, 107, 255, 0.1);
+    --glass-bg: rgba(255, 255, 255, 0.98);
 }
 
-/* === 搜索触发按钮 — 浮动岛式 === */
+/* === 搜索框触发按钮 === */
 .search-trigger {
     position: fixed;
-    top: var(--space-6, 24px);
-    right: var(--space-6, 24px);
-    width: 52px;
-    height: 52px;
-    border-radius: var(--radius-full, 9999px);
-    background: rgba(255, 255, 255, 0.03);
-    color: var(--color-text, rgba(255,255,255,0.85));
-    border: 0.5px solid rgba(255, 255, 255, 0.08);
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: var(--text-color);
+    border: none;
     cursor: pointer;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+    transition:
+        transform 0.2s ease-out,
+        box-shadow 0.2s ease-out;
     z-index: 100;
+    will-change: transform, box-shadow;
 }
 
 .search-trigger:hover {
-    border-color: rgba(106, 130, 251, 0.25);
     transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 8px 32px rgba(106, 130, 251, 0.15);
+    box-shadow: 0 6px 16px rgba(74, 107, 255, 0.4);
 }
 
 .search-trigger:active {
-    transform: scale(0.95);
+    transform: translateY(0) scale(0.98);
 }
 
 .search-trigger svg {
-    width: 22px;
-    height: 22px;
-    stroke-width: 1.5;
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: transform 0.2s ease-out;
 }
 
 .search-trigger:hover svg {
@@ -55,39 +69,42 @@
 
 .shortcut-hint {
     position: absolute;
-    bottom: -28px;
-    font-family: 'Space Grotesk', system-ui, sans-serif;
-    font-size: 0.65rem;
-    background: rgba(255, 255, 255, 0.04);
-    color: var(--color-text-tertiary, rgba(255,255,255,0.35));
-    padding: 2px 10px;
-    border-radius: var(--radius-full, 9999px);
+    bottom: -24px;
+    font-size: 0.7rem;
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    padding: 2px 8px;
+    border-radius: 4px;
     opacity: 0;
-    transition: opacity 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+    transition: opacity 0.2s ease-out;
     pointer-events: none;
-    border: 0.5px solid rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(8px);
 }
 
 .search-trigger:hover .shortcut-hint {
     opacity: 1;
 }
 
-/* === 搜索模态背景 === */
+/* === 搜索内容背景 === */
 .search-modal {
     position: fixed;
-    inset: 0;
-    background: var(--search-bg);
-    backdrop-filter: blur(40px);
-    -webkit-backdrop-filter: blur(40px);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(var(--backdrop-blur));
     display: flex;
     align-items: flex-start;
     justify-content: center;
     z-index: 999;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.4s cubic-bezier(0.32, 0.72, 0, 1), visibility 0.4s cubic-bezier(0.32, 0.72, 0, 1);
-    padding-top: 10vh;
+    transition:
+        opacity 0.2s ease-out,
+        visibility 0.2s ease-out;
+    padding-top: 8vh;
+    will-change: opacity;
+    contain: strict;
 }
 
 .search-modal.active {
@@ -97,155 +114,153 @@
 
 .search-modal-content {
     width: 90%;
-    max-width: 680px;
-    background: rgba(255, 255, 255, 0.02);
-    border: 0.5px solid rgba(255, 255, 255, 0.06);
-    border-radius: var(--radius-2xl, 36px);
-    padding: 2px;
-    box-shadow: 0 16px 64px rgba(0, 0, 0, 0.5);
-    transform: scale(0.95) translateY(10px);
-    transition: transform 0.5s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+    max-width: 700px;
+    background: var(--glass-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    transform: scale(0.95);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease-out;
+    will-change: transform;
 }
 
 .search-modal.active .search-modal-content {
-    transform: scale(1) translateY(0);
+    transform: scale(1);
 }
 
-.search-modal-content > * {
-    background: rgba(5, 5, 5, 0.6);
-    border-radius: calc(var(--radius-2xl, 36px) - 3px);
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.02);
+/* 高亮动画 */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.01);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
-/* === 搜索头部 === */
+/* 搜索框头部 */
 .search-header {
     display: flex;
     align-items: center;
-    padding: var(--space-5, 20px) var(--space-6, 24px);
-    border-bottom: 0.5px solid rgba(255, 255, 255, 0.04);
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .search-icon {
-    margin-right: var(--space-4, 16px);
-    color: var(--color-text-secondary, rgba(255,255,255,0.55));
+    margin-right: 12px;
+    color: var(--text-secondary);
     flex-shrink: 0;
-    stroke-width: 1.5;
 }
 
+/* 搜索框输入框 */
 #search-box {
     flex: 1;
-    padding: var(--space-3, 12px) var(--space-4, 16px);
-    font-family: 'Space Grotesk', system-ui, sans-serif;
-    font-size: var(--text-base, 1rem);
-    background: rgba(255, 255, 255, 0.03);
-    color: var(--color-text, rgba(255,255,255,0.85));
-    border: 0.5px solid rgba(255, 255, 255, 0.06);
-    border-radius: var(--radius-lg, 20px);
+    padding: 12px 15px;
+    font-size: 1.1rem;
+    border: 2px solid var(--border-color);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
+    border-radius: 6px;
     min-width: 0;
-    outline: none;
-    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: all 0.2s ease-out;
 }
 
 #search-box:focus {
-    border-color: rgba(106, 130, 251, 0.2);
-    box-shadow: 0 0 0 3px rgba(106, 130, 251, 0.06);
+    outline: none;
+    box-shadow: 0 0 0 2px var(--primary-color);
+    animation: pulse 1s;
 }
 
 #search-box::placeholder {
-    color: var(--color-text-tertiary, rgba(255,255,255,0.35));
+    color: var(--text-secondary);
+    opacity: 0.7;
 }
 
-/* === 关闭按钮 === */
+/* 关闭按钮 */
 .close-search {
-    width: 40px;
-    height: 40px;
-    border-radius: var(--radius-full, 9999px);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
     background: transparent;
-    color: var(--color-text-secondary, rgba(255,255,255,0.55));
-    border: 0.5px solid rgba(255, 255, 255, 0.06);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: color 0.3s cubic-bezier(0.32, 0.72, 0, 1), transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
-    margin-left: var(--space-3, 12px);
+    transition: all 0.2s ease-out;
+    margin-left: 8px;
     flex-shrink: 0;
 }
 
 .close-search:hover {
-    background: rgba(255, 255, 255, 0.04);
-    border-color: rgba(106, 130, 251, 0.15);
-    color: var(--color-text);
+    background: var(--bg-secondary);
+    color: var(--text-color);
+    border-color: var(--text-secondary);
 }
 
 .close-search svg {
-    stroke-width: 1.5;
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: transform 0.2s ease-out;
 }
 
 .close-search:hover svg {
     transform: rotate(90deg);
 }
 
-/* === 搜索结果 === */
+/* 搜索框结果区域 */
 .search-results {
     width: 100%;
-    max-height: 60vh;
+    max-height: 65vh;
     overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(106, 130, 251, 0.15) transparent;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    overscroll-behavior: contain;
 }
 
-.search-results::-webkit-scrollbar {
-    width: 4px;
-}
-
-.search-results::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.search-results::-webkit-scrollbar-thumb {
-    background: rgba(106, 130, 251, 0.15);
-    border-radius: var(--radius-full, 9999px);
-}
-
-/* === 空状态 === */
+/* 空状态设计 */
 .search-empty-state {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: var(--space-12, 48px) var(--space-6, 24px);
+    padding: 40px 20px;
     text-align: center;
-    color: var(--color-text-secondary, rgba(255,255,255,0.55));
+    color: var(--text-secondary);
 }
 
 .search-empty-state svg {
-    margin-bottom: var(--space-4, 16px);
-    opacity: 0.3;
-    stroke-width: 1;
+    margin-bottom: 16px;
+    opacity: 0.6;
 }
 
 .search-empty-state p {
-    margin: var(--space-2, 8px) 0 var(--space-4, 16px);
-    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-    font-size: var(--text-base, 1rem);
+    margin: 8px 0 16px;
+    font-size: 1.1rem;
 }
 
 .search-tips {
-    font-size: var(--text-sm, 0.875rem);
-    opacity: 0.5;
+    font-size: 0.9rem;
+    opacity: 0.7;
 }
 
-/* === 搜索结果项 === */
+/* 搜索区域项 */
 .search-result {
-    padding: var(--space-4, 16px) var(--space-6, 24px);
-    border-bottom: 0.5px solid rgba(255, 255, 255, 0.03);
+    padding: 16px 20px;
+    margin: 0;
+    border-bottom: 1px solid var(--border-color);
     cursor: pointer;
-    transition: background-color 0.2s cubic-bezier(0.32, 0.72, 0, 1), color 0.2s cubic-bezier(0.32, 0.72, 0, 1);
-    color: var(--color-text, rgba(255,255,255,0.85));
+    transition: background 0.15s ease-out;
+    color: var(--text-color);
     display: flex;
     align-items: center;
+    contain: content;
+    will-change: transform;
 }
 
 .search-result:last-child {
@@ -253,14 +268,18 @@
 }
 
 .search-result:hover {
-    background: rgba(106, 130, 251, 0.03);
+    background-color: var(--bg-secondary);
+}
+
+.search-result:focus {
+    outline: none;
+    background-color: var(--bg-secondary);
 }
 
 .search-result-icon {
-    margin-right: var(--space-3, 12px);
-    opacity: 0.4;
+    margin-right: 12px;
+    opacity: 0.7;
     flex-shrink: 0;
-    stroke-width: 1.5;
 }
 
 .search-result-content {
@@ -269,74 +288,181 @@
 }
 
 .search-result-description {
-    font-size: var(--text-sm, 0.875rem);
-    color: var(--color-text-secondary, rgba(255,255,255,0.55));
-    opacity: 0.7;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    opacity: 0.8;
 }
 
+/* 高亮文本 */
 .highlight {
-    color: var(--color-primary-light, #8ba3ff);
-    background: rgba(106, 130, 251, 0.08);
-    padding: 1px 4px;
-    border-radius: 4px;
+    color: var(--primary-color);
+    font-weight: 600;
+    background-color: var(--highlight-bg);
+    padding: 1px 3px;
+    border-radius: 3px;
 }
 
-/* === 加载状态 === */
+/* 加载状态 */
 .search-loading {
     display: flex;
     justify-content: center;
-    padding: var(--space-6, 24px);
+    padding: 20px;
 }
 
 .loading-spinner {
-    width: 20px;
-    height: 20px;
-    border: 1.5px solid rgba(106, 130, 251, 0.05);
-    border-top-color: var(--color-primary, #6a82fb);
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(74, 107, 255, 0.1);
+    border-top-color: var(--primary-color);
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
 }
 
 @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
+/* 无结果状态 */
 .no-result {
-    padding: var(--space-10, 40px) var(--space-6, 24px);
+    padding: 40px 20px;
     text-align: center;
-    color: var(--color-text-secondary, rgba(255,255,255,0.55));
+    color: var(--text-secondary);
 }
 
-/* === 响应式 === */
+/* === 自动收纳式滚动条 === */
+.search-results::-webkit-scrollbar {
+    scrollbar-width: thin; /* 支持Firefox */
+    scrollbar-color: transparent transparent; /* 默认隐藏 */
+    overflow-y: overlay; /* 防止内容跳动 */
+}
+
+.search-results::-webkit-scrollbar {
+    width: 6px; /* 收起状态 */
+    height: 6px;
+    background-color: transparent;
+    transition: all 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.search-results::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 10px;
+    margin: 4px 0;
+    transition: all 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.search-results::-webkit-scrollbar-thumb {
+    background-color: rgba(120, 120, 120, 0.2); /* 浅灰色 */
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+    transition: all 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+/* 悬停时展开 */
+.search-results:hover::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.search-results:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(100, 100, 100, 0.6); /* 深灰色 */
+}
+
+/* 活动状态 */
+.search-results::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(80, 80, 80, 0.8);
+    transform: scaleX(1.1);
+}
+
+.search-results::-webkit-scrollbar-thumb:active {
+    background-color: rgba(60, 60, 60, 0.9);
+}
+
+/* 明色主题适配 */
+.light-theme .search-results::-webkit-scrollbar-thumb {
+    background-color: rgba(180, 180, 180, 0.3);
+}
+
+.light-theme .search-results:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(150, 150, 150, 0.6);
+}
+
+.light-theme .search-results::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(120, 120, 120, 0.8);
+}
+
+.light-theme .search-results::-webkit-scrollbar-thumb:active {
+    background-color: rgba(100, 100, 100, 0.9);
+}
+
+/* 内容区域悬停时防止滚动条覆盖 */
+.search-results::-webkit-scrollbar {
+    padding-right: 4px;
+    transition: padding 0.3s ease;
+}
+
+.search-results::-webkit-scrollbar:hover {
+    padding-right: 0;
+}
+
+/* 响应式设计 */
 @media (max-width: 768px) {
-    .search-trigger {
-        width: 46px;
-        height: 46px;
-        top: 16px;
-        right: 16px;
+    .search-modal {
+        padding-top: 4vh;
+        backdrop-filter: blur(6px);
     }
 
-    .search-modal {
-        padding-top: 6vh;
+    .search-modal-content {
+        width: 94%;
+        max-width: none;
     }
 
     .search-header {
-        padding: var(--space-4, 16px);
+        padding: 12px 16px;
     }
 
     #search-box {
-        font-size: var(--text-base, 1rem);
-        padding: var(--space-3, 12px);
+        font-size: 1rem;
     }
 
     .search-result {
-        padding: var(--space-3, 12px) var(--space-4, 16px);
+        padding: 14px 16px;
+    }
+
+    .close-search {
+        width: 34px;
+        height: 34px;
     }
 }
 
 @media (max-width: 480px) {
     .search-trigger {
-        width: 42px;
-        height: 42px;
+        width: 44px;
+        height: 44px;
+        top: 12px;
+        right: 12px;
+    }
+
+    .search-modal {
+        padding-top: 2vh;
+    }
+
+    .search-results {
+        max-height: 70vh;
+    }
+
+    .search-empty-state {
+        padding: 30px 16px;
+    }
+
+    .search-empty-state svg {
+        width: 36px;
+        height: 36px;
+    }
+
+    #search-box {
+        font-size: 16px;
     }
 }

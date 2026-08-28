@@ -1,103 +1,127 @@
-/* === Ethereal Glass 滚动到顶部 === */
+/* 基础变量 */
 :root {
-    --scroll-btn-size: 54px;
+    --scroll-btn-size: 60px;
+    --scroll-btn-icon-size: 24px;
+    --scroll-btn-color: linear-gradient(135deg, #70c3ff, #4876ff);
+    --scroll-btn-hover: linear-gradient(135deg, #5aa6d6, #3a6dc8);
+    --scroll-btn-shadow: 0 6px 20px rgba(72, 118, 255, 0.3);
+    --scroll-btn-hover-shadow: 0 8px 24px rgba(72, 118, 255, 0.4);
+    --scroll-btn-dark-color: linear-gradient(135deg, #5a8cff, #3a5bc8);
+    --scroll-btn-dark-hover: linear-gradient(135deg, #4a7cdf, #2a4ba8);
+    --scroll-btn-dark-shadow: 0 6px 20px rgba(58, 91, 200, 0.4);
+    --scroll-btn-transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    --progress-thickness: 4px;
+    --progress-text-color: white;
 }
 
-/* === 浮动岛屿按钮 === */
+/* 主按钮样式 */
 .scroll-top-btn {
     position: fixed;
-    bottom: var(--space-8, 32px);
-    right: var(--space-8, 32px);
+    bottom: 32px;
+    right: 32px;
     width: var(--scroll-btn-size);
     height: var(--scroll-btn-size);
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.03);
-    color: var(--color-text, rgba(255,255,255,0.85));
-    border: 0.5px solid rgba(255, 255, 255, 0.06);
-    border-radius: var(--radius-full, 9999px);
+    background: var(--scroll-btn-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
     cursor: pointer;
     opacity: 0;
-    transform: translateY(20px) scale(0.85);
-    transition: all 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+    transform: translateY(20px) scale(0.8);
+    transition: var(--scroll-btn-transition);
     z-index: 1000;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--scroll-btn-shadow);
+    overflow: hidden;
     padding: 0;
     outline: none;
-    overflow: hidden;
+    will-change: transform, opacity;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
+/* 可见状态 */
 .scroll-top-btn.visible {
     opacity: 1;
     transform: translateY(0) scale(1);
+    display: flex;
 }
 
+/* 悬停状态 */
 .scroll-top-btn:hover {
-    border-color: rgba(106, 130, 251, 0.2);
-    transform: translateY(-4px) scale(1.06);
-    box-shadow: 0 8px 32px rgba(106, 130, 251, 0.12);
+    background: var(--scroll-btn-hover);
+    box-shadow: var(--scroll-btn-hover-shadow);
+    transform: translateY(-4px) scale(1.05);
 }
 
+/* 点击状态 */
 .scroll-top-btn:active {
-    transform: translateY(0) scale(0.96);
+    transform: translateY(1px) scale(0.98);
+    box-shadow: var(--scroll-btn-shadow);
 }
 
+/* 图标样式 */
 .scroll-top-btn svg {
-    width: 22px;
-    height: 22px;
-    stroke-width: 1.5;
+    transition: transform 0.3s ease;
     position: relative;
     z-index: 2;
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    width: var(--scroll-btn-icon-size);
+    height: var(--scroll-btn-icon-size);
 }
 
 .scroll-top-btn:hover svg {
     transform: translateY(-3px);
 }
 
-/* === 进度圆环 === */
+/* 进度圆环 - 现代化设计 */
 .progress-circle {
     position: absolute;
-    inset: 0;
-    border-radius: var(--radius-full, 9999px);
-    background: conic-gradient(rgba(106, 130, 251, 0.3) 0%, transparent 0%);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(rgba(255, 255, 255, 0.3) 0%,
+            transparent 0%);
     z-index: 1;
-    transition: background 0.1s cubic-bezier(0.32, 0.72, 0, 1);
-    -webkit-mask: radial-gradient(transparent calc(50% - 3px), white calc(50% - 3px + 0.5px));
-    mask: radial-gradient(transparent calc(50% - 3px), white calc(50% - 3px + 0.5px));
+    transition: background 0.1s linear;
+    -webkit-mask: radial-gradient(transparent calc(50% - var(--progress-thickness)),
+            white calc(50% - var(--progress-thickness) + 0.5px));
+    mask: radial-gradient(transparent calc(50% - var(--progress-thickness)),
+            white calc(50% - var(--progress-thickness) + 0.5px));
 }
 
+/* 进度文本 */
 .progress-text {
     position: absolute;
-    bottom: 10px;
-    font-family: 'Space Grotesk', system-ui, sans-serif;
-    font-size: 10px;
-    font-weight: 500;
-    color: var(--color-text-tertiary, rgba(255,255,255,0.35));
+    bottom: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--progress-text-color);
     z-index: 2;
-    opacity: 0.6;
-    transition: opacity 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
 }
 
 .scroll-top-btn:hover .progress-text {
     opacity: 1;
 }
 
-/* === 涟漪效果 === */
+/* 波纹效果 */
 .scroll-top-btn::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 4px;
-    height: 4px;
-    background: rgba(106, 130, 251, 0.2);
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
     opacity: 0;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%, -50%);
+    transform-origin: 50% 50%;
 }
 
 .scroll-top-btn:focus:not(:active)::after {
@@ -105,36 +129,65 @@
 }
 
 @keyframes ripple {
-    0% { transform: scale(0); opacity: 0.4; }
-    100% { transform: scale(20); opacity: 0; }
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: scale(20, 20);
+        opacity: 0;
+    }
 }
 
-/* === 响应式 === */
+/* 暗色模式 */
+@media (prefers-color-scheme: dark) {
+    .scroll-top-btn {
+        background: var(--scroll-btn-dark-color);
+        box-shadow: var(--scroll-btn-dark-shadow);
+    }
+
+    .scroll-top-btn:hover {
+        background: var(--scroll-btn-dark-hover);
+    }
+
+    .progress-circle {
+        background: conic-gradient(rgba(255, 255, 255, 0.4) 0%,
+                transparent 0%);
+    }
+}
+
+/* 响应式设计 */
 @media (max-width: 768px) {
     :root {
-        --scroll-btn-size: 48px;
+        --scroll-btn-size: 52px;
+        --scroll-btn-icon-size: 20px;
+        --progress-thickness: 3px;
     }
 
     .scroll-top-btn {
-        right: var(--space-6, 24px);
-        bottom: var(--space-6, 24px);
+        right: 24px;
+        bottom: 24px;
     }
 
     .progress-text {
-        display: none;
+        font-size: 10px;
+        bottom: 10px;
     }
 }
 
 @media (max-width: 480px) {
+    :root {
+        --scroll-btn-size: 48px;
+        --scroll-btn-icon-size: 18px;
+    }
+
     .scroll-top-btn {
-        width: 44px;
-        height: 44px;
         right: 16px;
         bottom: 16px;
     }
 
-    .scroll-top-btn svg {
-        width: 18px;
-        height: 18px;
+    .progress-text {
+        display: none;
     }
 }

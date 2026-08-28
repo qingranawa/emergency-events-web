@@ -1,9 +1,0 @@
-name = "emergency-events-web"
-compatibility_date = "2026-07-26"
-
-[[d1_databases]]
-binding = "CONTENT_DB"
-database_name = "emergency-events-content"
-database_id = "56c2af61-d05e-421e-bc6e-044526898ef3"
-preview_database_id = "CONTENT_DB"
-migrations_dir = "migrations"
