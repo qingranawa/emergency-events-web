@@ -96,23 +96,25 @@ nav { min-height: 58px; display: flex; align-items: center; justify-content: spa
 .icon-btn, .menu-btn { width: 40px; height: 40px; border: 1px solid var(--line); border-radius: 12px; color: var(--text); background: var(--panel); cursor: pointer; }
 .menu-btn { display: none; width: auto; padding: 0 12px; }
 
-.hero { min-height: calc(100svh - 58px); display: flex; align-items: center; padding: 72px 0; }
-.hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 64px; align-items: center; }
+.hero { min-height: calc(100svh - 58px); display: flex; align-items: center; padding: 48px 0; }
+.hero-grid { display: grid; grid-template-columns: 1.12fr .88fr; gap: 46px; align-items: center; }
 .eyebrow { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 8px 12px; color: var(--text-soft); background: var(--panel); font-size: 11px; letter-spacing: 1.5px; }
-h1 { max-width: 760px; margin: 26px 0 22px; font-size: clamp(52px, 7vw, 94px); line-height: .97; letter-spacing: -5px; font-weight: 650; }
+h1 { max-width: 800px; margin: 20px 0 18px; font-size: clamp(42px, 4.2vw, 62px); line-height: 1.06; letter-spacing: -3px; font-weight: 650; }
 h1 span { color: var(--text-dim); }
-.hero-desc { max-width: 690px; margin: 0; color: var(--text-soft); font-size: 18px; line-height: 1.85; }
-.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
-.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 20px; border: 1px solid var(--line-strong); border-radius: 14px; background: var(--panel); color: var(--text); cursor: pointer; transition: transform .2s ease, border-color .2s ease; }
+.hero-desc { max-width: 680px; margin: 0; color: var(--text-soft); font-size: 16px; line-height: 1.75; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 17px; border: 1px solid var(--line-strong); border-radius: 14px; background: var(--panel); color: var(--text); cursor: pointer; transition: transform .2s ease, border-color .2s ease; }
 .btn:hover { transform: translateY(-2px); border-color: var(--text-soft); }
 .btn.primary { border-color: var(--text); background: var(--text); color: var(--bg); }
+.hero-meta { display: flex; align-items: center; gap: 8px; margin-top: 16px; color: var(--text-dim); font-size: 10px; letter-spacing: 1.2px; }
+.hero-meta::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--success); box-shadow: 0 0 12px var(--success); }
 
-.director-panel { position: relative; overflow: hidden; padding: 30px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); }
+.director-panel { position: relative; overflow: hidden; padding: 26px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); }
 .director-panel::after { content: ""; position: absolute; width: 280px; height: 280px; top: -180px; right: -90px; border-radius: 50%; background: radial-gradient(circle, rgba(205,225,236,.16), transparent 65%); pointer-events: none; }
 .panel-label, .section-kicker { color: var(--text-dim); font-size: 11px; letter-spacing: 2px; }
-.panel-title { margin: 14px 0 22px; font-size: 22px; }
+.panel-title { margin: 12px 0 16px; font-size: 21px; }
 .decision-list { margin: 0; padding: 0; list-style: none; }
-.decision-list li { display: grid; grid-template-columns: 30px 1fr auto; align-items: center; gap: 12px; padding: 13px 0; border-top: 1px solid var(--line); color: var(--text-soft); font-size: 14px; }
+.decision-list li { display: grid; grid-template-columns: 30px 1fr auto; align-items: center; gap: 12px; padding: 11px 0; border-top: 1px solid var(--line); color: var(--text-soft); font-size: 13px; }
 .decision-list li:first-child { border-top: 0; }
 .decision-list b { color: var(--text); font-weight: 550; }
 .decision-list em { color: var(--success); font-size: 11px; font-style: normal; }
@@ -226,9 +228,11 @@ footer { border-top: 1px solid var(--line); padding: 36px 0 42px; }
                 <h1>动态危机响应。<br><span>不是定时随机事件。</span></h1>
                 <p class="hero-desc">Emergency Events 面向 SCP: Secret Laboratory / EXILED 持续观察整场回合，再依据真实战局决定设施需要何种响应、哪些事件具备资格，以及它们应以多大规模出现。</p>
                 <div class="hero-actions">
-                    <a class="btn primary" href="index.html">查看 D-LRC 系统</a>
-                    <a class="btn" href="#systems">了解核心模块</a>
+                    <a class="btn primary" href="https://github.com/qingranawa/Emergency-events" target="_blank" rel="noreferrer">GitHub 仓库</a>
+                    <a class="btn" href="https://github.com/qingranawa/Emergency-events/releases" target="_blank" rel="noreferrer">下载插件 / Releases</a>
+                    <a class="btn" href="index.html">查看 D-LRC 系统</a>
                 </div>
+                <div class="hero-meta mono">CORE RUNTIME READY · EVENT PACK PENDING</div>
             </div>
             <aside class="director-panel" aria-label="动态决策链">
                 <div class="panel-label mono">ROUND DIRECTOR / LIVE MODEL</div>
@@ -254,12 +258,27 @@ footer { border-top: 1px solid var(--line); padding: 36px 0 42px; }
                 <p class="section-desc">每个模块负责一种事实或决策，既能独立演化，又共同服务于“让特殊事件成为战局的一部分”这一目标。</p>
             </div>
             <div class="system-grid">
-                <article class="system-card"><div class="system-mark mono">M01 / ROUND CORE</div><h3>人口规格锁定</h3><p>回合开始时根据 16–45 名玩家锁定 E–A 人口档位，整局保持统一的事件规模与编制规则。</p></article>
-                <article class="system-card"><div class="system-mark mono">M02 / REINFORCEMENT</div><h3>与原版协作</h3><p>保留原版 Primary Wave 的选择、计时与 Spawn，只在外围施加上限、记录和必要约束。</p></article>
+                <article class="system-card"><div class="system-mark mono">M01 / ROUND CORE</div><h3>人口与开局结构</h3><p>开局锁定 E–A 人口档位，同时让安保与混沌渗透者以对称轻武装分赴 LCZ A/B 电梯，争夺武器库与权限。</p></article>
+                <article class="system-card"><div class="system-mark mono">M02 / REINFORCEMENT</div><h3>原版增援，有界介入</h3><p>禁用 Mini-Wave；Primary Wave 仍由原版决定，但按 E/D/C/B/A 施加 6/6/8/14/18 人 Cap，并仅以 MTF 表现评价基金会增援失败。</p></article>
                 <article class="system-card"><div class="system-mark mono">M03 / D-LRC</div><h3>动态响应代码</h3><p>通过人口档、响应等级与危机标签描述当前设施状态，并在回合中持续重新评估。</p></article>
-                <article class="system-card"><div class="system-mark mono">M04 / CRISIS + FDI</div><h3>危机与失序</h3><p>识别 BIO、SYS、CON、SEC、GOI、WAR、END 等危机，同时记录设施失序的长期影响。</p></article>
-                <article class="system-card"><div class="system-mark mono">M05 / EVENT DIRECTOR</div><h3>事件导演</h3><p>依据响应等级、危机、人数、FDI 和事件限制选择候选，并在执行前再次确认条件。</p></article>
-                <article class="system-card"><div class="system-mark mono">OBSERVER / TELEMETRY</div><h3>可解释的平衡数据</h3><p>读取正式系统的结果记录遥测，不制造第二套真相，为后续平衡与实服验证提供依据。</p></article>
+                <article class="system-card"><div class="system-mark mono">M04 / CRISIS + FDI</div><h3>危机与失序</h3><p>识别 BIO、SYS、CON、SEC、GOI、WAR、END；FDI 以 Previous FDI + Event Delta 累积，不是每轮快照重算。</p></article>
+                <article class="system-card"><div class="system-mark mono">M05 / EVENT DIRECTOR</div><h3>选择、复核、解耦</h3><p>Director 只负责 Eligibility、Population Plan 与 Profile；职业、武器与 Spawn 由 Event Pack 实现。</p></article>
+                <article class="system-card"><div class="system-mark mono">OBSERVER / TELEMETRY</div><h3>可解释的平衡数据</h3><p>记录 D-LRC Evaluation、Crisis Transition、FDI Settlement、Primary Wave 与 Round Summary，但不制造第二套真相。</p></article>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="section-head">
+                <div><div class="section-kicker mono">ROUND OPENING / FACILITY MEMORY</div><h2 class="section-title">它也改变开局，<br>并记住设施经历过什么。</h2></div>
+                <p class="section-desc">Emergency Events 不只在后半局挑选事件；它从开局就建立对称的争夺结构，并让 FDI 保留整局失序留下的影响。</p>
+            </div>
+            <div class="guardrails">
+                <article class="guardrail"><h3>Opening Gameplay</h3><p>安保人员与混沌渗透者以轻武装开局，分别出生于 LCZ A/B 电梯。双方通过进入设施、争夺武器和通行权限获取优势；SCP 总数也会随人口变化，第二只 SCP-939 只是随机候选而非固定必出。</p></article>
+                <article class="guardrail"><h3>FDI · Facility Disorder Index</h3><p>FDI 以 Previous FDI + Event Delta 形成持续记忆，并以 LOW / MEDIUM / HIGH 解释设施失序。只有局势稳定、没有活跃危机且静默窗口满足时才触发 Order Recovery；HIGH、MEDIUM、LOW 的恢复速度也不同。</p></article>
+                <article class="guardrail"><h3>Professional Response</h3><p>某些事件不是普通事件，而是针对特定危机的专业响应。只有指定 D-LRC 等级与危机标签同时满足时才有资格出现；真正 Commit 前的取消或 Rollback 不会消耗同一 Crisis Episode 的响应资格。</p></article>
+                <article class="guardrail"><h3>Population Profile</h3><p>同一个 EventId 不需要复制为 E/D/C/B/A 五个事件。每个事件可包含五套 Population Profile，在当前锁定档位内决定 Target、Minimum 与 Downscale，绝不跨档偷换规模。</p></article>
             </div>
         </div>
     </section>
@@ -289,8 +308,21 @@ footer { border-top: 1px solid var(--line); padding: 36px 0 42px; }
             <div class="guardrails">
                 <article class="guardrail"><h3>Vanilla-Friendly</h3><p>Primary Wave 的阵营选择、Token、原版计时、装备与 Spawn 仍由原版负责。插件只记录和约束，不把原版系统整体推翻。</p></article>
                 <article class="guardrail"><h3>Fail-Safe</h3><p>遥测写入、候选事件或环境验证失败时，系统记录原因并继续运行；事件可回滚，Director Busy 会被释放。</p></article>
-                <article class="guardrail"><h3>Population-Aware</h3><p>同一个事件可以有 E–A 五套人口 Profile。人数不足时只在当前档位内 Downscale，绝不偷偷换到另一人口档。</p></article>
-                <article class="guardrail"><h3>Observable & Privacy-Aware</h3><p>日志解释 D-LRC、危机、FDI 与事件为何发生，同时遥测不记录 SteamID、IP、昵称或跨局身份。</p></article>
+                <article class="guardrail"><h3>Population-Aware</h3><p>同一个 EventId 可以有 E–A 五套人口 Profile。人数不足时只在当前档位内 Downscale，绝不偷偷换到另一人口档。</p></article>
+                <article class="guardrail"><h3>Observable & Privacy-Aware</h3><p>遥测记录 D-LRC Evaluation、Crisis Transition、FDI Settlement、Primary Wave、Round Summary 与匿名 Spectator Wait；不记录 SteamID、IP、昵称或跨局身份。</p></article>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="section-head">
+                <div><div class="section-kicker mono">ENGINEERING STATUS</div><h2 class="section-title">以数据调整平衡，<br>以证据约束结论。</h2></div>
+                <p class="section-desc">模拟用于发现问题，Telemetry 用于收集真人服务器事实。它们服务于正式 Gameplay 系统，而不是凭感觉另起一套规则。</p>
+            </div>
+            <div class="guardrails">
+                <article class="guardrail"><h3>Balance Harness</h3><p>覆盖 E–A 全部人口档、Semantic Scenarios 与多 Seed 随机状态；用于观察 L4/L5 可达性和 Control State 的实际约束，而不是直接凭模拟结果粗暴改阈值。</p></article>
+                <article class="guardrail"><h3>工程验证</h3><p>182 automated tests · Release build clean · RuntimeHarness available · Live player validation pending。自动化与运行探针提供工程证据，但不替代真人实服验证。</p></article>
             </div>
         </div>
     </section>
@@ -308,6 +340,7 @@ footer { border-top: 1px solid var(--line); padding: 36px 0 42px; }
                 <div class="status-row"><strong>M04 Crisis / M04.5 FDI</strong><span>危机识别、失序结算与 Order Recovery。</span><span class="state ready mono">READY</span></div>
                 <div class="status-row"><strong>M05 Event Director</strong><span>事件资格、重新验证与生命周期框架。</span><span class="state observe mono">FRAMEWORK READY</span></div>
                 <div class="status-row"><strong>Formal Event Pack / Live Validation</strong><span>正式事件包尚未发布，真人实服验证仍待进行。</span><span class="state pending mono">PENDING</span></div>
+                <div class="status-row"><strong>M06 O4 Panel</strong><span>按设计暂缓，不在当前发布范围内。</span><span class="state pending mono">DEFERRED</span></div>
             </div>
         </div>
     </section>

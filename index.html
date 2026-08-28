@@ -413,6 +413,27 @@ main#top {
     gap: 12px;
 }
 
+.hero-meta {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    margin-top: 18px;
+
+    color: var(--text-dim);
+    font-size: 11px;
+    letter-spacing: 1.1px;
+}
+
+.hero-meta::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 12px var(--success);
+}
+
 .btn {
     padding: 13px 20px;
 
@@ -1255,6 +1276,30 @@ footer {
 
             </button>
 
+            <a
+                class="btn"
+                href="https://github.com/qingranawa/Emergency-events"
+                target="_blank"
+                rel="noreferrer">
+
+                GitHub 仓库
+
+            </a>
+
+            <a
+                class="btn"
+                href="https://github.com/qingranawa/Emergency-events/releases"
+                target="_blank"
+                rel="noreferrer">
+
+                下载插件 / Releases
+
+            </a>
+
+        </div>
+
+        <div class="hero-meta mono">
+            CORE RUNTIME READY · EVENT PACK PENDING
         </div>
 
         </div>
