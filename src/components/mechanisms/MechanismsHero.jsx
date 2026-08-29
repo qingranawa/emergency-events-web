@@ -1,0 +1,5 @@
+import { mechanismFacts } from "../../data/mechanisms";
+
+export function MechanismsHero() {
+  return <section className="hero mechanisms-hero"><div className="container mechanisms-hero-inner"><div><div className="eyebrow mono">EMERGENCY EVENTS · MECHANISMS</div><h1>机制</h1><p className="hero-desc">这里介绍 Emergency Events 的核心模块，以及它们在一局游戏中如何协同运行。</p><div className="hero-actions"><a className="btn primary" href="#overview">查看运行流程</a><a className="btn" href="#architecture">查看模块关系</a><a className="btn" href="dlrc.html">查看完整 D-LRC 页面</a></div><div className="hero-meta mono">M01–M05 已接入 · M06 按设计暂缓 · MinimumPlayers={mechanismFacts.minimumPlayers}</div></div><aside className="mechanism-hero-aside"><span className="mono">CURRENT BOUNDARY</span><strong>事实先于叙事</strong><p>页面只写当前 Runtime、配置和测试能够确认的行为。</p><div className="hero-aside-line"><span>首评</span><b>391s</b></div><div className="hero-aside-line"><span>周期</span><b>30s</b></div><div className="hero-aside-line"><span>FDI</span><b>0–100</b></div></aside></div></section>;
+}

@@ -1,0 +1,5 @@
+import { fdiMechanismFacts } from "../../data/mechanisms";
+
+export function FdiSection() {
+  return <div className="fdi-mechanism"><div className="fdi-equation-large">{fdiMechanismFacts.formula.map((item, index) => <span className={item === "→" ? "equation-result" : item === "+" || item === "−" ? "equation-symbol" : ""} key={`${item}-${index}`}>{item}</span>)}</div><div className="fdi-facts-grid"><article><span className="mono">首次结算</span><p>{fdiMechanismFacts.initial}</p></article><article><span className="mono">后续结算</span><p>{fdiMechanismFacts.later}</p></article><article><span className="mono">DISORDER BAND</span>{fdiMechanismFacts.bands.map(([band, range, delta]) => <div className="fdi-band" key={band}><b>{band}</b><span>{range}</span><small>{delta}</small></div>)}</article><article><span className="mono">ORDER RECOVERY</span><p>{fdiMechanismFacts.recovery}</p></article></div><div className="fdi-relation"><strong>FDI</strong><span>临时影响普通 SUPPORT 来源仲裁</span><i aria-hidden="true">≠</i><span>不改写 D-LRC、Crisis 或 Professional Response 资格</span></div><p className="source-line mono">{fdiMechanismFacts.source}</p></div>;
+}

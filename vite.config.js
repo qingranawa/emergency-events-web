@@ -9,6 +9,7 @@ export default defineConfig({
       input: {
         main: "index.html",
         dlrc: "dlrc.html",
+        mechanisms: "mechanisms.html",
       },
     },
   },

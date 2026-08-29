@@ -1,0 +1,5 @@
+import { crisisFacts } from "../../data/mechanisms";
+
+export function CrisisSection() {
+  return <div className="crisis-mechanism"><div className="crisis-detector-flow"><span>RoundSnapshot</span><i aria-hidden="true">→</i><strong>CrisisManager</strong><i aria-hidden="true">→</i><span>ActiveTags + EpisodeIds</span></div><div className="crisis-accordion" aria-label="Crisis Detector 详情">{crisisFacts.map(([code, trigger], index) => <details className="mechanism-disclosure" key={code} open={index === 0}><summary><span className="mono">{code}</span><strong>{code === "GOI" ? "外部组织" : code === "END" ? "终局状态" : code === "WAR" ? "核设施" : code === "BIO" ? "生化" : code === "SYS" ? "系统控制" : code === "CON" ? "收容" : "安全"}</strong><small className="mono">ACTIVE / INACTIVE</small></summary><div><p>{trigger}</p><span className="mono">状态关系</span><p>Inactive → Active 创建新的 EpisodeId；Active → Active 保持当前 Episode；Active → Inactive 结束 Episode，再次激活会创建新的 Episode。</p></div></details>)}</div><p className="section-note">Crisis 没有独立 Severity 轴，L4 只表示 EventResponseLevel，不表示某类危机的等级。</p></div>;
+}
