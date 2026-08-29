@@ -1,0 +1,35 @@
+:root {
+  --bg: #080a0d;
+  --bg-soft: #0d1014;
+  --panel: rgba(18, 22, 28, .72);
+  --panel-strong: #11151a;
+  --text: #f2f5f7;
+  --text-soft: #9ba6af;
+  --text-dim: #626d76;
+  --line: rgba(255,255,255,.09);
+  --line-strong: rgba(255,255,255,.16);
+  --accent: #dce8ef;
+  --accent-soft: rgba(205,225,236,.09);
+  --success: #8ce0ad;
+  --warning: #e5c680;
+  --danger: #ef8d8d;
+  --radius: 18px;
+  --max: 1180px;
+  --nav-link-font-size: 18px;
+  --nav-link-padding: 13px 18px;
+  --nav-links-gap: 8px;
+}
+
+body.light {
+  --bg: #eef1f3;
+  --bg-soft: #e5e9ec;
+  --panel: rgba(255,255,255,.78);
+  --panel-strong: #fff;
+  --text: #101418;
+  --text-soft: #505c65;
+  --text-dim: #85919a;
+  --line: rgba(0,0,0,.08);
+  --line-strong: rgba(0,0,0,.15);
+  --accent: #192126;
+  --accent-soft: rgba(0,0,0,.05);
+}
