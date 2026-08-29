@@ -1,3 +1,6 @@
+import { useSectionSpy } from "../../hooks/useSectionSpy";
+
 export function MechanismsNav({ sections }) {
-  return <nav className="mechanisms-nav" aria-label="机制页章节导航"><div className="container mechanisms-nav-track">{sections.map(({ id, label }) => <a className="mono" href={`#${id}`} key={id}>{label}</a>)}</div></nav>;
+  const activeId = useSectionSpy(sections.map(({ id }) => id));
+  return <nav className="mechanisms-nav" aria-label="机制页章节导航"><div className="container mechanisms-nav-track">{sections.map(({ id, label }) => <a className={id === activeId ? "is-current" : ""} href={`#${id}`} aria-current={id === activeId ? "location" : undefined} key={id}>{label}</a>)}</div></nav>;
 }

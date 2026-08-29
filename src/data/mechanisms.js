@@ -16,6 +16,29 @@ export const mechanismSections = [
   { id: "status", label: "状态" },
 ];
 
+export const runtimeBackboneSections = [
+  { id: "overview", label: "OVERVIEW", code: "00", pending: false },
+  { id: "round-core", label: "ROUND CORE", code: "01", pending: false },
+  { id: "reinforcement", label: "REINFORCEMENT", code: "02", pending: false },
+  { id: "dlrc", label: "D-LRC", code: "03", pending: false },
+  { id: "crisis", label: "CRISIS", code: "04", pending: false },
+  { id: "fdi", label: "FDI", code: "04.5", pending: false },
+  { id: "director", label: "DIRECTOR", code: "05", pending: false },
+  { id: "event-pack", label: "EVENT PACK", code: "—", pending: true },
+];
+
+export const runtimeTopology = [
+  { id: "round-start", label: "ROUND START", owner: "Plugin / Runtime", detail: "观察开局人数并决定本局是否接管。", target: "overview", related: ["round-start", "round-core", "reinforcement", "round-facts", "dlrc", "crisis-fdi", "director", "event-pack"] },
+  { id: "round-core", label: "ROUND CORE", owner: "M01", detail: "锁定 RoundId、PopulationTier 与开局编制。", target: "round-core", related: ["round-start", "round-core", "reinforcement", "round-facts", "dlrc", "crisis-fdi", "director", "event-pack"] },
+  { id: "reinforcement", label: "REINFORCEMENT", owner: "M02", detail: "围绕原版 Primary Wave 记录事实。", target: "reinforcement", related: ["round-core", "reinforcement", "round-facts", "dlrc", "crisis-fdi", "director", "event-pack"] },
+  { id: "round-facts", label: "ROUND FACTS", owner: "M01 + M02", detail: "汇总人口、SCP、人员、波次与设施事实。", target: "round-core", related: ["round-core", "reinforcement", "round-facts", "dlrc", "crisis-fdi", "director"] },
+  { id: "dlrc", label: "D-LRC", owner: "M03", detail: "发布绑定 RoundId 的响应评估。", target: "dlrc", related: ["round-facts", "dlrc", "crisis-fdi", "director", "event-pack"] },
+  { id: "crisis-node", label: "CRISIS", owner: "M04", detail: "维护危机 Active 状态与 Episode。", target: "crisis", related: ["dlrc", "crisis-node", "fdi-node", "director", "event-pack"] },
+  { id: "fdi-node", label: "FDI", owner: "M04.5", detail: "记录设施失序的持续记忆。", target: "fdi", related: ["dlrc", "crisis-node", "fdi-node", "director"] },
+  { id: "director", label: "EVENT DIRECTOR", owner: "M05", detail: "筛选资格、来源与 Population Plan。", target: "director", related: ["dlrc", "crisis-node", "fdi-node", "director", "event-pack"] },
+  { id: "event-pack", label: "EVENT PACK", owner: "CONTENT BOUNDARY", detail: "提供角色、装备、出生点与实际执行。", target: "event-pack", related: ["director", "event-pack"] },
+];
+
 export const mechanismFacts = {
   minimumPlayers: 16,
   evaluationStartSeconds: 391,
@@ -39,6 +62,13 @@ export const runtimeFlow = [
 ];
 
 export const roundCoreFacts = {
+  sequence: [
+    ["WAITING", "等待玩家或开局人数不足，保持原版流程。"],
+    ["ROUND START", "达到 MinimumPlayers 后捕获 RoundId 与开局玩家事实。"],
+    ["POPULATION LOCK", "锁定本局 PopulationTier，供编制、cap 与阈值读取。"],
+    ["COMPOSITION", "按 CompositionTable 应用已支持人数的开局编制。"],
+    ["ACTIVE", "运行时进入活动状态，评估和增援事实开始向下游发布。"],
+  ],
   lifecycle: [
     ["STANDBY", "等待玩家或开局人数不足，保持原版流程。"],
     ["ACTIVE", "达到 MinimumPlayers 后锁定本局 RoundId、人口档位和开局编制。"],
@@ -134,10 +164,10 @@ export const eventPackFacts = {
 };
 
 export const architectureLayers = [
-  { label: "事实来源", nodes: ["M01 Round Core", "M02 Reinforcement", "RoundSnapshot"] },
-  { label: "评估层", nodes: ["M03 D-LRC Evaluator", "M04 Crisis System", "M04.5 FDI"] },
-  { label: "决策层", nodes: ["M05 Event Director", "Population Plan", "O4 fallback"] },
-  { label: "执行与观察", nodes: ["Event Pack（未制作）", "Runtime result", "Telemetry"] },
+  { label: "DATA / FACT", nodes: ["M01 Round Core", "M02 Reinforcement", "RoundSnapshot"] },
+  { label: "EVALUATION", nodes: ["M03 D-LRC Evaluator", "M04 Crisis System", "M04.5 FDI"] },
+  { label: "SELECTION", nodes: ["M05 Event Director", "Population Plan"] },
+  { label: "EXECUTION BOUNDARY", nodes: ["Event Pack（未制作）", "M06 O4 Panel · DEFERRED BY DESIGN", "Telemetry"] },
 ];
 
 export const lifecycleStages = [
