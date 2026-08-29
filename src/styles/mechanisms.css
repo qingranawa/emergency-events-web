@@ -191,6 +191,29 @@
 @media (max-width: 820px) { .mechanisms-hero { min-height: auto; padding: 90px 0 70px; }.mechanisms-hero-inner { grid-template-columns: 1fr; }.mechanism-hero-aside { max-width: 420px; }.mechanism-split, .dlrc-detail-row, .fdi-facts-grid { grid-template-columns: 1fr; }.reinforcement-layout { grid-template-columns: 1fr; }.reinforcement-column, .reinforcement-bridge { min-height: auto; }.reinforcement-column h3 { margin-top: 28px; }.reinforcement-foot { grid-column: auto; grid-template-columns: 1fr; }.reinforcement-foot strong { grid-column: auto; }.reinforcement-foot small { grid-column: auto; }.dlrc-score-flow { grid-template-columns: 1fr; }.dlrc-flow-arrow { min-height: 36px; }.dlrc-flow-arrow::before { content: "↓"; }.dlrc-flow-arrow { font-size: 0; }.dlrc-flow-arrow::before { font-size: 18px; }.crisis-detector-flow { grid-template-columns: 1fr; gap: 8px; }.crisis-detector-flow i { transform: rotate(90deg); }.event-pack-boundary { grid-template-columns: 1fr; }.event-pack-interface { min-height: auto; }.event-pack-status { grid-column: auto; }.architecture-layer { grid-template-columns: 1fr; gap: 12px; padding: 19px 0; }.architecture-down { bottom: -9px; left: 50%; }.telemetry-stream-head { display: block; }.telemetry-stream-head p { margin-top: 10px; }.telemetry-row { grid-template-columns: 75px 1fr; }.telemetry-row span { grid-column: 2; }.mechanism-status-row { grid-template-columns: 1fr 1fr; }.mechanism-status-row p { grid-column: 1 / -1; }.mechanism-status-head p { display: none; } }
 @media (max-width: 600px) { .mechanisms-hero h1 { font-size: clamp(74px, 24vw, 120px); letter-spacing: -5px; }.runtime-flow { grid-template-columns: 1fr; }.runtime-flow-step { min-height: auto; }.runtime-flow-content > span { margin-top: 20px; }.round-lifecycle-step { grid-template-columns: 32px 1fr; gap: 9px; }.round-lifecycle-step p { grid-column: 2; }.population-scale-panel { padding: 19px; }.qualification-pipeline-large { display: block; }.qualification-node, .qualification-node:not(:first-child) { min-height: auto; padding: 17px 0; border-right: 0; border-top: 1px solid var(--line); }.qualification-node:first-child { border-top: 0; }.qualification-node strong { margin-top: 17px; }.qualification-node i { top: auto; right: 12px; bottom: -9px; transform: rotate(90deg); }.qualification-node:last-child i { display: none; }.director-boundary-wide { grid-template-columns: 1fr; }.command-list-large > div { grid-template-columns: 1fr; gap: 8px; }.command-list-large b { justify-self: start; }.mechanism-status-row { grid-template-columns: 1fr; gap: 8px; }.mechanism-status-row p { grid-column: auto; }.mechanism-status-head { display: none; }.fdi-equation-large { gap: 9px; font-size: 17px; }.fdi-relation { display: grid; gap: 10px; }.fdi-relation i { transform: rotate(90deg); }.mechanism-disclosure summary { grid-template-columns: 42px 1fr 20px; gap: 10px; }.mechanism-disclosure summary small { display: none; }.mechanism-disclosure > div { grid-template-columns: 1fr; padding-left: 52px; } }
 
+/* 统一机制页卡片边界，与首页和 D-LRC 的圆角语言保持一致。 */
+.mechanisms-page .mechanism-hero-aside,
+.mechanisms-page .population-scale-panel,
+.mechanisms-page .runtime-topology,
+.mechanisms-page .topology-node,
+.mechanisms-page .dlrc-code-stage,
+.mechanisms-page .runtime-flow,
+.mechanisms-page .reinforcement-layout,
+.mechanisms-page .dlrc-score-flow,
+.mechanisms-page .director-funnel,
+.mechanisms-page .director-boundary-wide,
+.mechanisms-page .event-pack-boundary,
+.mechanisms-page .command-terminal-large,
+.mechanisms-page .mechanism-table-wrap,
+.mechanisms-page .mechanism-status-table,
+.mechanisms-page .fdi-relation { border-radius: var(--radius); }
+.mechanisms-page .reinforcement-layout,
+.mechanisms-page .dlrc-score-flow,
+.mechanisms-page .director-boundary-wide,
+.mechanisms-page .event-pack-boundary { overflow: hidden; }
+.mechanisms-page .crisis-detector-flow span,
+.mechanisms-page .crisis-detector-flow strong { border-radius: 12px; }
+
 /* 机制页滚动重构：沿用现有冷灰系统，只改变空间、层级和过渡。 */
 .mechanisms-page { --mechanisms-rail: 172px; }
 .mechanisms-hero { position: relative; overflow: clip; background: radial-gradient(circle at 74% 45%, rgba(220,232,239,.055), transparent 28%); }
@@ -356,6 +379,80 @@
 .hood-phase .mechanisms-content { max-width: none; }
 .hood-phase .section-head { margin-bottom: 32px; }
 
+@keyframes mechanisms-hero-settle {
+  from { opacity: .01; transform: translate3d(0, 20px, 0); filter: blur(5px); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); filter: blur(0); }
+}
+@keyframes mechanisms-aside-arrive {
+  from { opacity: .01; transform: translate3d(18px, 0, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes mechanisms-node-arrive {
+  from { opacity: .18; transform: translate3d(0, 14px, 0) scale(.985); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+@keyframes mechanisms-line-draw {
+  from { opacity: .25; transform: scaleY(0); }
+  to { opacity: 1; transform: scaleY(1); }
+}
+@keyframes mechanisms-branch-arrive {
+  from { opacity: .12; transform: scale(.94, .78); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes mechanisms-stage-arrive {
+  from { opacity: .08; transform: translate3d(-12px, 0, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes mechanisms-code-reveal {
+  from { opacity: .01; transform: translate3d(0, 16px, 0) scale(.985); clip-path: inset(0 100% 0 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); clip-path: inset(0 0 0 0); }
+}
+@keyframes mechanisms-signal-draw {
+  from { opacity: .22; transform: scaleX(0); }
+  to { opacity: 1; transform: scaleX(1); }
+}
+@keyframes mechanisms-marker-arrive {
+  from { opacity: .1; transform: translate3d(0, 10px, 0) scale(.55); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+@keyframes mechanisms-backbone-pulse {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--success) 48%, transparent); transform: scale(.82); }
+  68% { box-shadow: 0 0 0 7px color-mix(in srgb, var(--success) 0%, transparent); transform: scale(1.08); }
+  100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--success) 0%, transparent); transform: scale(1); }
+}
+
+.mechanisms-hero[data-motion="hero"].scroll-reveal-visible .eyebrow { animation: mechanisms-hero-settle var(--motion-section) var(--motion-ease-expo) both; }
+.mechanisms-hero[data-motion="hero"].scroll-reveal-visible h1 { animation: mechanisms-hero-settle var(--motion-hero) var(--motion-ease-expo) 65ms both; }
+.mechanisms-hero[data-motion="hero"].scroll-reveal-visible .hero-desc { animation: mechanisms-hero-settle var(--motion-section) var(--motion-ease-expo) 145ms both; }
+.mechanisms-hero[data-motion="hero"].scroll-reveal-visible .hero-actions { animation: mechanisms-hero-settle var(--motion-section) var(--motion-ease-expo) 205ms both; }
+.mechanisms-hero[data-motion="hero"].scroll-reveal-visible .hero-meta { animation: mechanisms-hero-settle var(--motion-section) var(--motion-ease-expo) 270ms both; }
+.mechanisms-hero[data-motion="hero"].scroll-reveal-visible .mechanism-hero-aside { animation: mechanisms-aside-arrive var(--motion-hero) var(--motion-ease-expo) 145ms both; }
+
+.runtime-overview[data-motion="topology"].scroll-reveal-visible .topology-node { animation: mechanisms-node-arrive var(--motion-section) var(--motion-ease-expo) var(--motion-delay, 0ms) both; }
+.runtime-overview[data-motion="topology"].scroll-reveal-visible .topology-connector { transform-origin: center top; animation: mechanisms-line-draw 300ms var(--motion-ease-expo) var(--motion-delay, 0ms) both; }
+.runtime-overview[data-motion="topology"].scroll-reveal-visible .topology-branch { transform-origin: center top; animation: mechanisms-branch-arrive 360ms var(--motion-ease-expo) var(--motion-delay, 0ms) both; }
+.runtime-backbone li.is-current .backbone-node { animation: mechanisms-backbone-pulse var(--motion-slow) var(--motion-ease-expo) both; }
+
+.round-core-layout[data-motion="sequence"].scroll-reveal-visible .round-core-step { animation: mechanisms-stage-arrive var(--motion-section) var(--motion-ease-expo) var(--motion-delay, 0ms) both; }
+.round-core-layout[data-motion="sequence"].scroll-reveal-visible .round-core-arrow { animation: mechanisms-stage-arrive 280ms var(--motion-ease-expo) calc(var(--motion-delay, 0ms) + 120ms) both; }
+.population-tier-button { transform-origin: center; transition: color var(--motion-fast) var(--motion-ease), border-color var(--motion-fast) var(--motion-ease), background var(--motion-fast) var(--motion-ease), transform var(--motion-base) var(--motion-ease-expo); }
+.population-tier-button:hover, .population-tier-button:focus-visible { transform: translate3d(0, -3px, 0); }
+.population-tier-button:active { transform: translate3d(0, 0, 0) scale(.96); transition-duration: var(--motion-fast); }
+
+.dlrc-spotlight[data-motion="code"].scroll-reveal-visible .dlrc-code-kicker { animation: mechanisms-stage-arrive 340ms var(--motion-ease-expo) both; }
+.dlrc-spotlight[data-motion="code"].scroll-reveal-visible .dlrc-code-display { animation: mechanisms-code-reveal var(--motion-hero) var(--motion-ease-expo) 80ms both; }
+.dlrc-spotlight[data-motion="code"].scroll-reveal-visible .dlrc-code-caption { animation: mechanisms-stage-arrive var(--motion-section) var(--motion-ease-expo) 250ms both; }
+.dlrc-spotlight[data-motion="code"].scroll-reveal-visible .dlrc-code-transition { animation: mechanisms-stage-arrive var(--motion-section) var(--motion-ease-expo) 330ms both; }
+
+.crisis-console[data-motion="console"].scroll-reveal-visible::before { transform-origin: center; animation: mechanisms-signal-draw 520ms var(--motion-ease-expo) both; }
+.fdi-history[data-motion="signal"].scroll-reveal-visible .fdi-trace-line { transform-origin: left; animation: mechanisms-signal-draw var(--motion-hero) var(--motion-ease-expo) 50ms both; }
+.fdi-history[data-motion="signal"].scroll-reveal-visible .fdi-trace-point { animation: mechanisms-marker-arrive var(--motion-section) var(--motion-ease-expo) var(--motion-delay, 0ms) both; }
+.fdi-history[data-motion="signal"].scroll-reveal-visible .fdi-trace-point:last-of-type .fdi-trace-marker { animation: mechanisms-backbone-pulse var(--motion-slow) var(--motion-ease-expo) 520ms both; }
+
+.director-mechanism[data-motion="funnel"].scroll-reveal-visible .qualification-node { animation: mechanisms-stage-arrive var(--motion-section) var(--motion-ease-expo) var(--motion-delay, 0ms) both; }
+.architecture-stack[data-motion="layers"].scroll-reveal-visible .architecture-layer { animation: mechanisms-stage-arrive var(--motion-section) var(--motion-ease-expo) var(--motion-delay, 0ms) both; }
+.architecture-stack[data-motion="layers"].scroll-reveal-visible .architecture-down { animation: mechanisms-marker-arrive 340ms var(--motion-ease-expo) var(--motion-delay, 0ms) both; }
+
 @media (max-width: 1100px) {
   .mechanisms-shell { grid-template-columns: 1fr; gap: 0; width: min(calc(100vw - 40px), var(--max)); }
   .runtime-backbone { display: none; }
@@ -428,5 +525,13 @@
   .dlrc-code-token,
   .runtime-backbone a,
   .backbone-node { transition: none; }
-  .fdi-trace-line { animation: none; }
+  .fdi-trace-line,
+  .mechanisms-hero *,
+  .runtime-overview *,
+  .round-core-layout *,
+  .dlrc-spotlight *,
+  .crisis-console *,
+  .fdi-history *,
+  .director-mechanism *,
+  .architecture-stack * { animation: none !important; }
 }

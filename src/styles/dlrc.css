@@ -68,3 +68,66 @@
 .principles-wall { display: grid; grid-template-columns: 1.4fr 1fr 1fr; grid-auto-rows: minmax(88px, auto); gap: 8px; }.principle { display: flex; align-items: end; padding: 18px; border: 1px solid var(--line); color: var(--text-soft); font: 650 clamp(20px, 3vw, 36px) "SFMono-Regular", Consolas, monospace; }.principle-1 { grid-row: span 2; font-size: clamp(28px, 5vw, 62px); color: var(--text); }.principle-4 { grid-column: span 2; color: var(--accent); }.principle-6 { grid-column: span 2; }
 @media (max-width: 900px) { .anatomy-grid, .fdi-details, .crisis-detail-body { grid-template-columns: repeat(2, 1fr); }.response-ladder, .control-panel, .score-flow, .command-interface, .telemetry-panel { grid-template-columns: 1fr; }.score-flow-arrow { transform: rotate(90deg); min-height: 30px; }.crisis-relation { grid-template-columns: 1fr; }.relation-symbol { transform: rotate(90deg); }.evaluation-cycle, .qualification-flow { display: block; }.cycle-step, .qualification-step { min-height: auto; padding: 17px 8px 17px 0; border-right: 0; border-bottom: 1px solid var(--line); }.cycle-step:not(:first-child), .qualification-step:not(:first-child) { padding-left: 0; }.cycle-arrow, .qualification-arrow { top: auto; right: 8px; bottom: -9px; transform: rotate(90deg); }.vanilla-integration, .director-boundary { grid-template-columns: 1fr; }.system-layer { flex-wrap: wrap; }.command-list > div { grid-template-columns: 1fr auto; }.command-list span { grid-column: 1 / -1; order: 3; }.status-row { grid-template-columns: 1fr 1fr; }.status-row small { grid-column: 1 / -1; }.status-head small { display: none; } }
 @media (max-width: 600px) { .dlrc-section-nav { top: 58px; }.dlrc-section-nav a { padding-inline: 8px; }.anatomy-code { letter-spacing: -3px; gap: 6px; }.anatomy-grid, .fdi-details, .crisis-detail-body, .score-flow-column, .control-state-list, .principles-wall { grid-template-columns: 1fr; }.anatomy-grid > div, .anatomy-grid > div:not(:first-child) { min-height: auto; padding: 16px 0; border-right: 0; border-bottom: 1px solid var(--line); }.population-track { min-width: 620px; }.population-scale { overflow-x: auto; }.population-axis { min-width: 620px; }.threshold-wrap { padding: 14px; }.crisis-detail summary { grid-template-columns: 48px 1fr 20px; gap: 10px; }.crisis-detail-toggle { display: none; }.crisis-detail-body { padding-left: 0; }.system-node { min-width: min(170px, 100%); }.round-example { grid-template-columns: 1fr; min-width: 0; max-width: 100%; }.round-example-steps { display: flex; min-width: 0; max-width: 100%; overflow-x: auto; border-right: 0; border-bottom: 1px solid var(--line); }.round-example-steps button { min-width: 190px; border-bottom: 0; border-right: 1px solid var(--line); }.round-example-detail { padding: 28px; }.round-example-detail h3 { margin-top: 28px; }.command-list > div { grid-template-columns: 1fr; }.command-list b { justify-self: start; }.status-row { grid-template-columns: 1fr; gap: 7px; }.status-row small { grid-column: auto; }.principles-wall { grid-auto-rows: minmax(82px, auto); }.principle-1, .principle-4, .principle-6 { grid-column: auto; grid-row: auto; }.principle-1 { font-size: 31px; } }
+
+@keyframes dlrc-section-enter {
+  from { opacity: .01; transform: translate3d(0, 20px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes dlrc-card-enter {
+  from { opacity: .08; transform: translate3d(0, 16px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes dlrc-code-enter {
+  from { opacity: .01; transform: translate3d(0, 14px, 0) scale(.985); clip-path: inset(0 100% 0 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); clip-path: inset(0 0 0 0); }
+}
+
+@keyframes dlrc-signal-draw {
+  from { opacity: .2; transform: scaleX(0); }
+  to { opacity: 1; transform: scaleX(1); }
+}
+
+@keyframes dlrc-focus-glow {
+  0%, 100% { box-shadow: 0 0 0 0 transparent; }
+  45% { box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 28%, transparent), 0 0 32px color-mix(in srgb, var(--accent) 13%, transparent); }
+}
+
+.dlrc-page > section.scroll-reveal-visible .section-head > * { animation: dlrc-section-enter var(--motion-section) var(--motion-ease-expo) both; }
+.dlrc-page > section.scroll-reveal-visible .section-head > .section-desc { animation-delay: 90ms; }
+.dlrc-page > .dlrc-hero.scroll-reveal-visible .eyebrow { animation: dlrc-section-enter 360ms var(--motion-ease-expo) both; }
+.dlrc-page > .dlrc-hero.scroll-reveal-visible h1 { animation: dlrc-section-enter var(--motion-hero) var(--motion-ease-expo) 60ms both; }
+.dlrc-page > .dlrc-hero.scroll-reveal-visible .hero-desc { animation: dlrc-section-enter var(--motion-section) var(--motion-ease-expo) 145ms both; }
+.dlrc-page > .dlrc-hero.scroll-reveal-visible .hero-actions { animation: dlrc-section-enter var(--motion-section) var(--motion-ease-expo) 210ms both; }
+.dlrc-page > .dlrc-hero.scroll-reveal-visible .hero-meta { animation: dlrc-section-enter var(--motion-section) var(--motion-ease-expo) 270ms both; }
+
+.dlrc-page > .live-code-section.scroll-reveal-visible .demo-ribbon { animation: dlrc-section-enter 340ms var(--motion-ease-expo) both; }
+.dlrc-page > .live-code-section.scroll-reveal-visible .live-code { animation: dlrc-card-enter var(--motion-hero) var(--motion-ease-expo) 80ms both, dlrc-focus-glow 920ms var(--motion-ease-expo) 340ms both; }
+.dlrc-page > .live-code-section.scroll-reveal-visible .dlrc-code { animation: dlrc-code-enter var(--motion-hero) var(--motion-ease-expo) 180ms both; }
+.dlrc-page > .live-code-section.scroll-reveal-visible .progress div { transform-origin: left; animation: dlrc-signal-draw 620ms var(--motion-ease-expo) 380ms both; }
+
+.dlrc-page > section.scroll-reveal-visible .anatomy-code { animation: dlrc-code-enter var(--motion-hero) var(--motion-ease-expo) 110ms both; }
+.dlrc-page > section.scroll-reveal-visible .anatomy-grid > div, .dlrc-page > section.scroll-reveal-visible .population-segment, .dlrc-page > section.scroll-reveal-visible .level-step, .dlrc-page > section.scroll-reveal-visible .score-input, .dlrc-page > section.scroll-reveal-visible .control-state-list > div, .dlrc-page > section.scroll-reveal-visible .relation-card, .dlrc-page > section.scroll-reveal-visible .fdi-details > div, .dlrc-page > section.scroll-reveal-visible .system-node, .dlrc-page > section.scroll-reveal-visible .cycle-step, .dlrc-page > section.scroll-reveal-visible .qualification-step, .dlrc-page > section.scroll-reveal-visible .director-side, .dlrc-page > section.scroll-reveal-visible .integration-column, .dlrc-page > section.scroll-reveal-visible .fallback-state, .dlrc-page > section.scroll-reveal-visible .principle { animation: dlrc-card-enter var(--motion-section) var(--motion-ease-expo) both; }
+.dlrc-page > section.scroll-reveal-visible .anatomy-grid > div:nth-child(2), .dlrc-page > section.scroll-reveal-visible .population-segment:nth-child(2), .dlrc-page > section.scroll-reveal-visible .level-step:nth-child(2), .dlrc-page > section.scroll-reveal-visible .score-input:nth-child(2), .dlrc-page > section.scroll-reveal-visible .control-state-list > div:nth-child(2), .dlrc-page > section.scroll-reveal-visible .fdi-details > div:nth-child(2), .dlrc-page > section.scroll-reveal-visible .cycle-step:nth-child(2), .dlrc-page > section.scroll-reveal-visible .qualification-step:nth-child(2), .dlrc-page > section.scroll-reveal-visible .principle:nth-child(2) { animation-delay: 70ms; }
+.dlrc-page > section.scroll-reveal-visible .anatomy-grid > div:nth-child(3), .dlrc-page > section.scroll-reveal-visible .population-segment:nth-child(3), .dlrc-page > section.scroll-reveal-visible .level-step:nth-child(3), .dlrc-page > section.scroll-reveal-visible .score-input:nth-child(3), .dlrc-page > section.scroll-reveal-visible .control-state-list > div:nth-child(3), .dlrc-page > section.scroll-reveal-visible .fdi-details > div:nth-child(3), .dlrc-page > section.scroll-reveal-visible .cycle-step:nth-child(3), .dlrc-page > section.scroll-reveal-visible .qualification-step:nth-child(3), .dlrc-page > section.scroll-reveal-visible .principle:nth-child(3) { animation-delay: 140ms; }
+.dlrc-page > section.scroll-reveal-visible .anatomy-grid > div:nth-child(4), .dlrc-page > section.scroll-reveal-visible .population-segment:nth-child(4), .dlrc-page > section.scroll-reveal-visible .level-step:nth-child(4), .dlrc-page > section.scroll-reveal-visible .score-input:nth-child(4), .dlrc-page > section.scroll-reveal-visible .control-state-list > div:nth-child(4), .dlrc-page > section.scroll-reveal-visible .fdi-details > div:nth-child(4), .dlrc-page > section.scroll-reveal-visible .cycle-step:nth-child(4), .dlrc-page > section.scroll-reveal-visible .qualification-step:nth-child(4), .dlrc-page > section.scroll-reveal-visible .principle:nth-child(4) { animation-delay: 210ms; }
+.dlrc-page > section.scroll-reveal-visible .population-segment:nth-child(5), .dlrc-page > section.scroll-reveal-visible .level-step:nth-child(5), .dlrc-page > section.scroll-reveal-visible .cycle-step:nth-child(5), .dlrc-page > section.scroll-reveal-visible .qualification-step:nth-child(5), .dlrc-page > section.scroll-reveal-visible .principle:nth-child(5) { animation-delay: 280ms; }
+.dlrc-page > section.scroll-reveal-visible .level-step:nth-child(6) { animation-delay: 350ms; }
+.dlrc-page > section.scroll-reveal-visible .threshold-wrap, .dlrc-page > section.scroll-reveal-visible .score-result, .dlrc-page > section.scroll-reveal-visible .round-example, .dlrc-page > section.scroll-reveal-visible .telemetry-panel, .dlrc-page > section.scroll-reveal-visible .command-terminal { animation: dlrc-card-enter var(--motion-hero) var(--motion-ease-expo) 180ms both, dlrc-focus-glow 900ms var(--motion-ease-expo) 420ms both; }
+.dlrc-page > section.scroll-reveal-visible .score-flow-arrow, .dlrc-page > section.scroll-reveal-visible .system-connector, .dlrc-page > section.scroll-reveal-visible .relation-symbol, .dlrc-page > section.scroll-reveal-visible .fallback-arrow { animation: dlrc-section-enter 360ms var(--motion-ease-expo) 160ms both; }
+.dlrc-page > section.scroll-reveal-visible .fdi-equation { animation: dlrc-section-enter var(--motion-section) var(--motion-ease-expo) 90ms both; }
+.dlrc-page > section.scroll-reveal-visible .system-node.accent, .dlrc-page > section.scroll-reveal-visible .fallback-state.active { animation-name: dlrc-card-enter, dlrc-focus-glow; animation-duration: var(--motion-section), 900ms; animation-delay: 130ms, 420ms; }
+.dlrc-page > section.scroll-reveal-visible .crisis-detail { animation: dlrc-card-enter 340ms var(--motion-ease-expo) both; }
+.dlrc-page > section.scroll-reveal-visible .crisis-detail:nth-child(2) { animation-delay: 60ms; }
+.dlrc-page > section.scroll-reveal-visible .crisis-detail:nth-child(3) { animation-delay: 120ms; }
+.dlrc-page > section.scroll-reveal-visible .crisis-detail:nth-child(4) { animation-delay: 180ms; }
+.dlrc-page > section.scroll-reveal-visible .crisis-detail:nth-child(5) { animation-delay: 240ms; }
+.dlrc-page > section.scroll-reveal-visible .command-list > div, .dlrc-page > section.scroll-reveal-visible .status-row:not(.status-head) { animation: dlrc-card-enter 340ms var(--motion-ease-expo) both; }
+.dlrc-page > section.scroll-reveal-visible .command-list > div:nth-child(2), .dlrc-page > section.scroll-reveal-visible .status-row:nth-child(2) { animation-delay: 60ms; }
+.dlrc-page > section.scroll-reveal-visible .command-list > div:nth-child(3), .dlrc-page > section.scroll-reveal-visible .status-row:nth-child(3) { animation-delay: 120ms; }
+.dlrc-page > section.scroll-reveal-visible .command-list > div:nth-child(4), .dlrc-page > section.scroll-reveal-visible .status-row:nth-child(4) { animation-delay: 180ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .dlrc-page .section-head *, .dlrc-page .hero *, .dlrc-page .live-code *, .dlrc-page .anatomy-code, .dlrc-page .anatomy-grid > div, .dlrc-page .population-segment, .dlrc-page .level-step, .dlrc-page .threshold-wrap, .dlrc-page .score-flow *, .dlrc-page .control-panel *, .dlrc-page .crisis-detail, .dlrc-page .crisis-relation *, .dlrc-page .fdi-flow *, .dlrc-page .system-relationship *, .dlrc-page .evaluation-cycle *, .dlrc-page .qualification-flow *, .dlrc-page .director-boundary *, .dlrc-page .vanilla-integration *, .dlrc-page .runtime-fallback *, .dlrc-page .round-example, .dlrc-page .command-interface *, .dlrc-page .telemetry-panel *, .dlrc-page .status-row, .dlrc-page .principle { animation: none !important; }
+}

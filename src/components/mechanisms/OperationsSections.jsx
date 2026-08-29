@@ -1,7 +1,7 @@
 import { architectureLayers, commandRows, configurationRows, lifecycleStages, mechanismStatus, sourceWalkthrough, telemetryRows } from "../../data/mechanisms";
 
 export function ArchitectureSection() {
-  return <div className="architecture-stack" aria-label="Emergency Events 模块关系图">{architectureLayers.map((layer, index) => <div className="architecture-layer" data-scroll-reveal key={layer.label}><div className="architecture-layer-label mono">{layer.label}</div><div className="architecture-layer-nodes">{layer.nodes.map((node) => <span key={node}>{node}</span>)}</div>{index < architectureLayers.length - 1 && <div className="architecture-down" aria-hidden="true">↓</div>}</div>)}</div>;
+  return <div className="architecture-stack" data-scroll-reveal data-motion="layers" aria-label="Emergency Events 模块关系图">{architectureLayers.map((layer, index) => <div className="architecture-layer" style={{ "--motion-delay": `${index * 95}ms` }} key={layer.label}><div className="architecture-layer-label mono">{layer.label}</div><div className="architecture-layer-nodes">{layer.nodes.map((node) => <span key={node}>{node}</span>)}</div>{index < architectureLayers.length - 1 && <div className="architecture-down" aria-hidden="true">↓</div>}</div>)}</div>;
 }
 
 export function LifecycleSection() {

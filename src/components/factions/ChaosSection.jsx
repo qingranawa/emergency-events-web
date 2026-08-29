@@ -1,0 +1,5 @@
+import { chaosCells } from "../../data/factionsArchive";
+
+export function ChaosSection() {
+  return <section id="chaos" className="faction-section" data-scroll-reveal><div className="container"><div className="section-head"><div><div className="section-kicker mono">03 / CELL NETWORK</div><h2 className="section-title">混沌不是一条指挥链</h2></div><p className="section-desc">常见描绘将混沌表现为由 Delta Command 居中协调、由独立单元组成的网络；起源与内部结构会随作品变化。</p></div><div className="chaos-network"><div className="chaos-core"><span className="mono">COORDINATION LAYER</span><strong>DELTA<br />COMMAND</strong><small>常见设定节点</small></div><div className="chaos-orbits">{chaosCells.slice(1).map((cell, index) => <article className={`chaos-cell chaos-cell-${index + 1}`} key={cell.code}><span className="mono">{cell.code}</span><strong>{cell.title}</strong><p>{cell.text}</p></article>)}</div></div><div className="canon-note"><span className="mono">CANON NOTE</span><p>混沌的起源、目标和组织方式存在多种解释。这里保留“分散、适应性强、依单元行动”的共同轮廓，不把某一条故事线写成唯一真相。</p></div></div></section>;
+}

@@ -1,8 +1,10 @@
+import { useRef } from "react";
 import { Background } from "../layout/Background";
 import { Footer } from "../layout/Footer";
 import { SectionHeader } from "../layout/SectionHeader";
 import { SiteNav } from "../layout/SiteNav";
 import { useTheme } from "../../hooks/useTheme";
+import { useScrollReveal } from "../../hooks/useScrollReveal";
 import { crisisItems, dlrcDemoStates } from "../../data/dlrc";
 import { dlrcRuntimeFacts } from "../../data/dlrcPage";
 import { LiveResponse } from "./LiveResponse";
@@ -13,7 +15,9 @@ import { RoundExample, OperatorCommands, TelemetryPanel, ArchitectureStatus, Pri
 
 export function DlrcApp() {
   const { theme, toggleTheme } = useTheme();
-  return <><Background /><SiteNav page="dlrc" theme={theme} onToggleTheme={toggleTheme} /><main id="top">
+  const mainRef = useRef(null);
+  useScrollReveal(mainRef, ":scope > section");
+  return <><Background /><SiteNav page="dlrc" theme={theme} onToggleTheme={toggleTheme} /><main ref={mainRef} id="top" className="dlrc-page">
     <section className="hero dlrc-hero"><div className="container hero-inner"><div className="hero-intro"><div className="eyebrow mono">D-LRC · 系统架构</div><h1>D-LRC<br /><span>Dynamic Lockdown<br />Response Code</span></h1><p className="hero-desc">D-LRC 用来描述 Emergency Events 当前回合的响应状态。它会汇总人口规模、响应等级和 Crisis，生成一条可读的回合代码。</p><div className="hero-actions"><a className="btn primary" href="#code">查看代码结构</a><a className="btn" href="#levels">查看响应等级</a><a className="btn" href="#crisis">查看 Crisis</a><a className="btn" href="https://github.com/qingranawa/Emergency-events" target="_blank" rel="noreferrer">GitHub / Releases</a></div><div className="hero-meta mono">核心运行时已就绪 · Event Pack 待完成</div></div></div></section>
     <nav className="dlrc-section-nav" aria-label="D-LRC 页面章节"><div className="container">{[["代码", "#code"], ["人口", "#population"], ["等级", "#levels"], ["Crisis", "#crisis"], ["FDI", "#fdi"], ["Director", "#director"], ["示例", "#example"], ["状态", "#architecture"]].map(([label, href]) => <a className="mono" href={href} key={label}>{label}</a>)}</div></nav>
     <LiveResponse states={dlrcDemoStates} demoLabel={dlrcRuntimeFacts.demoLabel} />

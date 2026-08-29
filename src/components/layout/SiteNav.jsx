@@ -10,7 +10,7 @@ export const navigation = [
 ];
 
 export function SiteNav({ page = "home", theme, onToggleTheme }) {
-  const pageLabel = { home: "首页", dlrc: "D-LRC", mechanisms: "机制" }[page] || "当前页面";
+  const pageLabel = { home: "首页", dlrc: "D-LRC", factions: "阵营", mechanisms: "机制" }[page] || "当前页面";
   const renderLink = ({ label, href, id, pending }, mobile = false) => {
     if (pending) {
       return <span className="nav-link nav-link-disabled" aria-disabled="true" key={`${mobile ? "mobile-" : ""}${id}`}><span>{label}</span><small>待开放</small></span>;

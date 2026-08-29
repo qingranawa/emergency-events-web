@@ -55,3 +55,99 @@
 @media (max-width: 1080px) { .qualification-pipeline { grid-template-columns: 1fr; gap: 0; }.pipeline-stage.evaluate, .pipeline-stage.revalidate, .pipeline-stage.commit { margin-top: 0; }.pipeline-flow { width: 100%; min-height: 38px; }.pipeline-flow::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: var(--line-strong); }.pipeline-flow::after { top: auto; right: auto; bottom: 1px; left: 50%; transform: translateX(-50%) rotate(135deg); }.pipeline-flow span { display: none; }.faction-track { --carousel-scale-range: .10; --carousel-opacity-range: .24; }.faction-track .system-card { flex-basis: 43%; } }
 @media (max-width: 900px) { .story-row { grid-template-columns: 1fr; }.story-row.reverse .story-copy, .story-row.reverse .story-visual { order: initial; }.story-visual, .story-row.reverse .story-visual { border-top: 1px solid var(--line); border-right: 0; border-left: 0; }.timeline { grid-template-columns: 1fr; }.timeline::before { top: 0; right: auto; bottom: 0; left: 7px; width: 1px; height: auto; }.time-node { padding: 0 0 0 34px; }.time-node::before { top: 18px; left: 0; }.round-context { grid-template-columns: 1fr; }.architecture-map { grid-template-columns: 1fr; }.architecture-link { width: 1px; height: 44px; margin: auto; }.architecture-link::after { content: "⌄"; top: 14px; right: -9px; }.snapshot { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }.snapshot-item.profile { grid-column: 1 / -1; grid-row: auto; min-height: 190px; }.snapshot-item.response, .snapshot-item.tests, .snapshot-item.factions, .snapshot-item.events { grid-column: auto; grid-row: auto; }.word-block.feature, .word-block.big, .word-block.med, .word-block.small { grid-column: span 6; } }
 @media (max-width: 720px) { .faction-track { --carousel-scale-range: .06; --carousel-opacity-range: .14; gap: 6px; }.faction-track .system-card { flex-basis: 85%; }.story-copy { padding: 28px; }.story-copy h3 { font-size: 26px; }.story-visual { min-height: 260px; }.pipeline-stage { padding: 21px; }.pipeline-stage.observe { min-height: 270px; }.pipeline-stage.evaluate { min-height: 248px; }.pipeline-stage.qualify { min-height: 242px; }.pipeline-stage.revalidate { min-height: 214px; }.pipeline-stage.commit { min-height: 170px; }.word-block.feature, .word-block.big, .word-block.med, .word-block.small { grid-column: span 12; }.status-row { grid-template-columns: 1fr; gap: 8px; }.state { justify-self: start; }.download-panel { display: block; }.download-actions { margin-top: 24px; } }
+
+@keyframes home-section-enter {
+  from { opacity: .01; transform: translate3d(0, 20px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes home-card-enter {
+  from { opacity: .08; transform: translate3d(0, 18px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes home-side-enter {
+  from { opacity: .08; transform: translate3d(22px, 0, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes home-signal-draw {
+  from { opacity: .18; transform: scaleX(0); }
+  to { opacity: 1; transform: scaleX(1); }
+}
+
+@keyframes home-focus-glow {
+  0%, 100% { box-shadow: 0 0 0 0 transparent; }
+  46% { box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 28%, transparent), 0 0 30px color-mix(in srgb, var(--accent) 13%, transparent); }
+}
+
+.home-page > section.scroll-reveal-visible .section-head > * { animation: home-section-enter var(--motion-section) var(--motion-ease-expo) both; }
+.home-page > section.scroll-reveal-visible .section-head > .section-desc { animation-delay: 90ms; }
+
+.home-page > .hero.scroll-reveal-visible .eyebrow { animation: home-section-enter 360ms var(--motion-ease-expo) both; }
+.home-page > .hero.scroll-reveal-visible h1 { animation: home-section-enter var(--motion-hero) var(--motion-ease-expo) 60ms both; }
+.home-page > .hero.scroll-reveal-visible .hero-desc { animation: home-section-enter var(--motion-section) var(--motion-ease-expo) 145ms both; }
+.home-page > .hero.scroll-reveal-visible .hero-actions { animation: home-section-enter var(--motion-section) var(--motion-ease-expo) 210ms both; }
+.home-page > .hero.scroll-reveal-visible .hero-meta { animation: home-section-enter var(--motion-section) var(--motion-ease-expo) 270ms both; }
+.home-page > .hero.scroll-reveal-visible .director-panel { animation: home-side-enter var(--motion-hero) var(--motion-ease-expo) 155ms both; }
+.home-page > .hero.scroll-reveal-visible .decision-list li { animation: home-card-enter 340ms var(--motion-ease-expo) calc(250ms + var(--home-item-delay, 0ms)) both; }
+.home-page > .hero.scroll-reveal-visible .decision-list li:nth-child(2) { --home-item-delay: 45ms; }
+.home-page > .hero.scroll-reveal-visible .decision-list li:nth-child(3) { --home-item-delay: 90ms; }
+.home-page > .hero.scroll-reveal-visible .decision-list li:nth-child(4) { --home-item-delay: 135ms; }
+.home-page > .hero.scroll-reveal-visible .decision-list li:nth-child(5) { --home-item-delay: 180ms; }
+
+.home-page > #factions.scroll-reveal-visible .faction-carousel { animation: home-section-enter var(--motion-section) var(--motion-ease-expo) 120ms both; }
+.home-page > #factions.scroll-reveal-visible .faction-track .system-card:nth-child(3) { animation: home-focus-glow 900ms var(--motion-ease-expo) 360ms both; }
+.home-page > #events.scroll-reveal-visible .story-row { animation: home-card-enter var(--motion-section) var(--motion-ease-expo) both; }
+.home-page > #events.scroll-reveal-visible .story-row:nth-child(2) { animation-delay: 90ms; }
+.home-page > #events.scroll-reveal-visible .story-row:nth-child(3) { animation-delay: 180ms; }
+.home-page > #events.scroll-reveal-visible .story-visual .ghost { transform-origin: center; animation: home-signal-draw 520ms var(--motion-ease-expo) 160ms both; }
+
+.home-page > section.scroll-reveal-visible .time-node { animation: home-card-enter var(--motion-section) var(--motion-ease-expo) both; }
+.home-page > section.scroll-reveal-visible .time-node:nth-child(2) { animation-delay: 70ms; }
+.home-page > section.scroll-reveal-visible .time-node:nth-child(3) { animation-delay: 140ms; }
+.home-page > section.scroll-reveal-visible .time-node:nth-child(4) { animation-delay: 210ms; }
+.home-page > section.scroll-reveal-visible .time-node:nth-child(5) { animation-delay: 280ms; }
+.home-page > section.scroll-reveal-visible .timeline::before { transform-origin: left; animation: home-signal-draw var(--motion-hero) var(--motion-ease-expo) both; }
+.home-page > section.scroll-reveal-visible .round-context-item { animation: home-card-enter 380ms var(--motion-ease-expo) both; }
+.home-page > section.scroll-reveal-visible .round-context-item:nth-child(2) { animation-delay: 70ms; }
+.home-page > section.scroll-reveal-visible .round-context-item:nth-child(3) { animation-delay: 140ms; }
+.home-page > section.scroll-reveal-visible .round-context-item:nth-child(4) { animation-delay: 210ms; }
+
+.home-page > section.scroll-reveal-visible .pipeline-stage { animation: home-card-enter var(--motion-section) var(--motion-ease-expo) both; }
+.home-page > section.scroll-reveal-visible .pipeline-stage:nth-child(3) { animation-delay: 70ms; }
+.home-page > section.scroll-reveal-visible .pipeline-stage:nth-child(5) { animation-delay: 140ms; }
+.home-page > section.scroll-reveal-visible .pipeline-stage:nth-child(7) { animation-delay: 210ms; }
+.home-page > section.scroll-reveal-visible .pipeline-stage:nth-child(9) { animation-delay: 280ms; }
+.home-page > section.scroll-reveal-visible .pipeline-stage.qualify, .home-page > section.scroll-reveal-visible .pipeline-stage.commit { animation-name: home-card-enter, home-focus-glow; animation-duration: var(--motion-section), 820ms; animation-delay: 140ms, 400ms; }
+.home-page > section.scroll-reveal-visible .pipeline-flow span { transform-origin: left; animation: home-signal-draw 360ms var(--motion-ease-expo) both; }
+
+.home-page > #systems.scroll-reveal-visible .architecture-node { animation: home-card-enter var(--motion-section) var(--motion-ease-expo) both; }
+.home-page > #systems.scroll-reveal-visible .architecture-column:last-child .architecture-node { animation-delay: 120ms; }
+.home-page > #systems.scroll-reveal-visible .architecture-center { animation: home-card-enter var(--motion-hero) var(--motion-ease-expo) 150ms both, home-focus-glow 940ms var(--motion-ease-expo) 360ms both; }
+.home-page > #systems.scroll-reveal-visible .architecture-link { transform-origin: left; animation: home-signal-draw 440ms var(--motion-ease-expo) 250ms both; }
+
+.home-page > .snapshot-section.scroll-reveal-visible .snapshot-item { animation: home-card-enter var(--motion-section) var(--motion-ease-expo) both; }
+.home-page > .snapshot-section.scroll-reveal-visible .snapshot-item:nth-child(2) { animation-delay: 70ms; }
+.home-page > .snapshot-section.scroll-reveal-visible .snapshot-item:nth-child(3) { animation-delay: 140ms; }
+.home-page > .snapshot-section.scroll-reveal-visible .snapshot-item:nth-child(4) { animation-delay: 210ms; }
+.home-page > .snapshot-section.scroll-reveal-visible .snapshot-item:nth-child(5) { animation-delay: 280ms; }
+.home-page > .snapshot-section.scroll-reveal-visible .snapshot-item.profile { animation-name: home-card-enter, home-focus-glow; animation-duration: var(--motion-section), 900ms; animation-delay: 0ms, 330ms; }
+.home-page > section.scroll-reveal-visible .word-block { animation: home-card-enter var(--motion-section) var(--motion-ease-expo) both; }
+.home-page > section.scroll-reveal-visible .word-block:nth-child(2) { animation-delay: 60ms; }
+.home-page > section.scroll-reveal-visible .word-block:nth-child(3) { animation-delay: 120ms; }
+.home-page > section.scroll-reveal-visible .word-block:nth-child(4) { animation-delay: 180ms; }
+.home-page > section.scroll-reveal-visible .word-block:nth-child(5) { animation-delay: 240ms; }
+.home-page > section.scroll-reveal-visible .word-block:nth-child(6) { animation-delay: 300ms; }
+.home-page > section.scroll-reveal-visible .word-block:nth-child(7) { animation-delay: 360ms; }
+.home-page > section.scroll-reveal-visible .word-block:nth-child(8) { animation-delay: 420ms; }
+.home-page > section.scroll-reveal-visible .status-row { animation: home-card-enter 340ms var(--motion-ease-expo) both; }
+.home-page > section.scroll-reveal-visible .status-row:nth-child(2) { animation-delay: 60ms; }
+.home-page > section.scroll-reveal-visible .status-row:nth-child(3) { animation-delay: 120ms; }
+.home-page > section.scroll-reveal-visible .status-row:nth-child(4) { animation-delay: 180ms; }
+.home-page > section.scroll-reveal-visible .engineering-strip { animation: home-section-enter var(--motion-section) var(--motion-ease-expo) 220ms both; }
+.home-page > #download.scroll-reveal-visible .download-panel { animation: home-section-enter var(--motion-hero) var(--motion-ease-expo) both, home-focus-glow 920ms var(--motion-ease-expo) 260ms both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .home-page .section-head *, .home-page .hero *, .home-page .faction-carousel *, .home-page .story-row, .home-page .time-node, .home-page .round-context-item, .home-page .pipeline-stage, .home-page .pipeline-flow span, .home-page .architecture-map *, .home-page .snapshot-item, .home-page .word-block, .home-page .status-row, .home-page .engineering-strip, .home-page .download-panel { animation: none !important; }
+}

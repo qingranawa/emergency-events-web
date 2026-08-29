@@ -1,10 +1,10 @@
 import { fdiMechanismFacts } from "../../data/mechanisms";
 
 export function FdiSection() {
-  return <div className="fdi-history" data-scroll-reveal>
+  return <div className="fdi-history" data-scroll-reveal data-motion="signal">
     <div className="fdi-trace" aria-label="FDI 历史状态流程">
       <div className="fdi-trace-line" aria-hidden="true" />
-      {fdiMechanismFacts.formula.filter((item) => !["+", "−", "→"].includes(item)).map((item, index) => <div className={`fdi-trace-point point-${index + 1}`} data-scroll-reveal key={item}><span className="fdi-trace-marker" aria-hidden="true" /><strong>{item}</strong><small className="mono">{index === 0 ? "HISTORY" : index === 1 ? "DELTA" : index === 2 ? "RECOVERY" : "CURRENT"}</small></div>)}
+      {fdiMechanismFacts.formula.filter((item) => !["+", "−", "→"].includes(item)).map((item, index) => <div className={`fdi-trace-point point-${index + 1}`} style={{ "--motion-delay": `${index * 110 + 140}ms` }} key={item}><span className="fdi-trace-marker" aria-hidden="true" /><strong>{item}</strong><small className="mono">{index === 0 ? "HISTORY" : index === 1 ? "DELTA" : index === 2 ? "RECOVERY" : "CURRENT"}</small></div>)}
     </div>
     <div className="fdi-history-grid">
       <article><span className="mono">首次结算</span><p>{fdiMechanismFacts.initial}</p></article>

@@ -1,18 +1,17 @@
 import { useEffect } from "react";
 import { useReducedMotion } from "./useReducedMotion";
 
-export function useScrollReveal(rootRef) {
+export function useScrollReveal(rootRef, selector = "[data-scroll-reveal]") {
   const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     const root = rootRef.current;
     if (!root || reducedMotion) return undefined;
 
-    const targets = [...root.querySelectorAll("[data-scroll-reveal]")];
+    const targets = [...root.querySelectorAll(selector)];
     if (!targets.length) return undefined;
-    targets.forEach((target, index) => {
+    targets.forEach((target) => {
       target.classList.add("scroll-reveal-ready");
-      target.style.setProperty("--reveal-delay", `${Math.min(index, 8) * 35}ms`);
     });
 
     const observer = new IntersectionObserver((entries) => {
@@ -25,5 +24,5 @@ export function useScrollReveal(rootRef) {
     targets.forEach((target) => observer.observe(target));
 
     return () => observer.disconnect();
-  }, [reducedMotion, rootRef]);
+  }, [reducedMotion, rootRef, selector]);
 }

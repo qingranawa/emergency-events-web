@@ -5,9 +5,9 @@ export function RoundCoreSection() {
   const [selectedTier, setSelectedTier] = useState("C");
   const selectedProfile = populationProfiles.find((profile) => profile.tier === selectedTier) || populationProfiles[0];
 
-  return <div className="round-core-layout" data-scroll-reveal>
+  return <div className="round-core-layout" data-scroll-reveal data-motion="sequence">
     <div className="round-core-sequence" aria-label="Round Core 生命周期">
-      {roundCoreFacts.sequence.map(([state, detail], index) => <div className="round-core-step" data-scroll-reveal key={state}>
+      {roundCoreFacts.sequence.map(([state, detail], index) => <div className="round-core-step" style={{ "--motion-delay": `${index * 78}ms` }} key={state}>
         <span className="round-core-step-index mono">0{index + 1}</span>
         <i className="round-core-dot" aria-hidden="true" />
         <strong>{state}</strong>

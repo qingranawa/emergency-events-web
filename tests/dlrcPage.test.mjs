@@ -53,3 +53,12 @@ test("共享导航不把未制作页面伪装成锚点或死路由", () => {
   assert.doesNotMatch(navSource, /home: "#factions"/);
   assert.doesNotMatch(navSource, /home: "#events"/);
 });
+
+test("阵营页面拥有独立 MPA 入口与完整章节锚点", () => {
+  const pageSource = readFileSync(new URL("../factions.html", import.meta.url), "utf8");
+  const appSource = readFileSync(new URL("../src/components/factions/FactionsApp.jsx", import.meta.url), "utf8");
+  assert.match(pageSource, /src\/factions-main\.jsx/);
+  assert.match(appSource, /<FactionRelationshipMap \/>/);
+  assert.match(appSource, /<FactionComparison \/>/);
+  assert.match(appSource, /<FactionSources \/>/);
+});

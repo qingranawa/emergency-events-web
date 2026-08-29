@@ -1,0 +1,5 @@
+import { uiuRows } from "../../data/factionsArchive";
+
+export function UiuSection() {
+  return <section id="uiu" className="faction-section" data-scroll-reveal><div className="container"><div className="section-head"><div><div className="section-kicker mono">05 / FEDERAL UNIT</div><h2 className="section-title">FBI / UIU</h2></div><p className="section-desc">UIU 是 FBI 体系内处理异常事件的单位，属于政府执法结构，不是与基金会平行的超国家组织。</p></div><div className="uiu-layout"><div className="uiu-hierarchy"><div className="uiu-level"><span className="mono">01</span><strong>UNITED STATES GOVERNMENT</strong></div><div className="uiu-arrow">↓</div><div className="uiu-level"><span className="mono">02</span><strong>FEDERAL BUREAU OF INVESTIGATION</strong></div><div className="uiu-arrow">↓</div><div className="uiu-level uiu-level-focus"><span className="mono">03</span><strong>UNUSUAL INCIDENTS UNIT</strong></div></div><div className="uiu-notes">{uiuRows.map((row) => <article key={row.code}><span className="mono">{row.code}</span><h3>{row.title}</h3><p>{row.text}</p></article>)}</div></div></div></section>;
+}

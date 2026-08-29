@@ -11,7 +11,7 @@ export function DlrcSection() {
   const [activePart, setActivePart] = useState("level");
   const selectedPart = codeParts.find((part) => part.id === activePart) || codeParts[1];
 
-  return <div className="dlrc-spotlight" data-scroll-reveal>
+  return <div className="dlrc-spotlight" data-scroll-reveal data-motion="code">
     <div className="dlrc-code-stage">
       <span className="dlrc-code-kicker mono">FORMAT EXAMPLE · SCHEMATIC</span>
       <div className="dlrc-code-display" aria-label="D-LRC 代码示例">
