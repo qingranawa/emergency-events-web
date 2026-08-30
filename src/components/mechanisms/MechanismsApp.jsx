@@ -40,7 +40,7 @@ export function MechanismsApp() {
             </div>
             <section id="overview" data-scroll-reveal>
               <div className="container">
-                <SectionHeader kicker="01 / RUNTIME OVERVIEW" title="一局游戏中的 Emergency Events" description="从回合开始到记录结果，所有模块都围绕同一份回合事实协作。" />
+                <SectionHeader kicker="01 / RUNTIME OVERVIEW" title="一局游戏中的 Emergency Events D-LRC 评估" description="从回合开始到记录结果，所有模块都围绕同一份回合事实协作。" />
                 <RuntimeFlow />
               </div>
             </section>

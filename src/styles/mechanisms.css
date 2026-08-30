@@ -344,8 +344,16 @@
 .crisis-console::before { content: ""; position: absolute; top: 0; right: 0; left: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--line-strong), transparent); opacity: .7; }
 .crisis-console-head { display: flex; justify-content: space-between; gap: 18px; padding-bottom: 16px; color: var(--text-dim); font-size: 10px; letter-spacing: 1.4px; }
 .crisis-detector-dot { width: 7px; height: 7px; border: 1px solid var(--text-dim); border-radius: 50%; }
-.mechanism-disclosure summary { grid-template-columns: 14px 54px 1fr auto; }
+.mechanism-disclosure summary { grid-template-columns: 14px 54px 1fr auto 22px; }
+.mechanism-disclosure summary:focus-visible { outline: 1px solid var(--success); outline-offset: 4px; }
+.crisis-disclosure-hint { display: inline-grid; width: 20px; height: 20px; place-items: center; color: var(--text-dim); font: 18px/1 "SFMono-Regular", Consolas, monospace; transition: color var(--motion-fast) ease, transform var(--motion-fast) ease; }
+.mechanism-disclosure summary:hover .crisis-disclosure-hint, .mechanism-disclosure summary:focus-visible .crisis-disclosure-hint, .mechanism-disclosure[open] .crisis-disclosure-hint { color: var(--warning); }
+.mechanism-disclosure[open] .crisis-disclosure-hint { transform: rotate(90deg); }
+@media (max-width: 600px) { .mechanism-disclosure summary { grid-template-columns: 14px 42px 1fr 22px; } }
 .mechanism-disclosure summary:hover .crisis-detector-dot, .mechanism-disclosure[open] summary .crisis-detector-dot { border-color: var(--warning); background: var(--warning); }
+.crisis-note { display: flex; align-items: baseline; gap: 14px; margin: 22px 0 0; padding: 13px 16px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); border-left: 2px solid var(--warning); background: var(--accent-soft); color: var(--text-soft); font-size: 12px; line-height: 1.65; }
+.crisis-note-label { flex: 0 0 auto; color: var(--warning); font-size: 9px; letter-spacing: 1.2px; }
+@media (max-width: 600px) { .crisis-note { display: grid; gap: 7px; } }
 
 .fdi-history { padding-top: 16px; }
 .fdi-trace { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; min-height: 170px; padding: 35px 0 0; border-top: 1px solid var(--line-strong); border-bottom: 1px solid var(--line); }
