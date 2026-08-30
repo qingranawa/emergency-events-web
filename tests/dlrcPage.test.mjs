@@ -33,6 +33,34 @@ test("D-LRC 页面数据标记模拟内容与运行时边界", () => {
   assert.equal(dlrcRuntimeFacts.o4Status, "DEFERRED BY DESIGN");
 });
 
+test("LiveResponse 使用单一可清理定时器和合成层进度动画", () => {
+  const source = readFileSync(new URL("../src/components/dlrc/LiveResponse.jsx", import.meta.url), "utf8");
+  const styles = readFileSync(new URL("../src/styles/dlrc.css", import.meta.url), "utf8");
+  assert.doesNotMatch(source, /setInterval/);
+  assert.match(source, /setTimeout/);
+  assert.match(source, /clearTimeout/);
+  assert.match(source, /progress-fill/);
+  assert.doesNotMatch(styles, /\.dlrc-page > \.live-code-section\.scroll-reveal-visible \.dlrc-code \{ animation: dlrc-code-enter[^}]* both;/);
+});
+
+test("LiveResponse 提供逐位滚轮、危机切换和 Spring Fill 动效", () => {
+  const source = readFileSync(new URL("../src/components/dlrc/LiveResponse.jsx", import.meta.url), "utf8");
+  const styles = readFileSync(new URL("../src/styles/dlrc.css", import.meta.url), "utf8");
+  assert.match(source, /OdometerDigit/);
+  assert.match(source, /direction=\"up\"/);
+  assert.match(source, /direction=\"down\"/);
+  assert.match(source, /CrisisCodeTransition/);
+  assert.match(source, /is-springing/);
+  assert.match(styles, /@keyframes dlrc-odometer-up/);
+  assert.match(styles, /@keyframes dlrc-odometer-down/);
+  assert.match(styles, /@keyframes dlrc-crisis-enter/);
+  assert.match(styles, /@keyframes dlrc-spring-fill/);
+  assert.match(styles, /dlrc-odometer-up-out 720ms/);
+  assert.match(styles, /dlrc-spring-fill 780ms/);
+  assert.match(styles, /\.dlrc-code \{ display: inline-flex; align-items: center; min-height: 1em/);
+  assert.match(styles, /white-space: nowrap/);
+});
+
 test("机制页使用独立入口并覆盖完整运行链路", () => {
   assert.deepEqual(mechanismSections.map((section) => section.id), [
     "overview", "round-core", "reinforcement", "dlrc", "crisis", "fdi", "director", "event-pack", "architecture", "lifecycle", "configuration", "commands", "telemetry", "source", "status",
@@ -52,6 +80,14 @@ test("共享导航不把未制作页面伪装成锚点或死路由", () => {
   assert.match(navSource, /id: "events"[\s\S]*pending: true/);
   assert.doesNotMatch(navSource, /home: "#factions"/);
   assert.doesNotMatch(navSource, /home: "#events"/);
+});
+
+test("共享导航使用抠图标记并保留圆角边框", () => {
+  const navSource = readFileSync(new URL("../src/components/layout/SiteNav.jsx", import.meta.url), "utf8");
+  const styles = readFileSync(new URL("../src/styles/base.css", import.meta.url), "utf8");
+  assert.match(navSource, /emergency-events-mark\.png/);
+  assert.match(styles, /\.logo \{[^}]*padding: 4px[^}]*border-radius: 12px/);
+  assert.match(styles, /\.logo img \{[^}]*object-fit: contain[^}]*border-radius: 7px/);
 });
 
 test("阵营页面拥有独立 MPA 入口与完整章节锚点", () => {
