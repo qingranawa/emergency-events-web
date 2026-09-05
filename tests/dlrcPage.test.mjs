@@ -90,6 +90,22 @@ test("共享导航使用抠图标记并保留圆角边框", () => {
   assert.match(styles, /\.logo img \{[^}]*object-fit: contain[^}]*border-radius: 7px/);
 });
 
+test("共享导航将 GitHub 作为带图标的右侧操作入口", () => {
+  const navSource = readFileSync(new URL("../src/components/layout/SiteNav.jsx", import.meta.url), "utf8");
+  const styles = readFileSync(new URL("../src/styles/base.css", import.meta.url), "utf8");
+  assert.match(navSource, /className="github-action"/);
+  assert.match(navSource, /assets\/github\.svg/);
+  assert.doesNotMatch(navSource, /desktop-nav[\s\S]*nav-github/);
+  assert.match(styles, /\.github-action \{/);
+});
+
+test("共享导航使用较小字号且不显示当前页横线", () => {
+  const tokens = readFileSync(new URL("../src/styles/tokens.css", import.meta.url), "utf8");
+  const styles = readFileSync(new URL("../src/styles/base.css", import.meta.url), "utf8");
+  assert.match(tokens, /--nav-link-font-size: 16px/);
+  assert.doesNotMatch(styles, /\.nav-link\.is-current::after/);
+});
+
 test("阵营页面拥有独立 MPA 入口与完整章节锚点", () => {
   const pageSource = readFileSync(new URL("../factions.html", import.meta.url), "utf8");
   const appSource = readFileSync(new URL("../src/components/factions/FactionsApp.jsx", import.meta.url), "utf8");
