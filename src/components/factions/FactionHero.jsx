@@ -6,7 +6,7 @@ export function FactionHero() {
       <div>
         <span className="eyebrow mono">阵营参考 / 世界观资料</span>
         <h1>阵营<span>和行动单位</span></h1>
-        <p className="hero-desc">这里介绍 Emergency Events 可能接触到的组织、行动单位和异常实体。资料页不等于已经上线的生产事件。</p>
+        <p className="hero-desc">这里介绍 Emergency Events 可能接触到的组织、行动单位和异常实体；生产玩法状态见开发进度。</p>
       </div>
       <div className="factions-index-panel" aria-label="阵营索引">
         <span className="mono panel-label">页面目录</span>

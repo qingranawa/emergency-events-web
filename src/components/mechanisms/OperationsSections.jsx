@@ -13,7 +13,7 @@ export function ConfigurationSection() {
 }
 
 export function CommandsSection() {
-  return <div className="commands-layout"><div className="command-terminal-large"><span className="mono">服主查询 / ee</span><code>ee dlrc stage full</code><code>ee disorder explain</code><code>ee wave cap</code><small>需要服主权限；`ee test` 只是诊断入口，不会创建正式事件。</small></div><div className="command-list-large">{commandRows.map(([command, purpose]) => <div key={command}><code>{command}</code><span>{purpose}</span><b className="mono">可用</b></div>)}</div></div>;
+  return <div className="commands-layout"><div className="command-terminal-large"><span className="mono">服主查询 / ee</span><code>ee dlrc stage full</code><code>ee disorder explain</code><code>ee wave cap</code><small>需要服主权限；`ee test` 仅用于诊断，正式事件由生产内容提供。</small></div><div className="command-list-large">{commandRows.map(([command, purpose]) => <div key={command}><code>{command}</code><span>{purpose}</span><b className="mono">可用</b></div>)}</div></div>;
 }
 
 export function TelemetrySection() {

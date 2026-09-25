@@ -95,7 +95,7 @@ export const populationProfiles = [
 export const reinforcementFacts = {
   retained: ["MTF / CI 阵营决定", "原版影响力和增援令牌", "原版计时和玩家选择", "职业组成、装备和实际出生流程"],
   emergency: ["关闭小波次策略", "给原版增援结果套用人数上限", "记录实际出生成员、阵营、完成时间和波次历史", "成功波次完成后延长一次计时，并通知下游重新观察"],
-  capNote: "人数上限只是这一波最多允许进入的人数，不是必须刷满的目标；原版只选出 4 人时，上限是 8 也只会出生 4 人。",
+  capNote: "人数上限表示这一波最多允许进入的人数；原版只选出 4 人时，上限是 8 也只会出生 4 人。",
   timerNote: "一次性延长只影响当前计时，不会永久改下一波的基础间隔。",
   source: "Reinforcement/ReinforcementManager.cs · Reinforcement/PrimaryWavePolicy.cs · Reinforcement/MajorWaveHistory.cs",
 };

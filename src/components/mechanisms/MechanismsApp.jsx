@@ -40,49 +40,49 @@ export function MechanismsApp() {
             </div>
             <section id="overview" data-scroll-reveal>
               <div className="container">
-                <SectionHeader kicker="01 / 一局怎么走" title="从开局到候选，插件经过哪些步骤" description="插件围绕同一份回合记录工作：先接管，再记录，再判断，最后在开始前复核。" />
+                <SectionHeader kicker="01 / 运行流程" title="运行流程" description="从回合接管、事实记录、状态判断到候选复核，按顺序查看插件的运行链路。" />
                 <RuntimeFlow />
               </div>
             </section>
             <section id="round-core" data-scroll-reveal>
               <div className="container">
-                <SectionHeader kicker="02 / 回合核心" title="这一局要不要接管" description="人数达到最低要求后，回合核心锁定本局人数档位和开局编制；人数不够就继续走原版流程。" />
+                <SectionHeader kicker="02 / 回合核心" title="回合核心" description="判断是否接管本局，锁定人数档位和开局编制，并负责回合生命周期。" />
                 <RoundCoreSection />
               </div>
             </section>
             <section id="reinforcement" data-scroll-reveal>
               <div className="container">
-                <SectionHeader kicker="03 / 原版增援" title="原版增援还是原版负责" description="插件不替原版决定谁出生，只记录实际波次，并在规定边界内应用人数上限。" />
+                <SectionHeader kicker="03 / 原版增援" title="原版增援接入" description="保留原版阵营、职业、装备、玩家选择和出生流程，插件记录实际波次并应用人数上限。" />
                 <ReinforcementSection />
               </div>
             </section>
             <section id="dlrc" data-scroll-reveal>
               <div className="container">
-                <SectionHeader kicker="04 / 响应判断" title="系统怎样判断这一局的压力" description="它会综合 SCP、基金会、增援、时间和战略危险，得到响应分数和最终响应等级。" />
+                <SectionHeader kicker="04 / 响应判断" title="D-LRC Evaluator" description="读取 SCP、基金会、增援、时间和战略危险，计算响应分数、局面状态和最终响应等级。" />
                 <DlrcSection />
               </div>
             </section>
             <section id="crisis" data-scroll-reveal>
               <div className="container">
-                <SectionHeader kicker="05 / 危机识别" title="危机只回答：现在发生了吗" description="系统分别检查七类危机，记录它们什么时候开始、持续多久、什么时候结束。" />
+                <SectionHeader kicker="05 / 危机识别" title="Crisis System" description="七类危机检查器读取同一份回合记录，维护危机状态和每次危机的编号。" />
                 <CrisisSection />
               </div>
             </section>
             <section id="fdi" data-scroll-reveal>
               <div className="container">
-                <SectionHeader kicker="06 / 设施记录" title="设施发生过什么，会留下记录" description="设施失序记录保存历史变化，只会临时影响普通支援从哪个来源产生。" />
+                <SectionHeader kicker="06 / 设施记录" title="FDI · Facility Disorder Index" description="用 0–100 表示设施秩序状态，读取当前设施存量和最近事件变化，为普通支援来源选择提供输入。" />
                 <FdiSection />
               </div>
             </section>
             <section id="director" data-scroll-reveal>
               <div className="container">
-                <SectionHeader kicker="07 / 事件筛选" title="谁来决定候选能不能开始" description="事件筛选器检查条件、安排人数、生成候选，并在真正开始前重新确认；它不负责具体装备和出生点。" />
+                <SectionHeader kicker="07 / 事件筛选" title="Event Director" description="读取已确认的回合事实，检查事件条件、人数计划、来源和生命周期，并在启动前重新确认。" />
                 <DirectorSection />
               </div>
             </section>
             <section id="event-pack" data-scroll-reveal>
               <div className="container">
-                <SectionHeader kicker="08 / 内容边界" title="正式事件内容还在后面" description="未来的事件内容包负责角色、装备、出生点和实际执行；当前正式生产内容还没有制作。" />
+                <SectionHeader kicker="08 / 内容边界" title="Event Pack" description="事件内容包负责角色、装备、出生点和实际执行；当前正式生产内容数量为 0。" />
                 <EventPackSection />
               </div>
             </section>
@@ -95,13 +95,13 @@ export function MechanismsApp() {
             </div>
             <section id="architecture" data-scroll-reveal>
               <div className="container">
-                <SectionHeader kicker="09 / 模块关系" title="每个模块只管一件事" description="上游记录事实，下游读取结果，不在不同地方重复计算同一件事。" />
+                <SectionHeader kicker="09 / 模块关系" title="模块关系" description="上游模块发布事实，下游模块读取结果，状态在模块之间按边界传递。" />
                 <ArchitectureSection />
               </div>
             </section>
             <section id="lifecycle" data-scroll-reveal>
               <div className="container">
-                <SectionHeader kicker="10 / 一局生命周期" title="从加载到清理" description="插件加载、等待玩家、回合开始、持续判断和回合结束，都有清楚的清理边界。" />
+                <SectionHeader kicker="10 / 一局生命周期" title="Runtime Lifecycle" description="展示插件加载、等待玩家、回合开始、持续判断、回合结束和插件关闭的状态变化。" />
                 <LifecycleSection />
               </div>
             </section>
@@ -114,31 +114,31 @@ export function MechanismsApp() {
             </div>
             <section id="configuration" data-scroll-reveal>
               <div className="container">
-                <SectionHeader kicker="11 / 配置" title="影响行为的几个数字" description="这里只列最低人数、首次判断、更新间隔和设施记录窗口，不把整份配置搬过来。" />
+                <SectionHeader kicker="11 / 配置" title="关键配置" description="列出最低人数、首次判断、更新间隔、设施记录窗口和 Telemetry 容量。" />
                 <ConfigurationSection />
               </div>
             </section>
             <section id="commands" data-scroll-reveal>
               <div className="container">
-                <SectionHeader kicker="12 / 服主命令" title="可以查什么" description="这些命令用于查看状态和诊断；测试入口不会凭空创建正式事件。" />
+                <SectionHeader kicker="12 / 服主命令" title="RemoteAdmin Commands" description="列出当前可用的状态查询、响应判断、危机和设施记录命令。" />
                 <CommandsSection />
               </div>
             </section>
             <section id="telemetry" data-scroll-reveal>
               <div className="container">
-                <SectionHeader kicker="13 / 运行记录" title="只读保存判断结果" description="运行记录不参与回合决策，只把响应、危机、波次和设施变化保存下来。" />
+                <SectionHeader kicker="13 / 运行记录" title="Balance Telemetry" description="只读保存响应判断、危机、设施、增援和回合摘要。" />
                 <TelemetrySection />
               </div>
             </section>
             <section id="source" data-scroll-reveal>
               <div className="container">
-                <SectionHeader kicker="14 / 源码路径" title="想继续深挖，可以从这里开始" description="下面列出一次判断经过的源码入口，适合维护者继续追踪。" />
+                <SectionHeader kicker="14 / 源码路径" title="Source Walkthrough" description="列出一次判断经过的源码入口，供维护者继续追踪。" />
                 <SourceSection />
               </div>
             </section>
             <section id="status" data-scroll-reveal>
               <div className="container">
-                <SectionHeader kicker="15 / 当前状态" title="哪些已经能用，哪些还没有" description="运行框架、事件内容、观察者面板和真人验证分开标注，不把计划写成上线功能。" />
+                <SectionHeader kicker="15 / 当前状态" title="Module Status" description="分别标注已完成、框架完成、开发中、按设计暂缓和等待验证。" />
                 <StatusSection />
               </div>
             </section>
