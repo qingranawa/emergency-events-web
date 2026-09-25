@@ -1,7 +1,7 @@
 export const timeline = [
-  { id: "01", code: "开局", title: "回合开始", description: "安保人员、混沌渗透者和 SCP 进入设施并争夺资源。" },
-  { id: "02", code: "压力", title: "压力上升", description: "SCP 威胁、基金会损失或设施异常改变当前局面。" },
-  { id: "03", code: "危机", title: "危机达到条件", description: "某个 Crisis Detector 的条件被满足，专业响应可以进入判断。" },
-  { id: "04", code: "介入", title: "事件获得资格", description: "符合条件的专业单位或第三方事件进入候选。" },
-  { id: "05", code: "收尾", title: "结果留下影响", description: "事件结果写回回合数据，供下一次评估使用。" },
+  { id: "01", code: "开局", title: "先把这一局接进来", description: "人数达到最低要求后，插件记录开局局面并锁定人数档位。" },
+  { id: "02", code: "记录", title: "看局面怎么变化", description: "SCP 威胁、基金会伤亡、增援结果和设施异常都会留下记录。" },
+  { id: "03", code: "判断", title: "确认有没有危机", description: "危机条件成立后，系统把它记成当前局势的一部分。" },
+  { id: "04", code: "筛选", title: "看看有没有合适的响应", description: "人数、响应等级和可用人员都符合时，候选才会出现。" },
+  { id: "05", code: "收尾", title: "条件变了就停下来", description: "开始前再次复核；失败就回滚，结果留给下一次判断。" },
 ];

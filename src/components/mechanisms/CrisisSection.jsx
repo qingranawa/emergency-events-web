@@ -4,9 +4,9 @@ const crisisLabels = { BIO: "生化", SYS: "系统控制", CON: "收容", SEC: "
 
 export function CrisisSection() {
   return <div className="crisis-console" data-scroll-reveal data-motion="console">
-    <div className="crisis-console-head"><span className="mono">CRISIS DETECTOR CONSOLE</span><span className="mono">STATE / ACTIVE OR INACTIVE</span></div>
-    <div className="crisis-detector-flow"><span>RoundSnapshot</span><i aria-hidden="true">→</i><strong>CrisisManager</strong><i aria-hidden="true">→</i><span>ActiveTags + EpisodeIds</span></div>
-    <div className="crisis-accordion" aria-label="Crisis Detector 详情">{crisisFacts.map(([code, trigger], index) => <details className="mechanism-disclosure" key={code} open={index === 0}><summary><span className="crisis-detector-dot" aria-hidden="true" /><span className="mono">{code}</span><strong>{crisisLabels[code]}</strong><small className="mono">ACTIVE / INACTIVE</small><span className="crisis-disclosure-hint" aria-hidden="true">&gt;</span></summary><div><p>{trigger}</p><span className="mono">状态关系</span><p>Inactive → Active 创建新的 EpisodeId；Active → Active 保持当前 Episode；Active → Inactive 结束 Episode，再次激活会创建新的 Episode。</p></div></details>)}</div>
-    <p className="section-note crisis-note"><span className="crisis-note-label mono">READING NOTE</span><span>Crisis 没有独立 Severity 轴，L4 只表示 EventResponseLevel，不表示某类危机的等级。</span></p>
+    <div className="crisis-console-head"><span className="mono">危机识别</span><span className="mono">状态 / 发生或未发生</span></div>
+    <div className="crisis-detector-flow"><span>同一份回合记录</span><i aria-hidden="true">→</i><strong>危机判断器</strong><i aria-hidden="true">→</i><span>当前危机 + 危机编号</span></div>
+    <div className="crisis-accordion" aria-label="危机详情">{crisisFacts.map(([code, trigger], index) => <details className="mechanism-disclosure" key={code} open={index === 0}><summary><span className="crisis-detector-dot" aria-hidden="true" /><span className="mono">{code}</span><strong>{crisisLabels[code]}</strong><small className="mono">当前状态</small><span className="crisis-disclosure-hint" aria-hidden="true">&gt;</span></summary><div><p>{trigger}</p><span className="mono">状态怎么变化</span><p>危机从未发生变成发生时，会创建新的危机编号；持续发生时保持原编号；解除后结束这次危机，下次再发生会重新编号。</p></div></details>)}</div>
+    <p className="section-note crisis-note"><span className="crisis-note-label mono">请这样理解</span><span>危机没有自己的 L3/L4 等级；页面里的 L4 只表示整体响应等级。</span></p>
   </div>;
 }

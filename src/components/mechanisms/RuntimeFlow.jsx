@@ -17,7 +17,7 @@ export function RuntimeFlow() {
   const renderConnector = (index) => <div className="topology-connector" style={{ "--motion-delay": `${index * 72 + 34}ms` }} aria-hidden="true" />;
 
   return <div className="runtime-overview" data-scroll-reveal data-motion="topology">
-    <div className={`runtime-topology ${focusId ? "has-focus" : ""}`} aria-label="Emergency Events Runtime Topology">
+    <div className={`runtime-topology ${focusId ? "has-focus" : ""}`} aria-label="Emergency Events 运行拓扑图">
       <div className="topology-row">{renderNode("round-start", 0)}</div>
       {renderConnector(0)}
       <div className="topology-row">{renderNode("round-core", 1)}</div>
@@ -34,7 +34,7 @@ export function RuntimeFlow() {
       {renderConnector(6)}
       <div className="topology-row">{renderNode("event-pack", 7)}</div>
     </div>
-    <ol className="runtime-trace" aria-label="Runtime 流程索引">
+    <ol className="runtime-trace" aria-label="运行流程列表">
       {runtimeFlow.map((step) => <li data-scroll-reveal key={step.code}><span className="mono">{step.code}</span><strong>{step.title}</strong><small className="mono">{step.owner}</small></li>)}
     </ol>
   </div>;

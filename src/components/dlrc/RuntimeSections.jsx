@@ -1,15 +1,15 @@
 import { fdiFacts, evaluationCycle, qualificationSteps, directorBoundary, vanillaIntegration, runtimeFallback } from "../../data/dlrcPage";
 
 export function CrisisRelation() {
-  return <div className="crisis-relation"><div className="relation-demo mono">模拟关系 / ILLUSTRATIVE</div><div className="relation-card relation-global"><span className="mono">整体响应</span><strong>L4</strong><small>示例响应等级</small></div><div className="relation-symbol">≠</div><div className="relation-card relation-crisis"><span className="mono">Crisis 标签</span><div><b>BIO</b><i>■■■</i></div><div><b>SYS</b><i>■</i></div><div><b>SEC</b><i>■■</i></div><small>各 Detector 独立判断 Active 状态。</small></div><div className="relation-symbol">≠</div><div className="relation-card relation-fdi"><span className="mono">设施失序</span><strong>62</strong><small>示例 FDI 数值</small></div></div>;
+  return <div className="crisis-relation"><div className="relation-demo mono">模拟关系 / 只作示意</div><div className="relation-card relation-global"><span className="mono">整体响应</span><strong>L4</strong><small>示例响应等级</small></div><div className="relation-symbol">≠</div><div className="relation-card relation-crisis"><span className="mono">危机状态</span><div><b>BIO</b><i>■■■</i></div><div><b>SYS</b><i>■</i></div><div><b>SEC</b><i>■■</i></div><small>每个危机条件单独判断是否成立。</small></div><div className="relation-symbol">≠</div><div className="relation-card relation-fdi"><span className="mono">设施失序</span><strong>62</strong><small>示例记录值</small></div></div>;
 }
 
 export function FdiFlow() {
-  return <div className="fdi-flow"><div className="fdi-equation"><span>上次 FDI</span><b>+</b><span>事件 Delta</span><b>−</b><span>秩序恢复</span><b>→</b><strong>当前 FDI</strong></div><div className="fdi-details"><div><span className="mono">首次结算</span><p>{fdiFacts.initial}</p></div><div><span className="mono">后续结算</span><p>{fdiFacts.later}</p></div><div><span className="mono">区间</span><p>{fdiFacts.bands.join(" / ")} · 范围 {fdiFacts.range}</p></div><div><span className="mono">恢复条件</span><p>{fdiFacts.recovery}</p></div></div></div>;
+  return <div className="fdi-flow"><div className="fdi-equation"><span>上次记录</span><b>+</b><span>新事件变化</span><b>−</b><span>秩序恢复</span><b>→</b><strong>当前记录</strong></div><div className="fdi-details"><div><span className="mono">第一次记录</span><p>{fdiFacts.initial}</p></div><div><span className="mono">后续记录</span><p>{fdiFacts.later}</p></div><div><span className="mono">范围</span><p>{fdiFacts.bands.join(" / ")} · 范围 {fdiFacts.range}</p></div><div><span className="mono">什么时候恢复</span><p>{fdiFacts.recovery}</p></div></div></div>;
 }
 
 export function SystemRelationship() {
-  return <div className="system-relationship"><div className="system-layer"><span className="system-node">Round Core</span><span className="system-node">FDI</span><span className="system-node">Crisis</span></div><div className="system-connector">↓</div><div className="system-layer"><span className="system-node accent">D-LRC</span><span className="system-node accent">Event Director</span></div><div className="system-connector">↓</div><div className="system-layer"><span className="system-node">Population Plan</span><span className="system-node">Event Pack</span><span className="system-node">Telemetry</span></div><p className="section-note">上游数据进入 D-LRC 和 Event Director，下游分别处理人口计划、事件内容和只读记录。</p></div>;
+  return <div className="system-relationship"><div className="system-layer"><span className="system-node">回合核心</span><span className="system-node">设施记录</span><span className="system-node">危机识别</span></div><div className="system-connector">↓</div><div className="system-layer"><span className="system-node accent">响应判断</span><span className="system-node accent">事件筛选器</span></div><div className="system-connector">↓</div><div className="system-layer"><span className="system-node">人数计划</span><span className="system-node">事件内容</span><span className="system-node">运行记录</span></div><p className="section-note">上游先记录事实，中间层判断局势，最后把人数计划、事件内容和记录交给各自负责的模块。</p></div>;
 }
 
 export function EvaluationCycle() {
@@ -25,9 +25,9 @@ export function DirectorBoundary() {
 }
 
 export function VanillaIntegration() {
-  return <div className="vanilla-integration"><div className="integration-column"><span className="mono">原版 / 保留</span>{vanillaIntegration.retained.map((item) => <p key={item}><b>✓</b>{item}</p>)}</div><div className="integration-column"><span className="mono">Emergency Events / 调整范围</span>{vanillaIntegration.constrained.map((item) => <p key={item}><b>→</b>{item}</p>)}</div><div className="integration-column disabled"><span className="mono">已关闭</span>{vanillaIntegration.disabled.map((item) => <p key={item}><b>×</b>{item}</p>)}</div></div>;
+  return <div className="vanilla-integration"><div className="integration-column"><span className="mono">原版继续负责</span>{vanillaIntegration.retained.map((item) => <p key={item}><b>✓</b>{item}</p>)}</div><div className="integration-column"><span className="mono">插件只调整这些</span>{vanillaIntegration.constrained.map((item) => <p key={item}><b>→</b>{item}</p>)}</div><div className="integration-column disabled"><span className="mono">当前关闭</span>{vanillaIntegration.disabled.map((item) => <p key={item}><b>×</b>{item}</p>)}</div></div>;
 }
 
 export function RuntimeFallback() {
-  return <div className="runtime-fallback"><div className="fallback-state"><strong>15</strong><span>玩家</span><b>回到原版流程</b></div><div className="fallback-arrow">⇄</div><div className="fallback-state active"><strong>16+</strong><span>玩家</span><b>Emergency Events 已启用</b></div><p>{runtimeFallback.detail}</p></div>;
+  return <div className="runtime-fallback"><div className="fallback-state"><strong>&lt;16</strong><span>玩家</span><b>回到原版流程</b></div><div className="fallback-arrow">⇄</div><div className="fallback-state active"><strong>16+</strong><span>玩家</span><b>Emergency Events 已启用</b></div><p>{runtimeFallback.detail}</p></div>;
 }

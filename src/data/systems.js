@@ -1,24 +1,24 @@
 export const architectureGroups = {
   input: [
-    { code: "M01 / ROUND CORE", title: "Round Core", description: "管理回合、锁定 Population Profile，并处理开局条件。", status: "已完成" },
-    { code: "M05 / FDI", title: "FDI", description: "记录设施失序程度，并在后续评估中保留这段记忆。", status: "已完成" },
-    { code: "M04 / CRISIS", title: "Crisis System", description: "识别当前满足条件的 Crisis，让 Event Director 知道要回应什么。", status: "已完成" },
-    { code: "M02 / REINFORCEMENT", title: "Reinforcement Integration", description: "接入原版 Primary Wave，禁用 Mini-Wave，并应用 E/D/C/B/A 的 cap。", status: "已完成" },
+    { code: "M01 / 回合核心", title: "回合核心", description: "决定这一局是否接管，锁定开局人数档位并负责回合收尾。", status: "已完成" },
+    { code: "M04.5 / 设施记录", title: "设施失序记录", description: "记录设施秩序怎么变化，后续判断继续读取这段历史。", status: "已完成" },
+    { code: "M04 / 危机识别", title: "危机识别", description: "确认当前哪些危机条件成立，告诉事件筛选器该注意什么。", status: "已完成" },
+    { code: "M02 / 原版增援", title: "原版增援接入", description: "保留原版增援的决定和出生流程，插件只记录结果并套用人数上限。", status: "已完成" },
   ],
   output: [
-    { code: "人口输出", title: "Population Plan", description: "Population Profile 决定人数、编制和装备范围，结果留在当前档位内。", status: "E–A 档位" },
-    { code: "事件内容", title: "Event Pack", description: "Event Pack 提供职业、武器和出生点，Event Director 不直接写这些内容。", status: "架构已完成" },
-    { code: "观察 / Telemetry", title: "Telemetry", description: "记录 D-LRC Evaluation、Crisis Transition、FDI Settlement、Primary Wave 和 Round Summary。", status: "运行时可用" },
+    { code: "人数输出", title: "人数计划", description: "按当前人数档位决定候选事件需要多少人，能否缩减。", status: "E–A 档位" },
+    { code: "事件内容", title: "事件内容包", description: "未来负责职业、武器和出生点；事件筛选器不直接写这些内容。", status: "架构已完成" },
+    { code: "运行记录", title: "运行记录", description: "记录响应判断、危机变化、设施失序、增援和回合摘要。", status: "运行时可用" },
   ],
 };
 
 export const keywords = [
-  ["Multi-Faction", "同一套入口可以承接不同组织和专业单位。", "big"],
-  ["Situation-Aware", "事件资格取决于当前回合数据和 Crisis 状态。", "med"],
-  ["Population-Aware", "Population Profile 会调整事件规模、编制和装备。", "med"],
-  ["Vanilla-Friendly", "保留原版 Primary Wave，只接管插件需要调整的部分。", "small"],
-  ["Runtime Safe", "事件开始前再次检查条件，失效就取消。", "small"],
-  ["Modular", "Event Pack 和判断逻辑分开，新增内容不用改动 Event Director。", "big"],
-  ["Observable", "日志和 Telemetry 会记录系统为什么做出某个决定。", "med"],
-  ["Data-Driven", "Balance Harness 覆盖 E–A 档位、Semantic Scenarios 和多 seed。", "feature"],
+  ["多阵营", "同一个入口可以接入不同组织和专业单位。", "big"],
+  ["看局势", "事件资格取决于当前回合，而不是固定时间表。", "med"],
+  ["跟人数走", "人数档位会影响候选事件的规模和人员计划。", "med"],
+  ["保留原版", "原版增援怎么选、谁出生，仍由原版流程负责。", "small"],
+  ["安全退出", "条件在开始前失效，就取消，不留下半成品。", "small"],
+  ["各管一块", "判断和事件执行分开，新增内容不必重写整套判断。", "big"],
+  ["查得清楚", "日志会留下系统为什么做出某个判断。", "med"],
+  ["有数据可查", "自动化测试覆盖人数档位、场景和随机结果。", "feature"],
 ];

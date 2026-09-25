@@ -13,11 +13,11 @@ export function ConfigurationSection() {
 }
 
 export function CommandsSection() {
-  return <div className="commands-layout"><div className="command-terminal-large"><span className="mono">REMOTE ADMIN / ALIAS ee</span><code>ee dlrc stage full</code><code>ee disorder explain</code><code>ee wave cap</code><small>需要 emergencyevents.ra 权限；`ee test` 仅为 debug 诊断入口。</small></div><div className="command-list-large">{commandRows.map(([command, purpose]) => <div key={command}><code>{command}</code><span>{purpose}</span><b className="mono">PRODUCTION</b></div>)}</div></div>;
+  return <div className="commands-layout"><div className="command-terminal-large"><span className="mono">服主查询 / ee</span><code>ee dlrc stage full</code><code>ee disorder explain</code><code>ee wave cap</code><small>需要服主权限；`ee test` 只是诊断入口，不会创建正式事件。</small></div><div className="command-list-large">{commandRows.map(([command, purpose]) => <div key={command}><code>{command}</code><span>{purpose}</span><b className="mono">可用</b></div>)}</div></div>;
 }
 
 export function TelemetrySection() {
-  return <div className="telemetry-stream"><div className="telemetry-stream-head"><span className="mono">JSONL · schema v1 · OBSERVER ONLY</span><p>记录使用回合内 ID 和安全标签，不参与 Gameplay 决策。</p></div>{telemetryRows.map(([type, detail], index) => <div className="telemetry-row" key={type}><time className="mono">0{index + 1}:00</time><strong className="mono">{type}</strong><span>{detail}</span></div>)}</div>;
+  return <div className="telemetry-stream"><div className="telemetry-stream-head"><span className="mono">运行记录 · 只读</span><p>只记录回合内安全编号和状态，不参与回合决策。</p></div>{telemetryRows.map(([type, detail], index) => <div className="telemetry-row" key={type}><time className="mono">0{index + 1}:00</time><strong className="mono">{type}</strong><span>{detail}</span></div>)}</div>;
 }
 
 export function SourceSection() {

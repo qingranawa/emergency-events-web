@@ -75,16 +75,16 @@ export function LiveResponse({ states = [], demoLabel = "SIMULATED" }) {
               <CrisisCodeTransition key={`crisis-code-${index}`} value={getCrisisCode(current)} previousValue={getCrisisCode(previous)} animate={animate} className="crisis-code-main" />
             </div>
             <div className="code-detail">
-              <div className="tag">人口档位 · {current.population}</div>
-              <div className="tag">响应等级 · {current.response}</div>
-              <div className="tag bio" aria-label={`Crisis · ${current.primary}`}>Crisis · <CrisisCodeTransition key={`primary-${index}`} value={current.primary} previousValue={previous.primary} animate={animate} /></div>
-              <div className="tag sys" aria-label={`Crisis · ${current.secondary}`}>Crisis · <CrisisCodeTransition key={`secondary-${index}`} value={current.secondary} previousValue={previous.secondary} animate={animate} /></div>
+              <div className="tag">人口档位：{current.population}</div>
+              <div className="tag">响应等级：{current.response}</div>
+              <div className="tag bio" aria-label={`危机：${current.primary}`}>危机：<CrisisCodeTransition key={`primary-${index}`} value={current.primary} previousValue={previous.primary} animate={animate} /></div>
+              <div className="tag sys" aria-label={`危机：${current.secondary}`}>危机：<CrisisCodeTransition key={`secondary-${index}`} value={current.secondary} previousValue={previous.secondary} animate={animate} /></div>
             </div>
           </div>
           <div className="metric-panel">
             <div>
-              <div className="label mono">Response Score</div>
-              <div className="score mono" aria-label={`Response Score ${current.score} / 100`}>
+              <div className="label mono">响应分数</div>
+              <div className="score mono" aria-label={`响应分数 ${current.score} / 100`}>
                 <span className="score-value" aria-hidden="true">
                   {currentScore.split("").map((digit, digitIndex) => <OdometerDigit key={`score-${index}-${digitIndex}`} value={digit} previousValue={previousScore[digitIndex] || "0"} direction={digitIndex === 0 ? "up" : "down"} animate={animate} />)}
                 </span>
@@ -95,7 +95,7 @@ export function LiveResponse({ states = [], demoLabel = "SIMULATED" }) {
               </div>
             </div>
             <div>
-              <div className="label">ControlState</div>
+              <div className="label">局面状态</div>
               <div className="control-state">{current.state}</div>
             </div>
           </div>
