@@ -43,7 +43,7 @@ export const roleDossiers = [
   dossier({
     id: "d00341", category: "d-class", name: "D-00341 · 观察者", roleType: "D-Class Role Variant", baseRole: "ClassD", faction: "D-Class", health: "80 HP", badge: allyBadge,
     passives: ["数据直觉：周期性提示 8 米范围内可识别的钥匙卡或重要掉落物。", "具备 3 米范围内的目标门交互判定。"],
-    actives: [{ slot: "Active Slot 1", name: "过载黑客", detail: "CD 75 秒；对准符合条件的门可强制开门，并使目标减速 10 秒。" }],
+    actives: [{ slot: "Active Slot 1", name: "过载黑客", detail: "CD 75 秒；对准符合条件的门可强制开门；施放者会减速 10 秒。" }],
   }),
   dossier({
     id: "d20384", category: "d-class", name: "D-20384 · 实验狂徒", roleType: "D-Class Role Variant", baseRole: "ClassD", faction: "D-Class", health: "90 HP", badge: allyBadge,
