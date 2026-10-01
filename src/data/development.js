@@ -1,10 +1,10 @@
 export const developmentRows = [
-  ["回合运行", "负责这一局是否接管、人数档位和回合收尾。", "已完成", "ready"],
-  ["局势判断", "根据回合事实计算响应状态、危机和设施失序记录。", "等待平衡验证", "observe"],
-  ["事件筛选", "检查候选条件，开始前重新确认并安排生命周期。", "框架已完成", "ready"],
-  ["事件内容接口", "给未来的阵营、职业、装备和出生点内容预留位置。", "已完成", "ready"],
-  ["阵营内容", "正式阵营玩法仍在制作。", "开发中", "observe"],
-  ["事件内容", "正式事件包还没有发布。", "开发中", "observe"],
-  ["观察者面板", "按设计暂缓，不在当前生产事件范围内。", "按设计暂缓", "pending"],
-  ["真人服务器验证", "还没有完成真实玩家回合验证。", "等待验证", "pending"],
+  ["M01 · 回合运行", "接管资格、人口档位、opening slot quantities 与回合生命周期。", "已实现", "ready"],
+  ["M02 · 增援接入", "保留 Vanilla Primary Wave，记录真实波次事实并应用人数 ceiling。", "已实现", "ready"],
+  ["M03 / M04 / FDI", "响应评估、Crisis Episodes 与设施历史状态按独立契约运行。", "逻辑已实现 · 平衡待验证", "observe"],
+  ["M05 · Event Director", "候选资格、来源仲裁、Revalidate、Commit 与第二事件槽框架。", "框架已实现", "ready"],
+  ["M06 · O4 Panel", "有限 Foundation shortlist 选择面板与运行时接口。", "已实现 · 实服待验证", "observe"],
+  ["M07 · Gameplay Layer", "Opening identities、Role Variant、SCP augmentation、Ability、HUD、Badge、WorldEffect。", "已实现 · 313 / 313 logic tests", "ready"],
+  ["Event Pack", "生产事件 Definition、Executor 与实际玩法内容。", "开发中 · production definitions: 0", "observe"],
+  ["正式服务器验证", "SCP:SL plugin build 与 live smoke test。", "阻塞 / 待验证", "pending"],
 ];

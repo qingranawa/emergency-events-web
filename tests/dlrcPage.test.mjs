@@ -7,8 +7,10 @@ import {
   dlrcThresholds,
   primaryWaveCaps,
   dlrcRuntimeFacts,
+  architectureStatus,
+  crisisDefinitions,
 } from "../src/data/dlrcPage.js";
-import { mechanismSections, mechanismFacts } from "../src/data/mechanisms.js";
+import { mechanismNavGroups, mechanismFacts, responsibilityRows, eventPackFacts, o4Facts } from "../src/data/mechanisms.js";
 
 test("D-LRC 页面数据反映当前 Population 与 cap 契约", () => {
   assert.deepEqual(dlrcPopulationProfiles.map(({ code, min, max }) => [code, min, max]), [
@@ -30,7 +32,7 @@ test("D-LRC 页面数据标记模拟内容与运行时边界", () => {
   assert.equal(dlrcRuntimeFacts.evaluationStartSeconds, 391);
   assert.equal(dlrcRuntimeFacts.evaluationIntervalSeconds, 30);
   assert.equal(dlrcRuntimeFacts.demoLabel, "模拟示例 / SIMULATED");
-  assert.equal(dlrcRuntimeFacts.o4Status, "DEFERRED BY DESIGN");
+  assert.equal(dlrcRuntimeFacts.o4Status, "IMPLEMENTED · LIVE VALIDATION PENDING");
 });
 
 test("LiveResponse 使用单一可清理定时器和合成层进度动画", () => {
@@ -61,16 +63,41 @@ test("LiveResponse 提供逐位滚轮、危机切换和 Spring Fill 动效", () 
   assert.match(styles, /white-space: nowrap/);
 });
 
-test("机制页使用独立入口并覆盖完整运行链路", () => {
-  assert.deepEqual(mechanismSections.map((section) => section.id), [
-    "overview", "round-core", "reinforcement", "dlrc", "crisis", "fdi", "director", "event-pack", "architecture", "lifecycle", "configuration", "commands", "telemetry", "source", "status",
+test("机制页以四层架构组织完整运行链路", () => {
+  const navIds = mechanismNavGroups.flatMap((group) => group.items.map(({ id }) => id));
+  assert.deepEqual(navIds, [
+    "system-architecture", "responsibilities", "round-core", "reinforcement", "dlrc", "crisis", "fdi",
+    "director", "event-pack", "o4", "m07", "traces", "implementation-status", "lifecycle", "configuration", "commands", "telemetry", "source",
   ]);
   assert.equal(mechanismFacts.minimumPlayers, 16);
   assert.equal(mechanismFacts.evaluationStartSeconds, 391);
   assert.equal(mechanismFacts.evaluationIntervalSeconds, 30);
   assert.deepEqual(mechanismFacts.primaryWaveCaps, { E: 6, D: 6, C: 8, B: 14, A: 18 });
   assert.equal(mechanismFacts.fdiRange, "0–100");
-  assert.equal(mechanismFacts.fdiQuietWindowSeconds, 90);
+  assert.equal(mechanismFacts.fdiRecoverySeconds, 90);
+  assert.equal(mechanismFacts.testBaseline, "313 / 313");
+  assert.equal(responsibilityRows.find(({ module }) => module === "M07").excludes.includes("Mid-round reinforcement"), true);
+  assert.match(eventPackFacts.status, /production EventDefinition/);
+  assert.ok(o4Facts.status.includes("IMPLEMENTED"));
+  assert.ok(o4Facts.status.includes("LIVE VALIDATION PENDING"));
+});
+
+test("状态同步到插件当前实现而非旧的暂缓说明", () => {
+  assert.match(architectureStatus.find(([module]) => module === "M06")[2], /IMPLEMENTED/);
+  assert.match(architectureStatus.find(([module]) => module === "M07")[2], /LOGIC TESTED/);
+  assert.match(architectureStatus.find(([, module]) => module === "Event Pack")[2], /IN DEVELOPMENT/);
+  assert.match(crisisDefinitions.find(({ code }) => code === "WAR").trigger, /CrisisWarEnabled/);
+});
+
+test("首页系统图保留独立的 Gameplay Layer 与 M05/Event Pack 边界", () => {
+  const source = readFileSync(new URL("../src/components/systems/SystemArchitecture.jsx", import.meta.url), "utf8");
+  assert.match(source, /ROUND START/);
+  assert.match(source, /MID-ROUND/);
+  assert.match(source, /GAMEPLAY LAYER/);
+  assert.match(source, /M07 Role Variant/);
+  assert.match(source, /M05 Event Director/);
+  assert.match(source, /Event Pack/);
+  assert.doesNotMatch(source, /"M01 → M02 → M03/);
 });
 
 test("共享导航不把未制作页面伪装成锚点或死路由", () => {
