@@ -103,6 +103,7 @@ export function HomeApp() {
         <div className="container">
           <SectionHeader kicker="UNDER THE HOOD · SYSTEM ARCHITECTURE" title="两条运行路径，一个 Gameplay Layer" description="Round Start 分配开局身份；mid-round 保留原版增援；状态与评估汇入 M05。M07 横跨回合开局和玩家 Gameplay。" />
           <SystemArchitecture />
+          <a className="home-roles-link" href="roles.html"><span className="mono">M07 · ROLE ARCHIVE</span><strong>浏览角色档案与技能 <span aria-hidden="true">↗</span></strong></a>
         </div>
       </section>
 

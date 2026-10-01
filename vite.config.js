@@ -9,7 +9,9 @@ export default defineConfig({
       input: {
         main: "index.html",
         dlrc: "dlrc.html",
+        factions: "factions.html",
         mechanisms: "mechanisms.html",
+        roles: "roles.html",
       },
     },
   },

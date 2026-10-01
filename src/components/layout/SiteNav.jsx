@@ -5,12 +5,13 @@ export const navigation = [
   { label: "首页", id: "home", href: "index.html" },
   { label: "D-LRC", id: "dlrc", href: "dlrc.html" },
   { label: "阵营", id: "factions", pending: true },
+  { label: "角色", id: "roles", href: "roles.html" },
   { label: "事件", id: "events", pending: true },
   { label: "机制", id: "mechanisms", href: "mechanisms.html" },
 ];
 
 export function SiteNav({ page = "home", theme, onToggleTheme }) {
-  const pageLabel = { home: "首页", dlrc: "D-LRC", factions: "阵营", mechanisms: "机制" }[page] || "当前页面";
+  const pageLabel = { home: "首页", dlrc: "D-LRC", factions: "阵营", roles: "角色", mechanisms: "机制" }[page] || "当前页面";
   const renderLink = ({ label, href, id, pending }, mobile = false) => {
     if (pending) {
       return <span className="nav-link nav-link-disabled" aria-disabled="true" key={`${mobile ? "mobile-" : ""}${id}`}><span>{label}</span><small>暂未开放</small></span>;

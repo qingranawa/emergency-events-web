@@ -527,6 +527,10 @@
   .fdi-trace-point small { font-size: 8px; }
   .mechanisms-nav-track { padding-right: 0; padding-left: 0; }
 }
+.mechanisms-roles-link { display: inline-flex; align-items: center; margin-top: 27px; padding: 12px 0; border-bottom: 1px solid var(--line-strong); color: var(--text-soft); font-size: 12px; }
+.mechanisms-roles-link span { margin-left: 6px; color: var(--warning); }
+.mechanisms-roles-link:hover, .mechanisms-roles-link:focus-visible { color: var(--text); }
+
 @media (prefers-reduced-motion: reduce) {
   .runtime-topology .topology-node,
   .population-tier-button,
