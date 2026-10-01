@@ -49,7 +49,7 @@ export const crisisDefinitions = [
   { code: "CON", name: "收容危机", trigger: "第二个基金会支援波次完成后，后续收容检查连续失败。", escalation: "每 300 秒检查一次当前 SCP 压力和之前的基准。", resolution: "检查通过、还没有第二个波次，或没有可用基准。", readers: "响应判断和需要 CON 条件的候选会读取。" },
   { code: "SEC", name: "安全危机", trigger: "存在敌对威胁，基金会有效战斗人员又低于当前人数档位的安全阈值。", escalation: "基金会有效战斗人员继续减少时，危机保持发生。", resolution: "敌对威胁消失，或基金会人数回到阈值以上。", readers: "响应判断和需要 SEC 条件的候选会读取。" },
   { code: "GOI", name: "外部组织介入", trigger: "外部敌对组织有战斗人员、响应等级至少为 3，且基金会处于弱势。", escalation: "外部敌对力量和基金会劣势同时持续。", resolution: "任一条件消失；正式第三方运行来源仍未接入。", readers: "响应判断会读取，但不自动让 GOI 事件获得资格。" },
-  { code: "WAR", name: "核设施危机", trigger: "当前正式运行默认关闭，等可靠的核弹事实接入后再启用。", escalation: "暂不作为正式危机使用。", resolution: "暂不作为正式危机使用。", readers: "当前不进入正式候选判断。" },
+  { code: "WAR", name: "核设施危机", trigger: "CrisisWarEnabled 开启时：Alpha Warhead 已解锁且未 detonated。", escalation: "倒计时作为 reason / fact。", resolution: "核弹 detonated 或未解锁。", readers: "当前配置默认关闭；开启后由有效评估消费。" },
   { code: "END", name: "终局状态", trigger: "核弹已经爆炸，地表敌对僵持持续达到默认 300 秒。", escalation: "僵持达到窗口后进入终局状态。", resolution: "核弹事实、时间或地表敌对僵持条件消失。", readers: "响应判断和需要终局条件的候选会读取。" },
 ];
 
@@ -78,8 +78,8 @@ export const qualificationSteps = [
 ];
 
 export const directorBoundary = [
-  { side: "事件筛选器", question: "哪些事件可以进入候选？", detail: "负责检查条件、安排人数、筛选候选、选择来源和管理生命周期。" },
-  { side: "事件内容包", question: "事件具体怎么执行？", detail: "未来负责角色、武器、装备、出生点和正式事件执行；生产内容目前还没开始。" },
+  { side: "M05 · Event Director", question: "哪些计划可以进入候选？", detail: "负责资格、来源仲裁、Candidate / Selected plan、Revalidate、Commit 与生命周期决策。当前 production EventDefinition 数量为 0。" },
+  { side: "Event Pack", question: "提交后的玩法如何执行？", detail: "负责 Spawn、Role、Equipment、Ability、Objective、Lifecycle、Rollback 和 Cleanup；生产事件内容仍在开发。" },
 ];
 
 export const vanillaIntegration = {
@@ -113,15 +113,16 @@ export const operatorCommands = [
 ];
 
 export const architectureStatus = [
-  ["M01", "回合核心", "已完成", "负责回合资格、人数锁定、开局编制和清理。"],
-  ["M02", "原版增援接入", "已完成", "保留原版增援，记录波次结果并应用人数上限。"],
-  ["M03", "响应判断", "逻辑完成 · 等待平衡验证", "响应分数、等级、局面状态和历史接口已实现，参数还需真人数据。"],
-  ["M04", "危机识别", "已完成", "识别七类危机，记录开始、持续和结束。"],
-  ["M04.5", "设施失序记录", "逻辑完成 · 等待平衡验证", "设施记录和恢复逻辑已实现，参数还需真人数据校准。"],
-  ["M05", "事件筛选器", "框架已完成", "候选资格、开始前复核和生命周期边界已实现，正式事件尚未开始。"],
-  ["M06", "观察者面板", "按设计暂缓", "当前不把面板、投票和玩家资格写成正式事件执行能力。"],
-  ["—", "运行记录", "已实现 · 等待实时数据", "只读记录已经能生成，真人回合数据仍然不足。"],
-  ["—", "真人验证", "等待验证", "目前没有可在官网宣称的真人实服结果。"],
+  ["M01", "Round Core", "IMPLEMENTED", "接管资格、PopulationTier、RoundId 与 opening slot quantities。"],
+  ["M02", "Reinforcement Integration", "IMPLEMENTED", "保留 Vanilla reinforcement，记录实际波次并应用 cap ceiling。"],
+  ["M03", "D-LRC Evaluator", "IMPLEMENTED · BALANCE VALIDATION PENDING", "评估逻辑与默认门槛存在；平衡验证仍待真实运行数据。"],
+  ["M04", "Crisis System", "IMPLEMENTED", "七类 Crisis Tags 与 Episode transition。"],
+  ["M04.5", "Facility Disorder Index", "IMPLEMENTED · LIVE VALIDATION PENDING", "历史失序、SettlementWindow 与 90 秒恢复策略。"],
+  ["M05", "Event Director", "IMPLEMENTED", "候选、来源仲裁、Revalidate、Commit 框架；production definitions 为 0。"],
+  ["M06", "O4 Panel", "IMPLEMENTED · LIVE VALIDATION PENDING", "Hint shortlist 与 selector runtime 已实现；投票输入和实服行为待验证。"],
+  ["M07", "Opening Role & Ability", "LOGIC TESTED · LIVE VALIDATION PENDING", "313 / 313 custom logic tests；官方插件 build 缺少服务端程序集。"],
+  ["—", "Event Pack", "IN DEVELOPMENT", "生产 EventDefinition、Executor 与事件玩法尚未完成。"],
+  ["—", "Live server smoke", "BLOCKED / PENDING", "缺少完整 SCP:SL Managed assemblies；目前没有正式实服验证。"],
 ];
 
 export const designPrinciples = ["先看局势", "人数分档", "保留原版", "开始前复核", "过程可查", "数据判断", "各管一块"];
@@ -131,5 +132,5 @@ export const dlrcRuntimeFacts = {
   evaluationStartSeconds: 391,
   evaluationIntervalSeconds: 30,
   demoLabel: "模拟示例 / SIMULATED",
-  o4Status: "DEFERRED BY DESIGN",
+  o4Status: "IMPLEMENTED · LIVE VALIDATION PENDING",
 };

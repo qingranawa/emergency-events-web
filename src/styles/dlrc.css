@@ -183,3 +183,10 @@
   .dlrc-page .odometer-face-current, .dlrc-page .crisis-code-new { opacity: 1 !important; transform: translateY(0) !important; }
   .dlrc-page .progress-fill { transform: scaleX(var(--progress, 0)) !important; }
 }
+
+@media (max-width: 600px) {
+  .runtime-fallback { grid-template-columns: minmax(0, 1fr) 34px minmax(0, 1fr); gap: 7px; }
+  .fallback-state { min-width: 0; padding: 15px 10px; }
+  .fallback-state strong { font-size: clamp(30px, 9vw, 42px); }
+  .fallback-state b { overflow-wrap: anywhere; font-size: 9px; }
+}

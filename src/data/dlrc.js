@@ -3,7 +3,15 @@ export const crisisItems = [
 ];
 
 export const dlrcModules = [
-  ["01", "回合核心", "回合核心 · 开局人口与编制", "IMPLEMENTED", "done"], ["02", "原版增援接入", "原版支援流程接入", "IMPLEMENTED", "done"], ["03", "响应判断", "响应等级评估", "IMPLEMENTED", "done"], ["04", "危机识别", "专业危机识别", "IMPLEMENTED", "done"], ["05", "事件筛选", "事件候选与调度", "PLANNED", "future"], ["06", "观察者面板", "观察者信息与选择接口", "PLANNED", "future"], ["07", "事件内容包", "专业响应单位与事件内容", "PLANNED", "future"],
+  ["M01", "Round Core", "回合生命周期、PopulationTier 与 opening slot quantities", "IMPLEMENTED", "done"],
+  ["M02", "Reinforcement Integration", "保留原版 Primary Wave 并记录实际波次事实", "IMPLEMENTED", "done"],
+  ["M03", "D-LRC Evaluator", "响应等级、Control cap 与正式 DLRC Code", "IMPLEMENTED", "done"],
+  ["M04", "Crisis System", "七类 Crisis Tags 与 Episode 生命周期", "IMPLEMENTED", "done"],
+  ["M04.5", "Facility Disorder Index", "0–100 历史失序状态与 settlement/recovery", "IMPLEMENTED", "done"],
+  ["M05", "Event Director", "候选资格、来源仲裁、Revalidate 与 Commit", "IMPLEMENTED", "done"],
+  ["M06", "O4 Panel", "有限 Foundation shortlist 的选择面板与运行时接口", "LIVE VALIDATION PENDING", "observe"],
+  ["M07", "Opening Role & Ability", "开局身份、Role Variant、Ability、HUD、Badge 与 WorldEffect", "LOGIC TESTED · LIVE VALIDATION PENDING", "observe"],
+  ["—", "Event Pack", "生产 EventDefinition 与实际事件玩法内容", "IN DEVELOPMENT", "future"],
 ];
 
 export const dlrcDemoStates = [

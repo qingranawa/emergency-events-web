@@ -5,11 +5,11 @@ import { SectionHeader } from "../layout/SectionHeader";
 import { SiteNav } from "../layout/SiteNav";
 import { useTheme } from "../../hooks/useTheme";
 import { useScrollReveal } from "../../hooks/useScrollReveal";
-import { mechanismSections, runtimeBackboneSections } from "../../data/mechanisms";
+import { mechanismNavGroups } from "../../data/mechanisms";
 import { MechanismsHero } from "./MechanismsHero";
 import { MechanismsNav } from "./MechanismsNav";
-import { RuntimeBackbone } from "./RuntimeBackbone";
-import { RuntimeFlow } from "./RuntimeFlow";
+import { ArchitectureMap } from "./ArchitectureMap";
+import { ResponsibilityMatrix } from "./ResponsibilityMatrix";
 import { RoundCoreSection } from "./RoundCoreSection";
 import { ReinforcementSection } from "./ReinforcementSection";
 import { DlrcSection } from "./DlrcSection";
@@ -17,7 +17,17 @@ import { CrisisSection } from "./CrisisSection";
 import { FdiSection } from "./FdiSection";
 import { DirectorSection } from "./DirectorSection";
 import { EventPackSection } from "./EventPackSection";
-import { ArchitectureSection, LifecycleSection, ConfigurationSection, CommandsSection, TelemetrySection, SourceSection, StatusSection } from "./OperationsSections";
+import { O4Section } from "./O4Section";
+import { GameplayLayerSection } from "./GameplayLayerSection";
+import { SystemTraces } from "./SystemTraces";
+import { ImplementationNotesSection } from "./ImplementationNotesSection";
+import {
+  CommandsSection,
+  ConfigurationSection,
+  LifecycleSection,
+  SourceSection,
+  TelemetrySection,
+} from "./OperationsSections";
 
 export function MechanismsApp() {
   const { theme, toggleTheme } = useTheme();
@@ -29,117 +39,154 @@ export function MechanismsApp() {
     <SiteNav page="mechanisms" theme={theme} onToggleTheme={toggleTheme} />
     <main ref={mainRef} id="top" className="mechanisms-page">
       <MechanismsHero />
-      <MechanismsNav sections={mechanismSections} />
       <div className="mechanisms-shell">
-        <RuntimeBackbone sections={runtimeBackboneSections} />
+        <MechanismsNav groups={mechanismNavGroups} />
         <div className="mechanisms-content">
-          <div className="mechanisms-phase runtime-phase">
-            <div className="phase-intro" data-scroll-reveal>
-              <span className="phase-index mono">A / 一局怎么走</span>
-              <p>从回合开始一路读到事件边界，先看清插件到底做了什么。</p>
-            </div>
-            <section id="overview" data-scroll-reveal>
+          <div className="mechanisms-phase architecture-phase">
+            <section id="system-architecture" data-scroll-reveal>
               <div className="container">
-                <SectionHeader kicker="01 / 运行流程" title="运行流程" description="从回合接管、事实记录、状态判断到候选复核，按顺序查看插件的运行链路。" />
-                <RuntimeFlow />
+                <SectionHeader kicker="SYSTEM ARCHITECTURE" title="系统架构" description="Round Start 与 mid-round 有各自的运行路径；M07 连接开局槽位和玩家 Gameplay，M05 接收状态事实后规划候选。" />
+                <ArchitectureMap />
               </div>
             </section>
+            <section id="responsibilities" data-scroll-reveal>
+              <div className="container">
+                <SectionHeader kicker="RESPONSIBILITY MATRIX" title="模块职责矩阵" description="每个模块都标出所有权、输入、输出、边界和当前状态。" />
+                <ResponsibilityMatrix />
+              </div>
+            </section>
+          </div>
+
+          <div className="mechanisms-phase runtime-phase">
+            <div className="phase-intro" data-scroll-reveal>
+              <span className="phase-index mono">01 / RUNTIME BACKBONE</span>
+              <p>M01 接管本局并定义 opening slot 数量；M02 保留 Vanilla mid-round reinforcement 流程。</p>
+            </div>
             <section id="round-core" data-scroll-reveal>
               <div className="container">
-                <SectionHeader kicker="02 / 回合核心" title="回合核心" description="判断是否接管本局，锁定人数档位和开局编制，并负责回合生命周期。" />
+                <SectionHeader kicker="M01 · ROUND CORE" title="回合核心" description="Round Start 人口决定是否接管；M01 锁定 PopulationTier、RoundId 与 Composition slot 数量。" />
                 <RoundCoreSection />
               </div>
             </section>
             <section id="reinforcement" data-scroll-reveal>
               <div className="container">
-                <SectionHeader kicker="03 / 原版增援" title="原版增援接入" description="保留原版阵营、职业、装备、玩家选择和出生流程，插件记录实际波次并应用人数上限。" />
+                <SectionHeader kicker="M02 · REINFORCEMENT INTEGRATION" title="原版增援接入" description="M02 只处理 mid-round reinforcement，保留 Vanilla faction choice、player selection、composition、equipment 和 spawn。" />
                 <ReinforcementSection />
               </div>
             </section>
+          </div>
+
+          <div className="mechanisms-phase state-phase">
+            <div className="phase-intro" data-scroll-reveal>
+              <span className="phase-index mono">02 / STATE & EVALUATION</span>
+              <p>D-LRC 输出响应等级；Crisis 维护 Tags 与 Episodes；FDI 记录历史设施失序。</p>
+            </div>
             <section id="dlrc" data-scroll-reveal>
               <div className="container">
-                <SectionHeader kicker="04 / 响应判断" title="D-LRC Evaluator" description="读取 SCP、基金会、增援、时间和战略危险，计算响应分数、局面状态和最终响应等级。" />
+                <SectionHeader kicker="M03 · D-LRC EVALUATOR" title="Dynamic Lockdown Response Code" description="从五组局势输入计算响应分数、Control 上限、最终 L0–L5 等级与正式 DLRC Code。" />
                 <DlrcSection />
               </div>
             </section>
             <section id="crisis" data-scroll-reveal>
               <div className="container">
-                <SectionHeader kicker="05 / 危机识别" title="Crisis System" description="七类危机检查器读取同一份回合记录，维护危机状态和每次危机的编号。" />
+                <SectionHeader kicker="M04 · CRISIS TAGS + EPISODES" title="Crisis System" description="七类 detector 在每次有效 evaluation 后更新 Active / Inactive 状态，并按迁移维护 Episode。" />
                 <CrisisSection />
               </div>
             </section>
             <section id="fdi" data-scroll-reveal>
               <div className="container">
-                <SectionHeader kicker="06 / 设施记录" title="FDI · Facility Disorder Index" description="用 0–100 表示设施秩序状态，读取当前设施存量和最近事件变化，为普通支援来源选择提供输入。" />
+                <SectionHeader kicker="M04.5 · FACILITY DISORDER INDEX" title="设施混乱度与历史状态" description="FDI 以 0–100 记录设施失序历史；PERIODIC 推进结算窗口，其他触发只观察。" />
                 <FdiSection />
               </div>
             </section>
+          </div>
+
+          <div className="mechanisms-phase decision-phase">
+            <div className="phase-intro" data-scroll-reveal>
+              <span className="phase-index mono">03 / DECISION & CONTENT</span>
+              <p>M05 形成并复核计划，Event Pack 执行已提交的实际玩法；M06 在限定候选边界内返回选择结果。</p>
+            </div>
             <section id="director" data-scroll-reveal>
               <div className="container">
-                <SectionHeader kicker="07 / 事件筛选" title="Event Director" description="读取已确认的回合事实，检查事件条件、人数计划、来源和生命周期，并在启动前重新确认。" />
+                <SectionHeader kicker="M05 · EVENT DIRECTOR" title="Event Director" description="从已注册定义中检查资格、仲裁来源、形成计划，并在启动和提交前读取最新 context 复核。" />
                 <DirectorSection />
               </div>
             </section>
             <section id="event-pack" data-scroll-reveal>
               <div className="container">
-                <SectionHeader kicker="08 / 内容边界" title="Event Pack" description="事件内容包负责角色、装备、出生点和实际执行；当前正式生产内容数量为 0。" />
+                <SectionHeader kicker="EVENT PACK · EXECUTION CONTENT" title="事件内容包" description="Event Pack 提供 Spawn、Role、Equipment、Abilities、Objectives、Lifecycle、Rollback 与 Cleanup。" />
                 <EventPackSection />
               </div>
             </section>
-          </div>
-
-          <div className="mechanisms-phase architecture-phase">
-            <div className="phase-intro" data-scroll-reveal>
-              <span className="phase-index mono">B / 模块怎么接</span>
-              <p>一份回合记录怎样从上游传到下游，又怎样在下一局开始前清掉。</p>
-            </div>
-            <section id="architecture" data-scroll-reveal>
+            <section id="o4" data-scroll-reveal>
               <div className="container">
-                <SectionHeader kicker="09 / 模块关系" title="模块关系" description="上游模块发布事实，下游模块读取结果，状态在模块之间按边界传递。" />
-                <ArchitectureSection />
+                <SectionHeader kicker="M06 · O4 PANEL" title="有限候选选择边界" description="O4 接收 M05 已经完成来源仲裁的 Foundation normal SUPPORT shortlist；M05 保留最终 revalidation 与生命周期控制。" />
+                <O4Section />
               </div>
             </section>
+          </div>
+
+          <div className="mechanisms-phase gameplay-phase">
+            <div className="phase-intro" data-scroll-reveal>
+              <span className="phase-index mono">04 / GAMEPLAY LAYER</span>
+              <p>M07 横跨 Round Start 分配与玩家在场内的持续 Gameplay Runtime。</p>
+            </div>
+            <section id="m07" data-scroll-reveal>
+              <div className="container">
+                <SectionHeader kicker="M07 · OPENING ROLE & ABILITY SYSTEM" title="开局职业与技能系统" description="M07 负责具体开局身份、Role Variant、SCP enhancement、Ability、Shared HUD、Badge 与 WorldEffect。" />
+                <GameplayLayerSection />
+              </div>
+            </section>
+          </div>
+
+          <div className="mechanisms-phase trace-phase">
+            <section id="traces" data-scroll-reveal>
+              <div className="container">
+                <SectionHeader kicker="SYSTEM TRACES" title="跨模块追踪" description="从开局分配、增援事实、049 WorldEffect 到 Director Commit，沿着真实 contract 查看数据如何流动。" />
+                <SystemTraces />
+              </div>
+            </section>
+            <section id="implementation-status" data-scroll-reveal>
+              <div className="container">
+                <SectionHeader kicker="IMPLEMENTATION NOTES" title="实现状态与能力限制" description="区分已经实现、逻辑测试、尚待实服验证和当前 API 不支持的子项。" />
+                <ImplementationNotesSection />
+              </div>
+            </section>
+          </div>
+
+          <div className="mechanisms-phase operations-phase">
+            <div className="phase-intro" data-scroll-reveal>
+              <span className="phase-index mono">05 / OPERATIONS REFERENCE</span>
+              <p>配置、RemoteAdmin、Telemetry 和源码入口供维护者查阅。</p>
+            </div>
             <section id="lifecycle" data-scroll-reveal>
               <div className="container">
-                <SectionHeader kicker="10 / 一局生命周期" title="Runtime Lifecycle" description="展示插件加载、等待玩家、回合开始、持续判断、回合结束和插件关闭的状态变化。" />
+                <SectionHeader kicker="RUNTIME LIFECYCLE" title="一局生命周期" description="各服务在 WaitingForPlayers、Round Start、Low Population 与 Round End 边界同步状态。" />
                 <LifecycleSection />
               </div>
             </section>
-          </div>
-
-          <div className="mechanisms-phase hood-phase">
-            <div className="phase-intro" data-scroll-reveal>
-              <span className="phase-index mono">C / 给维护者看的细节</span>
-              <p>需要查配置、服主命令、运行记录和源码路径时，再来这里。</p>
-            </div>
             <section id="configuration" data-scroll-reveal>
               <div className="container">
-                <SectionHeader kicker="11 / 配置" title="关键配置" description="列出最低人数、首次判断、更新间隔、设施记录窗口和 Telemetry 容量。" />
+                <SectionHeader kicker="CONFIGURATION" title="关键配置" description="展示最低人数、默认 D-LRC 周期、wave cap、FDI recovery 与 Crisis 开关。" />
                 <ConfigurationSection />
               </div>
             </section>
             <section id="commands" data-scroll-reveal>
               <div className="container">
-                <SectionHeader kicker="12 / 服主命令" title="RemoteAdmin Commands" description="列出当前可用的状态查询、响应判断、危机和设施记录命令。" />
+                <SectionHeader kicker="REMOTE ADMIN" title="服主命令" description="当前 RemoteAdmin 提供的只读状态和诊断查询入口。" />
                 <CommandsSection />
               </div>
             </section>
             <section id="telemetry" data-scroll-reveal>
               <div className="container">
-                <SectionHeader kicker="13 / 运行记录" title="Balance Telemetry" description="只读保存响应判断、危机、设施、增援和回合摘要。" />
+                <SectionHeader kicker="BALANCE TELEMETRY" title="运行记录" description="记录结果供回看；Telemetry 不替代上游模块的正式事实。" />
                 <TelemetrySection />
               </div>
             </section>
             <section id="source" data-scroll-reveal>
               <div className="container">
-                <SectionHeader kicker="14 / 源码路径" title="Source Walkthrough" description="列出一次判断经过的源码入口，供维护者继续追踪。" />
+                <SectionHeader kicker="SOURCE & TESTS" title="源码与验证入口" description="列出架构中的主要插件代码路径，并展示当前 M07 验证边界。" />
                 <SourceSection />
-              </div>
-            </section>
-            <section id="status" data-scroll-reveal>
-              <div className="container">
-                <SectionHeader kicker="15 / 当前状态" title="Module Status" description="分别标注已完成、框架完成、开发中、按设计暂缓和等待验证。" />
-                <StatusSection />
               </div>
             </section>
           </div>

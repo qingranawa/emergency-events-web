@@ -38,7 +38,7 @@ export function DlrcApp() {
     <section id="example"><div className="container"><SectionHeader kicker="模拟示例" title="Round Example" description="用一条模拟状态链展示从开局、评估、危机到候选复核的变化。" /><RoundExample /></div></section>
     <section id="commands"><div className="container"><SectionHeader kicker="服主命令" title="RemoteAdmin Commands" description="用于查询回合、响应、危机、设施记录和模块状态。" /><OperatorCommands /></div></section>
     <section id="telemetry"><div className="container"><SectionHeader kicker="运行记录" title="Balance Telemetry" description="只读保存响应判断、危机、设施、增援和回合摘要，供维护者回看运行结果。" /><TelemetryPanel /></div></section>
-    <section id="architecture"><div className="container"><SectionHeader kicker="实现状态" title="Module Status" description="分别标注已完成、框架完成、开发中、按设计暂缓和等待验证。" /><ArchitectureStatus /></div></section>
+    <section id="architecture"><div className="container"><SectionHeader kicker="实现状态" title="Module Status" description="分别标注 IMPLEMENTED、LOGIC TESTED、IN DEVELOPMENT、BLOCKED 与 LIVE VALIDATION PENDING。" /><ArchitectureStatus /></div></section>
     <section id="principles"><div className="container"><SectionHeader kicker="设计原则" title="Runtime Principles" description="保留原版流程，模块各负其责，数据有来源，启动前重新确认。" /><PrinciplesWall /></div></section>
   </main><Footer dlrc /></>;
 }

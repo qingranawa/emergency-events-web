@@ -1,3 +1,19 @@
 export function RoundTimeline({ timeline }) {
-  return <><div className="timeline" aria-label="一局游戏的五个阶段">{timeline.map((item) => <div className="time-node" key={item.id}><div className="time-card"><div className="system-mark mono">{item.id} / {item.code}</div><h3>{item.title}</h3><p>{item.description}</p></div></div>)}</div><div className="round-context"><article className="round-context-item"><h3>回合开局 / 开局玩法</h3><p>安保人员和混沌渗透者轻装开局，分别从 LCZ A/B 电梯出生，争夺武器库和权限。SCP 数量会随人数变化，第二只 SCP-939 是否出现由随机候选决定。</p></article><article className="round-context-item"><h3>设施记录</h3><p>设施记录保存跨评估的秩序变化，并分为低、中、高三个范围。环境安静且条件满足时，才会进行恢复。</p></article><article className="round-context-item"><h3>专业响应</h3><p>指定响应等级和危机条件都满足后，专业响应事件才会进入候选。</p></article><article className="round-context-item"><h3>人数档位</h3><p>同一种事件按 E/D/C/B/A 档位调整规模、编制和装备，复用一份事件定义。</p></article></div></>;
+  return <>
+    <div className="timeline" aria-label="一局游戏的五个阶段">
+      {timeline.map((item) => <div className="time-node" key={item.id}>
+        <div className="time-card">
+          <div className="system-mark mono">{item.id} / {item.code}</div>
+          <h3>{item.title}</h3>
+          <p>{item.description}</p>
+        </div>
+      </div>)}
+    </div>
+    <div className="round-context">
+      <article className="round-context-item"><h3>开局槽位与身份</h3><p>M01 决定 D-Class、Scientist、Security、SCP 槽位数量；M07 再分配具体开局身份和能力。</p></article>
+      <article className="round-context-item"><h3>中途增援</h3><p>普通 MTF / CI Primary Wave 仍由 M02 接入原版流程；这不是 M07 的角色分配。</p></article>
+      <article className="round-context-item"><h3>三类状态输入</h3><p>D-LRC 计算响应等级，Crisis 维护 Tags / Episodes，FDI 保存设施历史状态。</p></article>
+      <article className="round-context-item"><h3>决定与执行</h3><p>M05 选择并复核事件计划；Event Pack 才提供实际玩法，当前 production definitions 为 0。</p></article>
+    </div>
+  </>;
 }
