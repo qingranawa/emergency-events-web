@@ -1,42 +1,17 @@
-import { commandRows, configurationRows, lifecycleStages, sourceWalkthrough, telemetryRows } from "../../data/mechanisms";
+import { lifecycleStages, mechanismFacts, populationProfiles } from "../../data/mechanisms";
 
 export function LifecycleSection() {
-  return <div className="lifecycle-timeline">{lifecycleStages.map(([stage, detail], index) => <article key={stage}>
-    <span className="mono">{String(index + 1).padStart(2, "0")}</span>
-    <div><strong>{stage}</strong><p>{detail}</p></div>
-  </article>)}</div>;
+  return <ol className="lifecycle-timeline">{lifecycleStages.map(([stage, detail]) => <li key={stage}>
+    <strong>{stage}</strong><p>{detail}</p>
+  </li>)}</ol>;
 }
 
 export function ConfigurationSection() {
-  return <div className="mechanism-table-wrap" tabIndex="0" aria-label="配置项，可横向滚动"><table className="mechanism-table">
-    <thead><tr><th scope="col">CONFIG</th><th scope="col">DEFAULT</th><th scope="col">PURPOSE</th><th scope="col">SOURCE</th></tr></thead>
-    <tbody>{configurationRows.map(([name, value, purpose, source]) => <tr key={name}>
-      <th scope="row">{name}</th><td className="mono">{value}</td><td>{purpose}</td><td className="mono">{source}</td>
-    </tr>)}</tbody>
-  </table></div>;
-}
-
-export function CommandsSection() {
-  return <div className="commands-layout">
-    <div className="command-terminal-large"><span className="mono">REMOTE ADMIN / ee</span><code>ee dlrc stage full</code><code>ee fdi explain</code><code>ee wave cap</code><code>ee o4 status</code><small>用于只读检查运行时状态；测试命令不代表 production event。</small></div>
-    <div className="command-list-large">{commandRows.map(([command, purpose]) => <div key={command}>
-      <code>{command}</code><span>{purpose}</span><b className="mono">AVAILABLE</b>
-    </div>)}</div>
+  return <div className="mechanism-defaults" aria-label="当前机制默认值">
+    <article><strong>接管门槛</strong><span>开局至少 {mechanismFacts.minimumPlayers} 人</span><p>接管后若人数跌破门槛，本局不会重新恢复接管。</p></article>
+    <article><strong>人数档位</strong><span>{populationProfiles.map(({ tier, range }) => `${tier} 档 ${range} 人`).join(" · ")}</span><p>回合开始后锁定本局档位。</p></article>
+    <article><strong>D-LRC 评估</strong><span>首次 {Math.floor(mechanismFacts.evaluationStartSeconds / 60)} 分 {mechanismFacts.evaluationStartSeconds % 60} 秒 · 之后每 {mechanismFacts.evaluationIntervalSeconds} 秒</span><p>第一次评估约在回合开始后 06:31。</p></article>
+    <article><strong>原版主要增援人数上限</strong><span>{Object.entries(mechanismFacts.primaryWaveCaps).map(([tier, cap]) => `${tier} 档 ${cap} 人`).join(" · ")}</span><p>这是最多人数，不保证一定会生成到上限。</p></article>
+    <article><strong>FDI 首次结算与恢复</strong><span>约 06:31 开始结算 · 默认静默 90 秒后满足恢复检查</span><p>恢复仍会受到当前危机和设施状态影响。</p></article>
   </div>;
-}
-
-export function TelemetrySection() {
-  return <div className="telemetry-stream">
-    <div className="telemetry-stream-head"><span className="mono">RUNTIME FACTS · READ ONLY</span><p>记录判断和状态迁移，不重算上游结果。</p></div>
-    {telemetryRows.map(([type, detail], index) => <div className="telemetry-row" key={type}>
-      <time className="mono">{String(index + 1).padStart(2, "0")}</time><strong className="mono">{type}</strong><span>{detail}</span>
-    </div>)}
-  </div>;
-}
-
-export function SourceSection() {
-  return <div className="source-walkthrough">{sourceWalkthrough.map(([method, path, detail], index) => <article key={method}>
-    <div className="source-step mono">{String(index + 1).padStart(2, "0")}</div>
-    <div><code>{method}</code><span className="mono">{path}</span><p>{detail}</p></div>
-  </article>)}</div>;
 }

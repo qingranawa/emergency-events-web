@@ -2,20 +2,12 @@ import { o4Facts } from "../../data/mechanisms";
 
 export function O4Section() {
   return <div className="o4-panel-section">
-    <div className="o4-status-line">
-      <span className="mono">M06 / O4 PANEL</span>
-      <div>{o4Facts.status.map((status) => <span className="status-tag" key={status}>{status}</span>)}</div>
-    </div>
+    <p className="o4-status-line"><b>当前状态：</b>按设计暂缓，尚未实现。</p>
     <div className="o4-boundary-diagram">
-      <article><span className="mono">M05</span><strong>已排序的合法 shortlist</strong><small>仅 Foundation normal SUPPORT 的多个候选</small></article>
-      <span className="o4-boundary-arrow" aria-hidden="true">↔</span>
-      <article><span className="mono">M06</span><strong>最多 2 个有限候选</strong><small>O4 返回选择结果；M05 仍 revalidate</small></article>
+      <article><span className="mono">Event Director</span><strong>提供有限候选</strong><p>仅在多个合格的基金会普通支援计划之间开启选择。</p></article>
+      <span className="o4-boundary-arrow" aria-hidden="true">→</span>
+      <article><span className="mono">O4 观察员</span><strong>从候选中选择</strong><p>选择结果返回 Event Director，仍需再次确认局势。</p></article>
     </div>
-    <div className="o4-facts-list">
-      {o4Facts.current.map((item) => <p key={item}>{item}</p>)}
-      <p>{o4Facts.input}</p>
-      <p>{o4Facts.interaction}</p>
-    </div>
-    <p className="source-line mono">{o4Facts.source}</p>
+    <ul className="o4-facts-list">{o4Facts.current.slice(1).map((item) => <li key={item}>{item}</li>)}</ul>
   </div>;
 }

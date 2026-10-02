@@ -63,11 +63,10 @@ test("LiveResponse 提供逐位滚轮、危机切换和 Spring Fill 动效", () 
   assert.match(styles, /white-space: nowrap/);
 });
 
-test("机制页以四层架构组织完整运行链路", () => {
+test("机制页保留七个主要章节和当前模块边界", () => {
   const navIds = mechanismNavGroups.flatMap((group) => group.items.map(({ id }) => id));
   assert.deepEqual(navIds, [
-    "system-architecture", "responsibilities", "round-core", "reinforcement", "dlrc", "crisis", "fdi",
-    "director", "event-pack", "o4", "m07", "traces", "implementation-status", "lifecycle", "configuration", "commands", "telemetry", "source",
+    "system-architecture", "round-reinforcement", "dlrc", "crisis-fdi", "director", "o4", "configuration",
   ]);
   assert.equal(mechanismFacts.minimumPlayers, 16);
   assert.equal(mechanismFacts.evaluationStartSeconds, 391);
@@ -76,10 +75,9 @@ test("机制页以四层架构组织完整运行链路", () => {
   assert.equal(mechanismFacts.fdiRange, "0–100");
   assert.equal(mechanismFacts.fdiRecoverySeconds, 90);
   assert.equal(mechanismFacts.testBaseline, "313 / 313");
-  assert.equal(responsibilityRows.find(({ module }) => module === "M07").excludes.includes("Mid-round reinforcement"), true);
-  assert.match(eventPackFacts.status, /production EventDefinition/);
-  assert.ok(o4Facts.status.includes("IMPLEMENTED"));
-  assert.ok(o4Facts.status.includes("LIVE VALIDATION PENDING"));
+  assert.match(responsibilityRows.find(({ module }) => module === "M07").handsOff, /不接管中途增援/);
+  assert.match(eventPackFacts.statusText, /开发中/);
+  assert.match(o4Facts.current[0], /尚未开放/);
 });
 
 test("状态同步到插件当前实现而非旧的暂缓说明", () => {

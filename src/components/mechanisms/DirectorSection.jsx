@@ -2,28 +2,30 @@ import { directorFacts } from "../../data/mechanisms";
 
 export function DirectorSection() {
   return <div className="director-mechanism">
-    <div className="director-funnel" aria-label="Event Director candidate funnel">
-      {directorFacts.pipeline.map(([label, detail], index) => <article className="director-funnel-step" key={label}>
+    <ol className="director-funnel" aria-label="事件计划筛选和启动流程">
+      {directorFacts.pipeline.map(([label, detail], index) => <li className="director-funnel-step" key={label}>
         <span className="mono">{String(index + 1).padStart(2, "0")}</span>
-        <strong>{label}</strong><p>{detail}</p>
-      </article>)}
-    </div>
-    <div className="director-eligibility">
-      <span className="mono">ELIGIBILITY INPUTS</span>
-      <ul>{directorFacts.eligibility.map((item) => <li key={item}>{item}</li>)}</ul>
-    </div>
+        <div><strong>{label}</strong><p>{detail}</p></div>
+      </li>)}
+    </ol>
+
     <div className="director-boundary-wide">
-      <article><span className="mono">M05 / DECISION</span><h3>Event Director</h3><p>输出 Candidate 与 Selected plan；执行前 TryStart 会用最新 context revalidate，再由 Commit 提交。</p></article>
-      <article className="director-pack-boundary"><span className="mono">EVENT PACK / EXECUTION</span><h3>Actual gameplay</h3><p>Spawn、Role、Equipment、Abilities、Objectives、Lifecycle、Rollback 与 Cleanup 由内容层实现。</p></article>
+      <article><span className="mono">决定事件计划</span><h3>Event Director</h3><p>候选和选中结果都只是计划；只有复核通过并确认后，事件才进入启动阶段。</p></article>
+      <article className="director-pack-boundary"><span className="mono">执行实际玩法</span><h3>事件内容包</h3><p>事件内容包负责生成角色和装备、提供目标与玩法，并在结束或失败后清理场景。</p></article>
     </div>
+
+    <div className="director-principles">
+      <p><b>响应顺序：</b>专业危机响应优先。只有普通支援事件才会按基金会、混沌分裂者、第三方等来源进行仲裁；FDI 只会临时影响普通支援的来源权重。</p>
+    </div>
+
     <div className="director-failure-path">
-      <span className="mono">REVALIDATE / EXECUTION FAILURE</span>
-      <div>{directorFacts.failure.map((state) => <strong key={state}>{state}</strong>)}</div>
+      <strong>复核或启动失败</strong>
+      <div>{directorFacts.failure.map((state) => <span key={state}>{state}</span>)}</div>
     </div>
+
     <div className="director-event2-branch">
-      <div className="module-panel-heading"><span className="mono">EVENT #2 · SEPARATE BRANCH</span><strong>{directorFacts.event2Note}</strong></div>
-      <div className="event2-timeline">{directorFacts.event2.map(([label, detail]) => <article key={label}><span className="mono">{detail}</span><strong>{label}</strong></article>)}</div>
+      <div className="module-panel-heading"><span className="mono">第二个事件</span><strong>{directorFacts.event2Note}</strong></div>
+      <ol className="event2-timeline">{directorFacts.event2.map(([label, detail]) => <li key={label}><span>{detail}</span><strong>{label}</strong></li>)}</ol>
     </div>
-    <p className="source-line mono">源码入口：{directorFacts.source}</p>
   </div>;
 }

@@ -2,38 +2,31 @@ import { fdiMechanismFacts } from "../../data/mechanisms";
 
 export function FdiSection() {
   return <div className="fdi-history">
-    <div className="fdi-range-heading"><span className="mono">FACILITY DISORDER INDEX</span><strong>0 — 100</strong></div>
-    <div className="fdi-value-scale" aria-label="FDI value range from 0 to 100"><span className="mono">0</span><i /><span className="mono">100</span></div>
+    <div className="fdi-intro-row">
+      <div><strong>FDI = 设施当前累计混乱程度</strong><p>它记录一段时间内设施秩序的变化，不等同于 D-LRC 响应等级或危机数量。</p></div>
+      <span className="fdi-range-label mono">0–100</span>
+    </div>
+
+    <div className="fdi-band-scale" aria-label="FDI 混乱程度：0 至 29 为低，30 至 59 为中，60 至 100 为高">
+      <div className="fdi-band-track"><span className="fdi-band-low" /><span className="fdi-band-medium" /><span className="fdi-band-high" /></div>
+      <div className="fdi-band-labels"><span>0–29 · 低</span><span>30–59 · 中</span><span>60–100 · 高</span></div>
+    </div>
+
+    <div className="fdi-change-columns">
+      <article><h4>哪些情况会升高</h4><p>{fdiMechanismFacts.increase}</p></article>
+      <article><h4>哪些情况会下降</h4><p>{fdiMechanismFacts.decrease}</p></article>
+    </div>
+
     <div className="fdi-settlement-trace">
-      {fdiMechanismFacts.initial[0].map((item, index) => <article key={item}>
-        <span className="fdi-trace-marker" aria-hidden="true" />
-        <small className="mono">{index === 0 ? "INITIAL BASE" : index === 1 ? "CURRENT STOCK" : "RECENT WINDOW"}</small>
-        <strong>{item}</strong>
-      </article>)}
-      <div className="fdi-trace-arrow" aria-hidden="true">→</div>
-      <article className="fdi-first-settlement"><span className="mono">FIRST SETTLEMENT</span><strong>06:31</strong><small>与系统第一次正式评估同步</small></article>
+      <article><span className="mono">首次正式结算</span><strong>约 06:31</strong><p>与第一次正式局势评估同时进行。</p></article>
+      <span className="fdi-trace-arrow" aria-hidden="true">→</span>
+      <article><span className="mono">之后</span><strong>固定周期结算</strong><p>累计上次结算后的新变化，并检查是否满足恢复条件。</p></article>
     </div>
-    <div className="fdi-periodic-model">
-      <article><span className="mono">INITIAL</span><strong>InitialBase + CurrentStockAdjustment + Recent120sTransientDelta</strong><p>{fdiMechanismFacts.initial[1]}</p></article>
-      <article><span className="mono">LATER</span><strong>{fdiMechanismFacts.later}</strong><p>只将上次结算后的新变化并入历史值。</p></article>
-    </div>
+
     <div className="fdi-settlement-guards">
-      {fdiMechanismFacts.settlement.map(([trigger, effect]) => <article key={trigger}>
-        <strong className="mono">{trigger}</strong><span>{effect}</span>
-      </article>)}
+      <p><b>正式结算：</b>{fdiMechanismFacts.timing}</p>
+      <p><b>自然恢复：</b>{fdiMechanismFacts.recovery}</p>
     </div>
-    <div className="fdi-recovery-row">
-      <span className="mono">RECOVERY</span><strong>90 seconds default</strong><p>{fdiMechanismFacts.recovery}</p>
-    </div>
-    <div className="fdi-state-fields">
-      <span className="mono">RUNTIME STATE FIELDS</span>
-      <div>{fdiMechanismFacts.stateFields.map(([field, detail]) => <article key={field}><code>{field}</code><small>{detail}</small></article>)}</div>
-      <p>官网没有连接实时服务器；这些字段描述运行状态结构，不是当前某局的实时数值。</p>
-    </div>
-    <div className="fdi-relation">
-      <strong>FDI</strong><span>{fdiMechanismFacts.relation}</span>
-    </div>
-    <p className="fdi-separation-note">FDI 是 historical facility disorder state，与 D-LRC response evaluation 分开保存，也没有 Crisis Severity 语义。</p>
-    <p className="source-line mono">源码入口：{fdiMechanismFacts.source}</p>
+    <p className="fdi-relation"><b>FDI 会影响什么：</b>只临时影响 Event Director 对普通支援来源的权重，不决定专业危机响应。</p>
   </div>;
 }
