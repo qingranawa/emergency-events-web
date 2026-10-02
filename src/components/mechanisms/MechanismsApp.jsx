@@ -36,6 +36,7 @@ export function MechanismsApp() {
           <section id="system-architecture" className="mechanisms-section" data-scroll-reveal>
             <div className="container">
               <SectionHeader kicker="一局如何运行" title="系统总览" description="从回合开始，到判断局势、选择并执行事件，按一局的顺序看 Emergency Events 如何运作。" />
+              <p className="mechanism-demo-label">页面中的交互均为机制演示，不连接实时服务器状态。</p>
               <ArchitectureMap />
               <div className="responsibility-heading">
                 <h3>各模块负责什么</h3>
@@ -98,7 +99,7 @@ export function MechanismsApp() {
 
           <section id="o4" className="mechanisms-section" data-scroll-reveal>
             <div className="container">
-              <SectionHeader kicker="M06 · 观察员选择边界" title="O4 目前尚未开放" description="未来 O4 只能从 Event Director 提供的少量合格候选中选择，不会创建或召唤事件。" />
+              <SectionHeader kicker="M06 · O4 观察员选择边界" title="O4 的有限选择" description="核心逻辑已实现；客户端投票体验暂定，实服验证待完成。O4 只选择 M05 已给出的候选，之后仍由 M05 复核。" />
               <O4Section />
             </div>
           </section>

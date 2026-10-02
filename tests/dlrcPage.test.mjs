@@ -77,7 +77,7 @@ test("机制页保留七个主要章节和当前模块边界", () => {
   assert.equal(mechanismFacts.testBaseline, "313 / 313");
   assert.match(responsibilityRows.find(({ module }) => module === "M07").handsOff, /不接管中途增援/);
   assert.match(eventPackFacts.statusText, /开发中/);
-  assert.match(o4Facts.current[0], /尚未开放/);
+  assert.match(o4Facts.status, /核心逻辑已实现/);
 });
 
 test("状态同步到插件当前实现而非旧的暂缓说明", () => {

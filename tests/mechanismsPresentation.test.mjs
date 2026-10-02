@@ -7,6 +7,7 @@ import {
   directorFacts,
   fdiMechanismFacts,
   mechanismNavGroups,
+  o4Facts,
   populationProfiles,
   reinforcementFacts,
   roundCoreFacts,
@@ -65,6 +66,8 @@ test("D-LRC 展示中文评估过程、正式代码和默认阈值", () => {
     [0, 18, 32, 48, 65, 82], [0, 20, 34, 50, 67, 84], [0, 22, 36, 52, 69, 86],
     [0, 24, 38, 54, 71, 88], [0, 26, 40, 56, 73, 90],
   ]);
+  assert.equal(dlrcMechanismFacts.code.population, "C");
+  assert.equal(`${dlrcMechanismFacts.code.prefix}-${dlrcMechanismFacts.code.population}${dlrcMechanismFacts.code.level}-${dlrcMechanismFacts.code.crisis}`, dlrcMechanismFacts.code.full);
   assert.equal(dlrcMechanismFacts.code.full, "DLRC-C4-BIO");
   assert.match(dlrcMechanismFacts.schedule[0], /391 秒/);
   assert.match(dlrcMechanismFacts.schedule[1], /每 30 秒/);
@@ -87,13 +90,14 @@ test("危机与 FDI 用当前信号说明用途、增减和结算", () => {
   assert.match(fdi, /60–100 · 高/);
 });
 
-test("事件调度只提交计划，O4 仍未开放", () => {
+test("事件调度只提交计划，O4 状态与插件实现一致", () => {
   assert.match(directorFacts.pipeline.find(([name]) => name === "形成候选计划")[1], /仍未生成事件/);
   assert.match(directorFacts.event2Note, /非普通支援来源/);
   assert.match(directorFacts.event2Note, /第一个事件没能真正开始/);
   assert.match(source("../src/components/mechanisms/DirectorSection.jsx"), /Event Director/);
   assert.match(source("../src/components/mechanisms/EventPackSection.jsx"), /开发中/);
-  assert.match(source("../src/components/mechanisms/O4Section.jsx"), /尚未实现/);
+  assert.match(o4Facts.status, /核心逻辑已实现/);
+  assert.match(source("../src/components/mechanisms/O4Section.jsx"), /o4Facts\.status/);
 });
 
 test("机制页侧栏没有独立滚动区，并统一使用 14px 圆角", () => {

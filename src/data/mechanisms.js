@@ -1,3 +1,7 @@
+import { sysCrisisTrigger } from "./crisisRules.js";
+
+const dlrcCodeParts = { prefix: "DLRC", population: "C", level: "4", crisis: "BIO" };
+
 export const mechanismNavGroups = [
   { label: "", items: [{ id: "system-architecture", label: "系统总览" }] },
   { label: "", items: [{ id: "round-reinforcement", label: "回合与增援" }] },
@@ -143,7 +147,7 @@ export const dlrcMechanismFacts = {
   inputs: [
     "SCP 威胁",
     "基金会压力",
-    "基金会增援受挫",
+    "基金会增援失败",
     "时间压力",
     "战略危险",
   ],
@@ -159,11 +163,8 @@ export const dlrcMechanismFacts = {
     "主要增援完成后可以立即更新观察，但不会重置定时评估周期。",
   ],
   code: {
-    prefix: "DLRC",
-    population: "A",
-    level: "4",
-    crisis: "BIO",
-    full: "DLRC-C4-BIO",
+    ...dlrcCodeParts,
+    full: `${dlrcCodeParts.prefix}-${dlrcCodeParts.population}${dlrcCodeParts.level}-${dlrcCodeParts.crisis}`,
   },
   thresholds: [
     ["E", 0, 18, 32, 48, 65, 82],
@@ -184,7 +185,7 @@ export const crisisFacts = [
   {
     tag: "SYS",
     signal: "SCP-079 控制设施",
-    rule: "SCP-079 存在，且响应等级达到 L3 或以上。",
+    rule: sysCrisisTrigger,
     note: "标记设施系统控制危机。",
   },
   {
@@ -227,6 +228,28 @@ export const fdiMechanismFacts = {
   timing: "首次结算与约 06:31 的第一次正式局势评估同步；此后由固定周期评估结算。增援完成或管理员查询只读取当前值，不提前推进结算。",
 };
 
+export const fdiDemoFacts = {
+  startingValue: 42,
+  disclaimer: "机制演示：42 是演示起点，不代表任何服务器的实时状态。",
+  incident: {
+    label: "基金会成员被 SCP 击杀",
+    delta: 3,
+    configNote: "取自 FoundationKilledByScp 当前默认临时平衡值；服务器配置可以调整。",
+  },
+  recovery: {
+    quietWindowSeconds: 90,
+    deltas: { HIGH: -2, MEDIUM: -1, LOW: 0 },
+    gates: [
+      "没有活动危机",
+      "设施未被摧毁",
+      "没有明显占优的敌对力量",
+      "没有其他待结算的普通变化",
+      "已满足当前配置的静默窗口",
+    ],
+    timing: "只有恢复条件全部满足，并进入 PERIODIC 正式周期结算时，恢复变化才会应用；90 秒本身不保证下降。默认恢复变化同样是临时配置值。",
+  },
+};
+
 export const directorFacts = {
   pipeline: [
     ["筛选可用事件", "检查回合、响应等级、危机、人数、设施状态和可用人员。"],
@@ -261,12 +284,27 @@ export const eventPackFacts = {
 };
 
 export const o4Facts = {
-  current: [
-    "目前尚未开放观察员选择。",
-    "未来只会在多个基金会普通支援计划都符合条件时，提供少量候选供 O4 选择。",
-    "O4 不创建事件、不选择来源、不召唤混沌分裂者（Chaos），也不能阻止 Event Director。",
-    "当前事件内容尚在开发，因此还没有正式事件进入这条选择流程。",
-    "若该选择流程要求 O4 但没有符合条件的观察员，当前候选会跳过，不会自动换来源。",
+  status: "核心逻辑已实现；客户端投票体验仍属暂定，实服验证待完成。",
+  rules: [
+    "只有 M05 筛选和来源仲裁后，出现多个合格的基金会普通支援计划时，才会请求 O4 选择。",
+    "O4 只查看既有候选，不创建事件、不改选来源，也不能阻止 Event Director。",
+    "投票结果返回 Event Director，由 M05 再次复核最新局势后决定是否尝试启动。",
+    "当前合法选择人是在线观察员或 Overwatch，并需通过服务端监管状态识别。",
+    "Chaos、GOI、专业危机响应和非普通支援计划不进入 O4 选择。",
+    "当前默认投票窗口为 20 秒（临时值）；每个合格观察员在一次会话中只能投一次，平票交回 M05 既有规则处理。",
+    "如果没有合格 O4，当前需要 O4 的普通支援机会会跳过，不等待或自动改选来源。",
+  ],
+  demoCandidates: ["候选 A", "候选 B"],
+};
+
+export const directorDemoFacts = {
+  label: "机制演示 · 占位候选，不代表已发布事件，也不读取实时服务器状态。",
+  context: { population: "C", responseLevel: 4, crisisTags: ["BIO"] },
+  stages: ["查看候选", "响应等级", "危机条件", "人数计划", "当前局势", "来源仲裁", "O4 有限选择", "选中计划", "启动前复核", "尝试启动"],
+  candidates: [
+    { id: "A", requiredLevel: 3, requiredCrisis: "BIO", minimumPopulation: "C", currentSituationEligible: true, source: "基金会 · 普通支援" },
+    { id: "B", requiredLevel: 4, requiredCrisis: "BIO", minimumPopulation: "C", currentSituationEligible: true, source: "基金会 · 普通支援" },
+    { id: "C", requiredLevel: 5, requiredCrisis: "SYS", minimumPopulation: "A", currentSituationEligible: false, source: "混沌分裂者 · 普通支援" },
   ],
 };
 
