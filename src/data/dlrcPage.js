@@ -1,3 +1,5 @@
+import { sysCrisisTrigger } from "./crisisRules.js";
+
 export const dlrcPopulationProfiles = [
   { code: "E", min: 16, max: 19, label: "最低人数档", cap: 6 },
   { code: "D", min: 20, max: 25, label: "低人数档", cap: 6 },
@@ -45,7 +47,7 @@ export const controlStates = [
 
 export const crisisDefinitions = [
   { code: "BIO", name: "生化危机", trigger: "SCP-049-2 数量达到当前人数档位的阈值。", escalation: "数量达到阈值后，生化危机会保持发生。", resolution: "数量降回阈值以下，下一次合法评估会解除。", readers: "响应判断和需要 BIO 条件的候选会读取。" },
-  { code: "SYS", name: "系统控制危机", trigger: "SCP-079 存在，控制等级有效且达到 3 级。", escalation: "控制等级继续上升时，危机保持发生。", resolution: "SCP-079 消失、控制等级无效或低于 3 级。", readers: "响应判断和需要 SYS 条件的候选会读取。" },
+  { code: "SYS", name: "系统控制危机", trigger: sysCrisisTrigger, escalation: "控制等级继续上升时，危机保持发生。", resolution: "SCP-079 消失、控制等级无效或低于 3 级。", readers: "响应判断和需要 SYS 条件的候选会读取。" },
   { code: "CON", name: "收容危机", trigger: "第二个基金会支援波次完成后，后续收容检查连续失败。", escalation: "每 300 秒检查一次当前 SCP 压力和之前的基准。", resolution: "检查通过、还没有第二个波次，或没有可用基准。", readers: "响应判断和需要 CON 条件的候选会读取。" },
   { code: "SEC", name: "安全危机", trigger: "存在敌对威胁，基金会有效战斗人员又低于当前人数档位的安全阈值。", escalation: "基金会有效战斗人员继续减少时，危机保持发生。", resolution: "敌对威胁消失，或基金会人数回到阈值以上。", readers: "响应判断和需要 SEC 条件的候选会读取。" },
   { code: "GOI", name: "外部组织介入", trigger: "外部敌对组织有战斗人员、响应等级至少为 3，且基金会处于弱势。", escalation: "外部敌对力量和基金会劣势同时持续。", resolution: "任一条件消失；正式第三方运行来源仍未接入。", readers: "响应判断会读取，但不自动让 GOI 事件获得资格。" },
