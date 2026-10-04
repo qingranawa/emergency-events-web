@@ -1,12 +1,5 @@
 export const mechanismNavGroups = [
   {
-    label: "ARCHITECTURE",
-    items: [
-      { id: "system-architecture", label: "系统架构" },
-      { id: "responsibilities", label: "职责矩阵" },
-    ],
-  },
-  {
     label: "RUNTIME BACKBONE",
     items: [
       { id: "round-core", label: "M01 · Round Core" },

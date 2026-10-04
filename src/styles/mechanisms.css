@@ -580,9 +580,7 @@
 .mechanisms-nav a.is-current { border-color: var(--text-soft); color: var(--text); }
 .mechanisms-nav a.is-current i { border-color: var(--text); background: var(--text); }
 .mechanisms-nav a:focus-visible { outline: 2px solid var(--success); outline-offset: 2px; }
-@media (min-width: 1101px) and (max-height: 850px) {
-  .mechanisms-nav { position: static; }
-}
+.architecture-phase .container { padding-inline: clamp(16px, 2vw, 28px); }
 .mechanisms-content { min-width: 0; }
 .mechanisms-content section { scroll-margin-top: 124px; }
 .mechanisms-phase { padding-bottom: 30px; }
