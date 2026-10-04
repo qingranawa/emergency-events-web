@@ -14,6 +14,5 @@ export function GameplayLayerSection() {
     <ScpAugmentationSection />
     <M07SharedSystems />
     <WorldEffectSection />
-    <a className="mechanisms-roles-link" href="roles.html">查看完整角色档案与技能明细 <span aria-hidden="true">↗</span></a>
   </div>;
 }

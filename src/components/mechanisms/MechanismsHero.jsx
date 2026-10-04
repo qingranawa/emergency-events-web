@@ -1,26 +1,24 @@
-import { mechanismFacts } from "../../data/mechanisms";
-
 export function MechanismsHero() {
   return <section className="hero mechanisms-hero" data-scroll-reveal data-motion="hero">
     <div className="container mechanisms-hero-inner">
       <div>
-        <div className="eyebrow mono">EMERGENCY EVENTS · 机制说明</div>
-        <h1>一局如何运行</h1>
-        <p className="hero-desc">从开局接管、原版增援到局势评估和事件执行，用玩家与服主都能看懂的方式说明各机制如何配合。</p>
+        <div className="eyebrow mono">EMERGENCY EVENTS · MECHANISMS</div>
+        <h1>系统机制</h1>
+        <p className="hero-desc">从 Round Core、状态评估到 Event Director 和 Gameplay Layer，查看每个模块的职责、数据流、边界与当前验证状态。</p>
         <div className="hero-actions">
-          <a className="btn primary" href="#system-architecture">查看一局流程</a>
-          <a className="btn" href="#round-reinforcement">回合与增援</a>
-          <a className="btn" href="#director">事件如何发生</a>
+          <a className="btn primary" href="#system-architecture">查看系统架构</a>
+          <a className="btn" href="#m07">查看 M07 Gameplay Layer</a>
+          <a className="btn" href="dlrc.html">查看 D-LRC 详情</a>
         </div>
-        <div className="hero-meta mono">最低接管人数 {mechanismFacts.minimumPlayers} · 首次局势评估约 06:31 · FDI 范围 0–100</div>
+        <div className="hero-meta mono">M01–M07 边界 · Event Pack execution boundary · population minimum 16</div>
       </div>
-      <aside className="mechanism-hero-aside" aria-label="运行要点">
-        <span className="mono">运行要点</span>
-        <strong>开局定名额，中途看局势，满足条件后安排事件。</strong>
-        <p>M01 决定开局槽位，M07 为槽位分配具体身份；M02 保留原版的中途增援流程。</p>
-        <div className="hero-aside-line"><span>首次响应评估</span><b>06:31</b></div>
-        <div className="hero-aside-line"><span>后续评估间隔</span><b>30 秒</b></div>
-        <div className="hero-aside-line"><span>增援人数上限</span><b>E 档 6 · D 档 6 · C 档 8 · B 档 14 · A 档 18</b></div>
+      <aside className="mechanism-hero-aside">
+        <span className="mono">SYSTEM SNAPSHOT</span>
+        <strong>多条运行路径，共享状态事实</strong>
+        <p>Round Start opening identity 由 M07 分配；mid-round reinforcement 由 M02 接入；M05 消费状态并规划候选。</p>
+        <div className="hero-aside-line"><span>D-LRC first evaluation</span><b>391 sec</b></div>
+        <div className="hero-aside-line"><span>D-LRC interval</span><b>30 sec</b></div>
+        <div className="hero-aside-line"><span>FDI range</span><b>0–100</b></div>
       </aside>
     </div>
   </section>;

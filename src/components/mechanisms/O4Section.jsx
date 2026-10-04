@@ -2,13 +2,20 @@ import { o4Facts } from "../../data/mechanisms";
 
 export function O4Section() {
   return <div className="o4-panel-section">
-    <p className="o4-status-line"><b>当前状态：</b>{o4Facts.status}</p>
-    <div className="o4-boundary-diagram">
-      <article><span className="mono">Event Director</span><strong>提供已筛选候选</strong><p>只有多个合格的基金会普通支援计划同时存在时才进入此边界。</p></article>
-      <span className="o4-boundary-arrow" aria-hidden="true">→</span>
-      <article><span className="mono">O4 观察员</span><strong>在有限候选中选择</strong><p>结果返回 Event Director；计划仍需最新局势复核后才能尝试启动。</p></article>
+    <div className="o4-status-line">
+      <span className="mono">M06 / O4 PANEL</span>
+      <div>{o4Facts.status.map((status) => <span className="status-tag" key={status}>{status}</span>)}</div>
     </div>
-    <ul className="o4-facts-list">{o4Facts.rules.map((item) => <li key={item}>{item}</li>)}</ul>
-    <a className="text-link" href="#director">查看事件调度演示（含 O4 选择）→</a>
+    <div className="o4-boundary-diagram">
+      <article><span className="mono">M05</span><strong>已排序的合法 shortlist</strong><small>仅 Foundation normal SUPPORT 的多个候选</small></article>
+      <span className="o4-boundary-arrow" aria-hidden="true">↔</span>
+      <article><span className="mono">M06</span><strong>最多 2 个有限候选</strong><small>O4 返回选择结果；M05 仍 revalidate</small></article>
+    </div>
+    <div className="o4-facts-list">
+      {o4Facts.current.map((item) => <p key={item}>{item}</p>)}
+      <p>{o4Facts.input}</p>
+      <p>{o4Facts.interaction}</p>
+    </div>
+    <p className="source-line mono">{o4Facts.source}</p>
   </div>;
 }

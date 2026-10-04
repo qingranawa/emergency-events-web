@@ -1,78 +1,61 @@
 import { useState } from "react";
-import { crisisFacts, dlrcMechanismFacts, populationProfiles } from "../../data/mechanisms";
+import { dlrcMechanismFacts } from "../../data/mechanisms";
+
+const codeParts = [
+  { id: "prefix", value: "DLRC", label: "系统名", detail: "Dynamic Lockdown Response Code。" },
+  { id: "population", value: "A", label: "Population Tier", detail: "A 档，对应 38–45 人。" },
+  { id: "level", value: "4", label: "Final Response Level", detail: "最终响应等级为 L4。" },
+  { id: "crisis", value: "BIO", label: "Crisis Tag", detail: "当前示例中的 BIO tag。" },
+];
 
 export function DlrcSection() {
-  const [selectedPart, setSelectedPart] = useState("population");
-  const code = dlrcMechanismFacts.code;
-  const bio = crisisFacts.find(({ tag }) => tag === code.crisis);
-  const populationRange = populationProfiles.find(({ tier }) => tier === code.population)?.range;
-  const responseLevel = Number(code.level);
-  const descriptions = {
-    population: { title: `${code.population} · 人数档位`, detail: `${populationRange} 人；人数档位在开局锁定。` },
-    level: { title: `${code.level} · 最终响应等级 L${code.level}`, detail: `局势最终响应等级为 L${code.level}；实际等级受当前控制状态限制。` },
-    crisis: { title: "BIO · 生物危机", detail: `${bio?.rule} 该标签说明当前威胁类型。` },
-  };
-  const selectedMeaning = descriptions[selectedPart];
+  const [activePart, setActivePart] = useState("level");
+  const selectedPart = codeParts.find((part) => part.id === activePart) || codeParts[2];
 
   return <div className="dlrc-spotlight">
     <div className="dlrc-code-stage">
-      <span className="mono">响应代码示例 · 点击代码片段查看含义</span>
-      <div className="dlrc-code-display" role="group" aria-label="DLRC-C4-BIO 代码解读">
-        <span className="dlrc-code-prefix">{code.prefix}-</span>
-        <button className={`dlrc-code-part ${selectedPart === "population" ? "is-selected" : ""}`} type="button" aria-label="查看人数档位 C" aria-pressed={selectedPart === "population"} onClick={() => setSelectedPart("population")}>{code.population}</button>
-        <button className={`dlrc-code-part ${selectedPart === "level" ? "is-selected" : ""}`} type="button" aria-label="查看响应等级 4" aria-pressed={selectedPart === "level"} onClick={() => setSelectedPart("level")}>{code.level}</button>
-        <span className="dlrc-code-separator">-</span>
-        <button className={`dlrc-code-part ${selectedPart === "crisis" ? "is-selected" : ""}`} type="button" aria-label="查看危机标签 BIO" aria-pressed={selectedPart === "crisis"} onClick={() => setSelectedPart("crisis")}>{code.crisis}</button>
+      <span className="dlrc-code-kicker mono">SYSTEM OUTPUT · 示例</span>
+      <div className="dlrc-code-display" aria-label="D-LRC 输出示例 DLRC-A4-BIO">
+        <span className="dlrc-code-prefix mono">DLRC-</span>
+        {codeParts.slice(1).map((part, index) => <span key={part.id}>
+          <button type="button" className={"dlrc-code-token " + part.id + (activePart === part.id ? " is-active" : "")} onClick={() => setActivePart(part.id)} onFocus={() => setActivePart(part.id)} aria-pressed={activePart === part.id} aria-label={part.label + " " + part.value}>{part.value}</button>
+          {index === 1 && <span className="dlrc-code-separator">-</span>}
+        </span>)}
       </div>
-      <div className="dlrc-code-meaning" aria-live="polite" aria-atomic="true">
-        <strong>{selectedMeaning.title}</strong><p>{selectedMeaning.detail}</p>
-      </div>
-      <div className="dlrc-level-row" aria-label="响应等级 0 至 5，当前示例为 L4">
-        <span>最终响应等级</span>
-        <ol className="dlrc-level-ruler">
-          {Array.from({ length: 6 }, (_, level) => <li className={level === responseLevel ? "is-current" : ""} aria-current={level === responseLevel ? "step" : undefined} key={level}>L{level}</li>)}
-        </ol>
-      </div>
+      <div className="dlrc-code-caption"><span className="mono">{selectedPart.label}</span><p>{selectedPart.detail}</p></div>
+      <div className="dlrc-code-transition mono" aria-label="代码状态变化"><span>DLRC-A3</span><i aria-hidden="true">→</i><strong>DLRC-A4-BIO</strong></div>
     </div>
 
     <div className="dlrc-inputs">
-      <h3>五类局势输入</h3>
-      <ul>{dlrcMechanismFacts.inputs.map((input) => <li key={input}>{input}</li>)}</ul>
-      <p>增援失败只根据基金会（MTF）主要增援判断。混沌分裂者（Chaos）增援不会建立基金会增援失败基准。</p>
+      <span className="mono">FIVE CORE INPUTS</span>
+      <div>{dlrcMechanismFacts.inputs.map((input) => <span key={input}>{input}</span>)}</div>
+      <p>Foundation Reinforcement Failure 只使用 Foundation / MTF Primary Wave。Chaos Wave 不建立 Foundation 失败基线。</p>
     </div>
 
-    <ol className="dlrc-score-pipeline" aria-label="D-LRC 从局势输入到响应代码的判断过程">
-      {dlrcMechanismFacts.stages.map(([stage, detail], index) => <li className="dlrc-pipeline-stage" key={stage}>
-        <span className="mono">{String(index + 1).padStart(2, "0")}</span>
-        <div><strong>{stage}</strong><p>{detail}</p></div>
-      </li>)}
-      <li className="dlrc-pipeline-stage dlrc-code-output">
-        <span className="mono">05</span>
-        <div><strong>生成 D-LRC 代码</strong><p>例如 {code.full}。无效评估不会交给后续机制使用。</p></div>
-      </li>
-    </ol>
+    <div className="dlrc-score-pipeline" aria-label="D-LRC 分数处理流程">
+      <div className="dlrc-score-source"><span className="mono">SCORE</span><strong>Natural</strong><i>+</i><strong>Persistent</strong></div>
+      {dlrcMechanismFacts.stages.map(([stage, label], index) => <div className="dlrc-pipeline-stage" key={stage}>
+        <span className="mono">{String(index + 1).padStart(2, "0")}</span><strong>{stage}</strong><small>{label}</small>
+      </div>)}
+      <div className="dlrc-pipeline-stage dlrc-code-output"><span className="mono">CODE</span><strong>{dlrcMechanismFacts.code.full}</strong><small>Invalid Evaluation 下游不得消费。</small></div>
+    </div>
+    <div className="dlrc-result-contract">
+      <span className="mono">EVALUATION RESULT CONTRACT</span>
+      <div>{dlrcMechanismFacts.resultFields.map((field) => <code key={field}>{field}</code>)}</div>
+      <p>IsValid = false 时，任何下游模块都不得消费该 Evaluation。</p>
+    </div>
 
     <div className="dlrc-detail-grid">
-      <div className="dlrc-timing">
-        <h3>评估频率</h3>
-        {dlrcMechanismFacts.schedule.map((item) => <p key={item}>{item}</p>)}
-      </div>
-      <details className="threshold-table-block">
-        <summary>查看当前默认阈值</summary>
-        <div className="threshold-table-content">
-          <div className="threshold-table-heading">
-            <div><h3>当前响应阈值</h3><p>不同人数档位使用不同的分数门槛。</p></div>
-            <span>当前默认值 · 平衡验证待完成</span>
-          </div>
-          <div className="threshold-mini-scroll">
-            <table className="threshold-mini">
-              <thead><tr><th scope="col">人数档位</th>{["L0", "L1", "L2", "L3", "L4", "L5"].map((level) => <th scope="col" key={level}>{level}</th>)}</tr></thead>
-              <tbody>{dlrcMechanismFacts.thresholds.map((row) => <tr key={row[0]}>{row.map((value, index) => index === 0 ? <th scope="row" key={index}>{value} 档</th> : <td key={index}>{value}</td>)}</tr>)}</tbody>
-            </table>
-          </div>
-        </div>
-      </details>
+      <article><span className="mono">EVALUATION SCHEDULE</span>{dlrcMechanismFacts.schedule.map((item) => <p key={item}>{item}</p>)}</article>
+      <article className="threshold-table-block">
+        <div className="threshold-table-heading"><span className="mono">CURRENT DEFAULTS</span><strong>BALANCE VALIDATION PENDING</strong></div>
+        <div className="threshold-mini-scroll"><table>
+          <thead><tr><th scope="col">Tier</th>{["L0", "L1", "L2", "L3", "L4", "L5"].map((level) => <th scope="col" key={level}>{level}</th>)}</tr></thead>
+          <tbody>{dlrcMechanismFacts.thresholds.map((row) => <tr key={row[0]}>{row.map((value, index) => index === 0 ? <th scope="row" key={index}>{value}</th> : <td key={index}>{value}</td>)}</tr>)}</tbody>
+        </table></div>
+      </article>
     </div>
-    <a className="text-link" href="dlrc.html">查看 D-LRC 的详细计算说明 →</a>
+    <p className="source-line mono">{dlrcMechanismFacts.source}</p>
+    <a className="text-link" href="dlrc.html">打开完整 D-LRC 页面 →</a>
   </div>;
 }
