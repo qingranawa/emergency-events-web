@@ -553,8 +553,6 @@
   display: grid;
   align-self: start;
   gap: 18px;
-  max-height: calc(100vh - 132px);
-  overflow-y: auto;
   padding: 16px 12px 20px 0;
   border: 0;
   background: transparent;
@@ -582,11 +580,13 @@
 .mechanisms-nav a.is-current { border-color: var(--text-soft); color: var(--text); }
 .mechanisms-nav a.is-current i { border-color: var(--text); background: var(--text); }
 .mechanisms-nav a:focus-visible { outline: 2px solid var(--success); outline-offset: 2px; }
+@media (min-width: 1101px) and (max-height: 850px) {
+  .mechanisms-nav { position: static; }
+}
 .mechanisms-content { min-width: 0; }
 .mechanisms-content section { scroll-margin-top: 124px; }
 .mechanisms-phase { padding-bottom: 30px; }
 .mechanisms-content > .mechanisms-phase + .mechanisms-phase { margin-top: 34px; padding-top: 48px; border-top: 1px solid var(--line); }
-.trace-phase { background-image: linear-gradient(180deg, rgba(255,255,255,.012), transparent 23%); }
 .phase-intro { padding-top: 22px; }
 
 .system-map { min-width: 0; border-top: 1px solid var(--line-strong); border-bottom: 1px solid var(--line-strong); }
@@ -605,13 +605,14 @@
   gap: 6px;
   padding: 11px 13px;
   border: 1px solid var(--line);
+  border-radius: var(--radius);
   background: color-mix(in srgb, var(--panel) 70%, transparent);
   color: var(--text-soft);
   transition: opacity var(--motion-fast) ease, border-color var(--motion-fast) ease, background var(--motion-fast) ease;
 }
 .system-map-node.is-module { border-color: var(--line-strong); }
 .system-map-node strong { color: var(--text); font: 600 13px "SFMono-Regular", Consolas, monospace; }
-.system-map-node small { color: var(--text-dim); font-size: 10px; line-height: 1.45; }
+.system-map-node small { color: var(--text-soft); font-size: 12px; line-height: 1.5; }
 .system-map-node:hover,
 .system-map-node:focus-visible { border-color: var(--text-soft); background: var(--panel); color: var(--text); }
 .system-map-node:focus-visible { outline: 2px solid var(--success); outline-offset: 3px; }
@@ -631,7 +632,7 @@
   transition: opacity var(--motion-fast) ease, color var(--motion-fast) ease;
 }
 .system-map-edge span { color: var(--text-soft); font-size: 17px; line-height: 1; }
-.system-map-edge small { font-size: 8px; line-height: 1.3; }
+.system-map-edge small { color: var(--text-soft); font-size: 11px; line-height: 1.4; }
 .system-map-edge.is-dimmed { opacity: .28; }
 .system-map-state-inputs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
 .system-map-context-edge { grid-column: 2; margin: 10px auto; padding: 8px 12px; border-left: 1px solid var(--line-strong); color: var(--text-dim); font-size: 9px; }
@@ -648,12 +649,17 @@
 
 .responsibility-matrix { margin-top: 4px; }
 .responsibility-matrix:focus-visible { outline: 2px solid var(--success); outline-offset: 3px; }
-.responsibility-matrix .mechanism-table { min-width: 1120px; }
-.responsibility-matrix th:first-child { min-width: 155px; }
-.responsibility-matrix td { min-width: 175px; }
+.responsibility-matrix .mechanism-table { min-width: 0; table-layout: fixed; }
+.responsibility-matrix th,
+.responsibility-matrix td { min-width: 0; overflow-wrap: anywhere; }
+.responsibility-matrix th:first-child,
+.responsibility-matrix td:first-child,
+.responsibility-matrix th:last-child,
+.responsibility-matrix td:last-child { width: 15%; }
 .matrix-module { display: block; margin-bottom: 5px; color: var(--text-dim); font-size: 9px; }
 .status-tag-list { display: flex; flex-wrap: wrap; gap: 5px; }
 .status-tag { display: inline-flex; align-items: center; min-height: 22px; padding: 4px 7px; border: 1px solid var(--line-strong); color: var(--text-soft); font: 8px "SFMono-Regular", Consolas, monospace; letter-spacing: .35px; line-height: 1.25; }
+.responsibility-matrix .status-tag { font-family: inherit; font-size: 11px; line-height: 1.25; letter-spacing: 0; }
 
 .module-panel-heading { display: grid; gap: 8px; }
 .module-panel-heading > span { color: var(--text-dim); font-size: 9px; letter-spacing: 1.2px; }
@@ -1084,7 +1090,7 @@
   .system-map-node { min-height: 66px; width: 100%; }
   .system-map-edge { min-height: 33px; flex-direction: row; gap: 7px; }
   .system-map-edge span { transform: rotate(90deg); }
-  .system-map-edge small { font-size: 8px; }
+  .system-map-edge small { font-size: 11px; }
   .system-map-state-inputs { grid-template-columns: 1fr; }
   .system-map-context-edge,
   .system-map-decision,
@@ -1095,7 +1101,6 @@
   .system-map-cleanse { display: grid; grid-template-columns: 1fr auto; gap: 7px; margin: 10px 0 0; }
   .system-map-cleanse > span:nth-of-type(2) { grid-column: 1; }
   .system-map-cleanse > span:nth-of-type(3) { display: none; }
-  .responsibility-matrix .mechanism-table { min-width: 1120px; }
   .population-ruler-panel,
   .runtime-state-panel,
   .vanilla-pipeline,
@@ -1174,6 +1179,10 @@
   .mechanism-status-row p { grid-column: auto; }
   .implementation-blockers > article { grid-template-columns: 1fr; gap: 7px; }
   .source-walkthrough article { grid-template-columns: 32px 1fr; gap: 10px; }
+}
+
+@media (max-width: 1100px) {
+  .responsibility-matrix .mechanism-table { min-width: 1120px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -8,12 +8,12 @@ export function ResponsibilityMatrix() {
   return <div className="mechanism-table-wrap responsibility-matrix" tabIndex="0" aria-label="职责矩阵，可横向滚动">
     <table className="mechanism-table">
       <thead><tr>
-        <th scope="col">MODULE</th>
-        <th scope="col">OWNS</th>
-        <th scope="col">CONSUMES</th>
-        <th scope="col">PRODUCES</th>
-        <th scope="col">DOES NOT OWN</th>
-        <th scope="col">STATUS</th>
+        <th scope="col">模块</th>
+        <th scope="col">负责范围</th>
+        <th scope="col">接收信息</th>
+        <th scope="col">输出结果</th>
+        <th scope="col">不负责</th>
+        <th scope="col">状态</th>
       </tr></thead>
       <tbody>{responsibilityRows.map((row) => <tr key={row.module + row.name}>
         <th scope="row"><span className="matrix-module mono">{row.module}</span><span>{row.name}</span></th>
