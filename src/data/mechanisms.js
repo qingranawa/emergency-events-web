@@ -64,10 +64,10 @@ export const responsibilityRows = [
   {
     module: "M06",
     name: "O4 有限选择边界",
-    responsibility: "未来让符合条件的观察员从少量候选计划中选择。",
+    responsibility: "允许符合条件的观察员从少量候选计划中选择。",
     receives: "Event Director 已筛选出的有限候选列表。",
     handsOff: "选择结果返回 Event Director 再次复核。",
-    statusText: "暂缓设计 · 尚未开放",
+    statusText: "核心逻辑已实现 · 实服验证待完成",
   },
   {
     module: "M07",

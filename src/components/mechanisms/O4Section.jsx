@@ -9,6 +9,6 @@ export function O4Section() {
       <article><span className="mono">O4 观察员</span><strong>在有限候选中选择</strong><p>结果返回 Event Director；计划仍需最新局势复核后才能尝试启动。</p></article>
     </div>
     <ul className="o4-facts-list">{o4Facts.rules.map((item) => <li key={item}>{item}</li>)}</ul>
-    <a className="text-link" href="#director-o4-branch">查看候选筛选中的 O4 选择演示 →</a>
+    <a className="text-link" href="#director">查看事件调度演示（含 O4 选择）→</a>
   </div>;
 }
