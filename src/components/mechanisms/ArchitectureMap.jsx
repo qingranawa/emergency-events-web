@@ -62,75 +62,75 @@ export function ArchitectureMap() {
   const [focusId, setFocusId] = useState(null);
   return <div className="system-map" aria-label="Emergency Events 系统数据流">
     <div className="system-map-legend mono">
-      <span>ROUND START</span>
-      <span>MID-ROUND</span>
-      <span>PLAYER GAMEPLAY</span>
+      <span>回合开始</span>
+      <span>局中运行</span>
+      <span>玩家游戏内能力</span>
     </div>
 
     <div className="system-map-lane">
-      <div className="system-map-lane-label mono">ROUND START</div>
+      <div className="system-map-lane-label mono">回合开始</div>
       <div className="system-map-flow">
-        <MapNode id="m01" module="M01" title="Round Core" detail="RoundId · tier · slot quantities" focusId={focusId} setFocusId={setFocusId} />
-        <MapEdge from="m01" to="slots" label="defines quantities" focusId={focusId} />
-        <MapNode id="slots" title="Composition Slots" detail="D-Class · Scientist · Security · SCP" focusId={focusId} setFocusId={setFocusId} />
-        <MapEdge from="slots" to="m07" label="opening assignments" focusId={focusId} />
-        <MapNode id="m07" module="M07" title="Opening Role & Ability" detail="Concrete opening identities" focusId={focusId} setFocusId={setFocusId} />
+        <MapNode id="m01" module="M01" title="Round Core" detail="回合编号 · 人数档位 · 开局名额" focusId={focusId} setFocusId={setFocusId} />
+        <MapEdge from="m01" to="slots" label="确定开局名额" focusId={focusId} />
+        <MapNode id="slots" title="开局角色槽位" detail="D 级人员 · 科学家 · 安保 · SCP" focusId={focusId} setFocusId={setFocusId} />
+        <MapEdge from="slots" to="m07" label="分配开局身份" focusId={focusId} />
+        <MapNode id="m07" module="M07" title="Opening Role & Ability" detail="具体的开局身份" focusId={focusId} setFocusId={setFocusId} />
       </div>
     </div>
 
     <div className="system-map-lane">
-      <div className="system-map-lane-label mono">MID-ROUND</div>
+      <div className="system-map-lane-label mono">局中增援</div>
       <div className="system-map-flow">
-        <MapNode id="m02" module="M02" title="Reinforcement" detail="Vanilla Primary Wave facts" focusId={focusId} setFocusId={setFocusId} />
-        <MapEdge from="m02" to="wave-facts" label="records actual wave" focusId={focusId} />
-        <MapNode id="wave-facts" title="Major Wave Facts" detail="Faction · players · count · time" focusId={focusId} setFocusId={setFocusId} />
-        <MapEdge from="wave-facts" to="m03" label="evaluation input" focusId={focusId} />
-        <MapNode id="m03" module="M03" title="D-LRC" detail="Response level + DLRC Code" focusId={focusId} setFocusId={setFocusId} />
+        <MapNode id="m02" module="M02" title="Reinforcement" detail="原版主要增援波次事实" focusId={focusId} setFocusId={setFocusId} />
+        <MapEdge from="m02" to="wave-facts" label="记录实际波次" focusId={focusId} />
+        <MapNode id="wave-facts" title="主要增援事实" detail="阵营 · 玩家 · 人数 · 时间" focusId={focusId} setFocusId={setFocusId} />
+        <MapEdge from="wave-facts" to="m03" label="评估输入" focusId={focusId} />
+        <MapNode id="m03" module="M03" title="D-LRC" detail="响应等级 + D-LRC 代码" focusId={focusId} setFocusId={setFocusId} />
       </div>
     </div>
 
     <div className="system-map-lane">
-      <div className="system-map-lane-label mono">STATE → DECISION</div>
+      <div className="system-map-lane-label mono">局势判断 → 事件决策</div>
       <div className="system-map-state-inputs">
-        <MapNode id="m03" module="M03" title="D-LRC" detail="Valid evaluation" focusId={focusId} setFocusId={setFocusId} />
-        <MapNode id="m04" module="M04" title="Crisis" detail="Tags + Episodes" focusId={focusId} setFocusId={setFocusId} />
-        <MapNode id="fdi" module="M04.5" title="Facility Disorder" detail="Historical state · 0–100" focusId={focusId} setFocusId={setFocusId} />
+        <MapNode id="m03" module="M03" title="D-LRC" detail="有效的局势评估" focusId={focusId} setFocusId={setFocusId} />
+        <MapNode id="m04" module="M04" title="Crisis" detail="危机标签 + 事件周期" focusId={focusId} setFocusId={setFocusId} />
+        <MapNode id="fdi" module="M04.5" title="Facility Disorder" detail="设施混乱历史值 · 0–100" focusId={focusId} setFocusId={setFocusId} />
       </div>
-      <div className="system-map-context-edge mono">same-round facts → DirectorContext</div>
+      <div className="system-map-context-edge mono">同一回合事实 → DirectorContext</div>
       <div className="system-map-flow system-map-decision">
-        <MapNode id="m05" module="M05" title="Event Director" detail="Eligibility · arbitration · revalidate · commit" focusId={focusId} setFocusId={setFocusId} />
-        <MapEdge from="m05" to="event-pack" label="committed plan" focusId={focusId} />
-        <MapNode id="event-pack" title="Event Pack" detail="Gameplay execution and cleanup" focusId={focusId} setFocusId={setFocusId} />
+        <MapNode id="m05" module="M05" title="Event Director" detail="资格筛选 · 来源仲裁 · 再验证 · 提交" focusId={focusId} setFocusId={setFocusId} />
+        <MapEdge from="m05" to="event-pack" label="提交的事件计划" focusId={focusId} />
+        <MapNode id="event-pack" title="Event Pack" detail="事件玩法执行与清理" focusId={focusId} setFocusId={setFocusId} />
       </div>
       <div className="system-map-o4">
-        <MapNode id="m06" module="M06" title="O4 selection boundary" detail="Finite Foundation shortlist from M05" focusId={focusId} setFocusId={setFocusId} />
-        <span className="mono">M06 returns a selection result to M05</span>
+        <MapNode id="m06" module="M06" title="O4 选择边界" detail="M05 提供的有限基金会候选" focusId={focusId} setFocusId={setFocusId} />
+        <span className="mono">M06 将选择结果返回给 M05</span>
       </div>
     </div>
 
     <div className="system-map-lane system-map-gameplay">
-      <div className="system-map-lane-label mono">PLAYER GAMEPLAY</div>
+      <div className="system-map-lane-label mono">玩家游戏内能力</div>
       <div className="system-map-flow">
-        <MapNode id="m07" module="M07" title="Gameplay Layer" detail="Opening identity + in-round abilities" focusId={focusId} setFocusId={setFocusId} />
-        <MapEdge from="m07" to="roles" label="runtime services" focusId={focusId} />
+        <MapNode id="m07" module="M07" title="Gameplay Layer" detail="开局身份 + 局内技能" focusId={focusId} setFocusId={setFocusId} />
+        <MapEdge from="m07" to="roles" label="场内能力服务" focusId={focusId} />
         <div className="system-map-output-group">
           {[
-            ["roles", "Role Variant"],
-            ["abilities", "Ability"],
-            ["hud", "Shared HUD"],
-            ["badge", "Badge"],
-            ["world-effects", "WorldEffect"],
+            ["roles", "角色变体"],
+            ["abilities", "技能"],
+            ["hud", "共享状态栏（HUD）"],
+            ["badge", "徽章"],
+            ["world-effects", "场景效果（WorldEffect）"],
           ].map(([id, label]) => <span className="system-map-output" data-map-node={id} key={id}>{label}</span>)}
         </div>
       </div>
       <div className="system-map-cleanse">
         <span className="system-map-cleanse-origin">M07 WorldEffect</span>
         <span aria-hidden="true">→</span>
-        <span>future BIO / explicitly allowed Event</span>
+        <span>未来的 BIO 危机 / 明确允许的事件</span>
         <span aria-hidden="true">→</span>
         <strong id="cleanse">IWorldEffectService.TryCleanse(...)</strong>
       </div>
     </div>
-    <p className="system-map-note">M01 owns opening slot quantities. M07 assigns concrete Round Start identities. M02 handles mid-round reinforcement.</p>
+    <p className="system-map-note">M01 决定开局名额；M07 分配具体开局身份；M02 负责局中增援。</p>
   </div>;
 }
