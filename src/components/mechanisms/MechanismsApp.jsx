@@ -48,7 +48,7 @@ export function MechanismsApp() {
             </section>
             <section id="responsibilities" data-scroll-reveal>
               <div className="container">
-                <SectionHeader kicker="RESPONSIBILITY MATRIX" title="模块职责矩阵" description="每个模块都标出所有权、输入、输出、边界和当前状态。" />
+                <SectionHeader kicker="职责与边界" title="模块职责矩阵" description="列明各模块的负责范围、输入、输出和职责边界。" />
                 <ResponsibilityMatrix />
               </div>
             </section>

@@ -655,6 +655,7 @@
 .matrix-module { display: block; margin-bottom: 5px; color: var(--text-dim); font-size: 9px; }
 .status-tag-list { display: flex; flex-wrap: wrap; gap: 5px; }
 .status-tag { display: inline-flex; align-items: center; min-height: 22px; padding: 4px 7px; border: 1px solid var(--line-strong); color: var(--text-soft); font: 8px "SFMono-Regular", Consolas, monospace; letter-spacing: .35px; line-height: 1.25; }
+.responsibility-matrix .status-tag { font-family: inherit; font-size: 11px; line-height: 1.25; letter-spacing: 0; }
 
 .module-panel-heading { display: grid; gap: 8px; }
 .module-panel-heading > span { color: var(--text-dim); font-size: 9px; letter-spacing: 1.2px; }
