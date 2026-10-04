@@ -19,13 +19,10 @@ import { DirectorSection } from "./DirectorSection";
 import { EventPackSection } from "./EventPackSection";
 import { O4Section } from "./O4Section";
 import { GameplayLayerSection } from "./GameplayLayerSection";
-import { SystemTraces } from "./SystemTraces";
-import { ImplementationNotesSection } from "./ImplementationNotesSection";
 import {
   CommandsSection,
   ConfigurationSection,
   LifecycleSection,
-  SourceSection,
   TelemetrySection,
 } from "./OperationsSections";
 
@@ -139,25 +136,10 @@ export function MechanismsApp() {
             </section>
           </div>
 
-          <div className="mechanisms-phase trace-phase">
-            <section id="traces" data-scroll-reveal>
-              <div className="container">
-                <SectionHeader kicker="SYSTEM TRACES" title="跨模块追踪" description="从开局分配、增援事实、049 WorldEffect 到 Director Commit，沿着真实 contract 查看数据如何流动。" />
-                <SystemTraces />
-              </div>
-            </section>
-            <section id="implementation-status" data-scroll-reveal>
-              <div className="container">
-                <SectionHeader kicker="IMPLEMENTATION NOTES" title="实现状态与能力限制" description="区分已经实现、逻辑测试、尚待实服验证和当前 API 不支持的子项。" />
-                <ImplementationNotesSection />
-              </div>
-            </section>
-          </div>
-
           <div className="mechanisms-phase operations-phase">
             <div className="phase-intro" data-scroll-reveal>
               <span className="phase-index mono">05 / OPERATIONS REFERENCE</span>
-              <p>配置、RemoteAdmin、Telemetry 和源码入口供维护者查阅。</p>
+              <p>配置、RemoteAdmin 和 Telemetry 供维护者查阅。</p>
             </div>
             <section id="lifecycle" data-scroll-reveal>
               <div className="container">
@@ -181,12 +163,6 @@ export function MechanismsApp() {
               <div className="container">
                 <SectionHeader kicker="BALANCE TELEMETRY" title="运行记录" description="记录结果供回看；Telemetry 不替代上游模块的正式事实。" />
                 <TelemetrySection />
-              </div>
-            </section>
-            <section id="source" data-scroll-reveal>
-              <div className="container">
-                <SectionHeader kicker="SOURCE & TESTS" title="源码与验证入口" description="列出架构中的主要插件代码路径，并展示当前 M07 验证边界。" />
-                <SourceSection />
               </div>
             </section>
           </div>

@@ -33,8 +33,6 @@ export const mechanismNavGroups = [
     label: "GAMEPLAY LAYER",
     items: [
       { id: "m07", label: "M07 · Opening Roles" },
-      { id: "traces", label: "System Traces" },
-      { id: "implementation-status", label: "Implementation Notes" },
     ],
   },
   {
@@ -44,7 +42,6 @@ export const mechanismNavGroups = [
       { id: "configuration", label: "Configuration" },
       { id: "commands", label: "RemoteAdmin" },
       { id: "telemetry", label: "Telemetry" },
-      { id: "source", label: "Source & Tests" },
     ],
   },
 ];
